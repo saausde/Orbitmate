@@ -43,7 +43,7 @@ The project is organized into the following directories and files:
 ### Installation
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/airiell1/Orbitmate.git
    ```
 2. Navigate to the project directory:
    ```
