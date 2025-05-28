@@ -1,13 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "./css/Sign.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { SignupProvider } from "./contexts/SignupContext";
+import { ChatProvider } from "./contexts/ChatContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { UserProvider } from "./contexts/UserContext";
+import { SignThemeProvider } from "./contexts/SignTheme";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <ThemeProvider>
+        <SignupProvider>
+          <ChatProvider>
+            <SignThemeProvider>
+              <App />
+            </SignThemeProvider>
+          </ChatProvider>
+        </SignupProvider>
+      </ThemeProvider>
+    </UserProvider>
   </React.StrictMode>
 );
 

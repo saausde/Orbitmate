@@ -1,3 +1,0 @@
-# Orbitmate
-
-your ai frontend

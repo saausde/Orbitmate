@@ -1,0 +1,78 @@
+/*새채팅*/
+.new_chat_btn {
+    display: block;
+    margin: 90px auto;
+    width: 90%;
+    padding: 12px; 
+    border: none;
+    border-radius: 15px; 
+    background-color: #F8F0FB; 
+    color: #6B3CC9; 
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+
+  .new_chat_btn:hover {
+    background-color: #6B3CC9;
+    color: #FFFFFF;
+    border-color: #E1BEE7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  .new_chat_btn:active{transform: scale(0.99);}
+
+/*채팅제거*/
+  .new_chat_btn2 {
+    display: block;
+    margin: 90px auto;
+    width: 90%;
+    padding: 12px; 
+    border: none;
+    border-radius: 15px; 
+    background-color: #F8F0FB; 
+    color: #6B3CC9; 
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+
+  .new_chat_btn2:hover {
+    background-color: #6B3CC9;
+    color: #FFFFFF;
+    border-color: #E1BEE7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  .new_chat_btn2active{transform: scale(0.99);}
+
+  .sidebar-dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    z-index: 200;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar-dropdown-content a {
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .sidebar-dropdown-content a:hover {
+    background: rgb(38, 255, 38);
+    color: white;
+  }
+  

@@ -1,0 +1,120 @@
+
+/* 모달 오버레이*/
+.modal-overlay {
+    position: fixed; /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(250, 249, 249, 0.5); 
+    z-index: 1000; /* 다른 요소들 위에 표시 */
+    pointer-events: auto; /* 오버레이 클릭 가능하게 */
+}
+
+/* 모달 콘텐츠 영역 기본 스타일 */
+.modal-content {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: fixed; 
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    transform: none; /* 중앙 정렬용 transform 제거 */
+    max-width: 200px; 
+    width: 150px; 
+    min-width: 150px; 
+    z-index: 1001; 
+    pointer-events: auto; /* 모달 내용 클릭 가능하게 */
+    
+}
+
+/* 모달 닫기 버튼 */
+.modal-close-button {
+    position: absolute;
+    top: 5px; 
+    right: 5px; 
+    font-size: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px; 
+    z-index: 10; 
+}
+
+/* 모달 본문 내용 영역 */
+.modal-body {
+    margin-top: 15px; 
+}
+
+
+.modal-top-left {
+     top: 56vh; 
+     left: 87.6vw; 
+}
+
+.modal-bottom-left {
+    top: 66vh; 
+    left: 87.6vw;
+}
+
+.modal-top-right {
+     top: 76vh; 
+     left: 87.6vw;
+}
+
+.modal-bottom-right {
+     top: 73vh;
+     left: 87.6vw; 
+
+}
+
+
+/* 링크 목록 스타일 (Modal 안에 넣은 내용의 스타일) */
+.link-list-modal h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.link-list-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-list-modal li {
+    margin-bottom: 10px;
+
+}
+
+.link-list-modal a {
+    text-decoration: none;
+    font: bold 16px #007bff;
+    text-align: center;
+    display: block;
+    padding: 5px 0;
+    color: #4a00e0;
+    font-weight: bold;
+   
+}
+
+.link-list-modal a:hover {
+  text-decoration: underline;
+  background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  background-color: #f0f0f0;
+  color: white;
+  cursor: pointer;
+  border-radius: 15px;
+  text-align: center;
+  width: auto;
+  margin-left: 4px;
+}
+
+
+
+
+

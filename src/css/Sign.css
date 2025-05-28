@@ -1,0 +1,352 @@
+.signpage *,
+.signpage *::before,
+.signpage *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.signpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* 3. 카드 컨테이너 */
+.signpage .container {
+  width: 360px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.signpage .container h1 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* 입력 그룹 */
+.signpage .input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+.signpage .input-group input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s, border-width 0.2s, border-radius 0.2s;
+}
+.signpage .input-group input:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+  border-radius: 24px;
+}
+
+/* 플로팅 레이블 */
+.signpage .input-group label {
+  position: absolute;
+  left: 12px;
+  top: 45%;
+  transform: translateY(-50%);
+  background: #fff;
+  padding: 0 4px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+  transition: top 0.2s, font-size 0.2s, color 0.2s;
+}
+.signpage .input-group input:focus + label,
+.signpage .input-group input:not(:placeholder-shown) + label {
+  top: -2px;
+  font-size: 12px;
+  color: #4285f4;
+}
+
+/* 6. 에러 메시지 */
+.signpage .error-message {
+  display: none;
+}
+.signpage .input-group.error .error-message {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #d93025;
+  text-align: left;
+}
+.signpage .input-group.error .error-message::before {
+  content: "⚠";
+  margin-right: 6px;
+  font-size: 14px;
+}
+.signpage .input-group.error input,
+.signpage .input-group.error input:focus {
+  border: 2px solid #d93025;
+  border-radius: 24px;
+}
+.signpage .input-group.error label {
+  top: -2px;
+  font-size: 12px;
+  color: #d93025;
+}
+
+/* 버튼 */
+.signpage .btn-primary {
+  width: 100%;
+  height: 44px;
+  background-color: #1ea463;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.signpage .btn-primary:hover {
+  background-color: #179b50;
+}
+
+/* 안내 문구 */
+.signpage .signup-prompt {
+  margin: 16px 0;
+  font-size: 14px;
+  color: #555;
+}
+.signpage .signup-prompt .link {
+  color: #1a73e8;
+  text-decoration: none;
+}
+.signpage .signup-prompt .link:hover {
+  text-decoration: underline;
+}
+
+/* Signup.jsx 전용: 비밀번호 요구사항 박스 */
+.signpage .password-requirements {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: left;
+  color: #555;
+}
+.signpage .password-requirements.hidden {
+  display: none;
+}
+.signpage .password-requirements ul {
+  list-style: none;
+
+  padding-left: 0;
+}
+.signpage .password-requirements li {
+  position: relative;
+  margin-bottom: 6px;
+  padding-right: 24px;
+}
+.signpage .password-requirements li.valid {
+  color: #1ea463;
+}
+.signpage .password-requirements li.valid::after {
+  content: "✔";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+}
+.signpage .password-requirements li.invalid {
+  color: #d93025;
+}
+.signpage .password-requirements li.invalid::after {
+  content: "✖";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+}
+
+/* 다크 모드 css */
+.signdarkpage *,
+.signdarkpage *::before,
+.signdarkpage *::after {
+  background-color: #303030;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.signdarkpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background-color: #212121;
+}
+
+/* 3. 카드 컨테이너 */
+.signdarkpage .container {
+  width: 360px;
+  padding: 40px;
+  background: #303030;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(2, 2, 2, 0.1);
+  text-align: center;
+}
+.signdarkpage .container h1 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* 입력 그룹 */
+.signdarkpage .input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+.signdarkpage .input-group input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #f9f9f9;
+  transition: border-color 0.2s, border-width 0.2s, border-radius 0.2s;
+}
+.signdarkpage .input-group input:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+  border-radius: 24px;
+}
+
+/* 플로팅 레이블 */
+.signdarkpage .input-group label {
+  position: absolute;
+  left: 12px;
+  top: 45%;
+  transform: translateY(-50%);
+  background: transparent;
+  padding: 0 4px;
+  font-size: 14px;
+  color: #555;
+  pointer-events: none;
+  transition: top 0.2s, font-size 0.2s, color 0.2s;
+}
+.signdarkpage .input-group input:focus + label,
+.signdarkpage .input-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 12px;
+  color: #4285f4;
+}
+
+/* 6. 에러 메시지 */
+.signdarkpage .error-message {
+  display: none;
+}
+.signdarkpage .input-group.error .error-message {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #d93025;
+  text-align: left;
+}
+.signdarkpage .input-group.error .error-message::before {
+  content: "⚠";
+  margin-right: 6px;
+  font-size: 14px;
+}
+.signdarkpage .input-group.error input,
+.signdarkpage .input-group.error input:focus {
+  border: 2px solid #d93025;
+  border-radius: 24px;
+}
+.signdarkpage .input-group.error label {
+  top: -10px;
+  font-size: 12px;
+  color: #d93025;
+}
+
+/* 버튼 */
+.signdarkpage .btn-primary {
+  width: 100%;
+  height: 44px;
+  background-color: #1ea463;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.signdarkpage .btn-primary:hover {
+  background-color: #179b50;
+}
+
+/* 안내 문구 */
+.signdarkpage .signup-prompt {
+  margin: 16px 0;
+  font-size: 14px;
+  color: #555;
+}
+.signdarkpage .signup-prompt .link {
+  color: #1a73e8;
+  text-decoration: none;
+}
+.signdarkpage .signup-prompt .link:hover {
+  text-decoration: underline;
+}
+
+/* Signup.jsx 전용: 비밀번호 요구사항 박스 */
+.signdarkpage .password-requirements {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #555;
+  background: #303030;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: left;
+  color: #555;
+}
+.signdarkpage .password-requirements.hidden {
+  display: none;
+}
+.signdarkpage .password-requirements ul {
+  list-style: none;
+  padding-left: 0;
+}
+.signdarkpage .password-requirements li {
+  position: relative;
+  margin-bottom: 6px;
+  padding-right: 24px;
+}
+.signdarkpage .password-requirements li.valid {
+  color: #1ea463;
+}
+.signdarkpage .password-requirements li.valid::after {
+  content: "✔";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+}
+.signdarkpage .password-requirements li.invalid {
+  color: #d93025;
+}
+.signdarkpage .password-requirements li.invalid::after {
+  content: "✖";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+}

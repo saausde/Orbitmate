@@ -1,23 +1,65 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Node dependencies
 /node_modules
+node_modules
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
-# production
+# Build output
 /build
+build/
 
-# misc
-.DS_Store
+# Test coverage
+/coverage
+coverage/
+
+# Environment files
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log*
+*.swp
+*.swo
+
+# Misc
+.DS_Store
+.DS_STORE
+.idea
+.vscode
+*.iml
+*.sublime-project
+*.sublime-workspace
+*~
+*.pyc
+.grunt
+_SpecRunner.html
+__benchmarks__
+.module-cache
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+test/the-files-to-test.generated.js
+chrome-user-data
+remote-repo/
+scripts/flow/*/.flowconfig
+.flowconfig
+
+# React DevTools packages
+packages/react-devtools-core/dist
+packages/react-devtools-extensions/chrome/build
+packages/react-devtools-extensions/chrome/*.crx
+packages/react-devtools-extensions/chrome/*.pem
+packages/react-devtools-extensions/firefox/build
+packages/react-devtools-extensions/firefox/*.xpi
+packages/react-devtools-extensions/firefox/*.pem
+packages/react-devtools-extensions/shared/build
+packages/react-devtools-extensions/.tempUserDataDir
+packages/react-devtools-fusebox/dist
+packages/react-devtools-inline/dist
+packages/react-devtools-shell/dist
+packages/react-devtools-timeline/dist

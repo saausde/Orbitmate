@@ -1,72 +1,74 @@
-# W.I.P
+# Orbitmate
 
-# Getting Started with Create React App
+## Overview
+Orbitmate is a React-based web application designed to provide an interactive experience with AI functionalities. The application features a dashboard, chat interface, and various reusable components to enhance user interaction.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Structure
+The project is organized into the following directories and files:
 
-## Available Scripts
+- **public/**: Contains static files such as the favicon and main HTML file.
+  - `favicon.ico`: The favicon for the application.
+  - `index.html`: The main HTML file that serves as the entry point for the React application.
+  - `robots.txt`: Instructions for web crawlers.
 
-In the project directory, you can run:
+- **src/**: Contains the source code for the application.
+  - **assets/**: Directory for image assets.
+  - **components/**: Contains reusable components.
+    - **common/**: Commonly used components like Button, Loading, and Header.
+    - **dashboard/**: Dashboard component.
+    - **chat/**: Chat interface component.
+  - **contexts/**: Context provider for managing AI-related state.
+  - **hooks/**: Custom hooks for managing AI responses.
+  - **pages/**: Contains different pages of the application.
+    - `Home.js`: Landing page component.
+    - `Chat.js`: Chat page component.
+    - `NotFound.js`: 404 error page component.
+  - **services/**: Functions for interacting with AI services.
+  - **styles/**: Global styles and theme-related constants.
+  - **utils/**: Utility functions for the application.
+  - `App.js`: Main application component.
+  - `index.js`: Entry point for the React application.
+  - `routes.js`: Defines application routes.
 
-### `npm start`
+- **.eslintrc.js**: ESLint configuration file.
+- **.gitignore**: Specifies files to be ignored by Git.
+- **package.json**: Contains project metadata and dependencies.
+- **README.md**: Documentation for the project.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js and npm installed on your machine.
 
-### `npm test`
+### Installation
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```
+   cd orbitmate
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Running the Application
+To start the development server, run:
+```
+npm start
+```
+The application will be available at `http://localhost:3000`.
 
-### `npm run build`
+### Running Tests
+To run the tests, use:
+```
+npm test
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License.
