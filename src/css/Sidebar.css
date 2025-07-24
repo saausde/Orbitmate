@@ -1,78 +1,417 @@
-/*새채팅*/
+/* 사이드바 전체 레이아웃 및 UI 요소별 한국어 주석 추가, 코드 최적화 */
+
+/* 사이드바 토글 버튼 (브라우저 기준 고정) */
+#side_btn {
+  position: fixed;
+  top: 18px;
+  left: 15px;
+  margin: 0;
+  z-index: 20000;
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  background-size: contain;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#side_btn:hover {
+  transform: scale(1.05);
+  background-color: rgba(107, 60, 201, 0.08);
+}
+#side_btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 800px) {
+  #side_btn {
+    top: 12px;
+    left: 8px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* 사이드바 프레임 (슬라이드 메뉴) */
+.side_bar_frame {
+  width: 16vw;
+  min-width: 210px;
+  height: 100vh;
+  /*background: transparent;
+  backdrop-filter: blur(15px);*/
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(-100%);
+  z-index: 10000;
+  overflow-y: auto;
+  box-shadow: 0 0px 10px rgba(255, 255, 255, 0.2);
+  opacity: 0;
+}
+.side_bar_frame.open {
+  /* 사이드바 열림 */
+  transform: translateX(0);
+  opacity: 1;
+}
+.side_bar_frame.closed {
+  /* 사이드바 닫힘 */
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* 사이드바 채팅 목록 */
+.sidebar-chat-list {
+  position: relative;
+  padding-top: 60px;
+  color: white;
+  font-weight: normal;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+}
+
+.sidebar_chat_list_wrapper {
+  max-height: 59vh;
+  overflow-y: auto;
+}
+
+/* 채팅 아이템 */
+.chat-item {
+  display: flex;
+  color: #6b3cc9;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 90%;
+  height: 35px;
+  padding: 10px 8px;
+  margin: 8px auto;
+  border-radius: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+}
+.chat-item:hover {
+  /* 채팅 아이템 호버 효과 */
+  background-color: #6b3cc9;
+  border-color: #e1bee7;
+  box-shadow: 0 6px 12px rgba(39, 27, 27, 0.15);
+  transform: translate(-2px, -2px);
+  color: white;
+}
+.chat-noMessage {
+  /* 채팅 없음 안내 */
+  color: #c0b8b8;
+  font-size: 15px;
+  margin: 8px auto;
+}
+.chat-item:active {
+  box-shadow: none;
+  transform: none;
+}
+/*.chat-item.inactive {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.chat-item.active {
+  background-color: white;
+}*/
+
+/* 옵션 버튼 (채팅별 ...) */
+.options-btn {
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  background: none;
+  display: block;
+}
+/* 새 채팅 버튼 및 채팅 내역 전체 삭제 버튼 공통 스타일 */
+.new_chat_btn,
+.new_chat_btn2,
+.chat-item .active,
+.chat-item .inactive {
+  min-width: 130px;
+}
+
+/* 새 채팅 버튼 */
 .new_chat_btn {
-    display: block;
-    margin: 90px auto;
-    width: 90%;
-    padding: 12px; 
-    border: none;
-    border-radius: 15px; 
-    background-color: #F8F0FB; 
-    color: #6B3CC9; 
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-  }
+  display: block;
+  margin: 150px auto 30px;
+  width: 90%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  /*background-color: #f8f0fb;*/
+  font-weight: normal;
+  background: transparent;
+  color: #6b3cc9;
 
-  .new_chat_btn:hover {
-    background-color: #6B3CC9;
-    color: #FFFFFF;
-    border-color: #E1BEE7;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-  }
-  .new_chat_btn:active{transform: scale(0.99);}
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 0px 10px rgba(117, 69, 129, 0.2);
+  transition: all 0.3s ease, color 0.3s ease;
+  backdrop-filter: blur(20px);
+}
+.new_chat_btn:hover {
+  background-color: #6b3cc9;
+  color: #ffffff;
+  border-color: #e1bee7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translate(-2px, -2px);
+}
+.new_chat_btn:active {
+  transform: scale(0.99);
+}
 
-/*채팅제거*/
+/* 채팅 내역 전체 삭제 버튼 */
+.new_chat_btn2 {
+  display: block;
+  margin: 0 auto 30px;
+  width: 90%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  /*background-color: #f8f0fb;*/
+  background: transparent;
+  color: #6b3cc9;
+  font-weight: normal;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease, color 0.3s ease;
+}
+.new_chat_btn2:hover {
+  background-color: #6b3cc9;
+  color: #ffffff;
+  border-color: #e1bee7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translate(-2px, -2px);
+}
+
+/* 드롭다운 컨텐츠 (채팅 옵션 등) */
+.sidebar-dropdown-content {
+  position: fixed;
+  top: var(--dropdown-top);
+  left: var(--dropdown-left);
+  z-index: 9999;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-dropdown-content a {
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #6b3cc9;
+  font-size: 14px;
+}
+.sidebar-dropdown-content a:hover {
+  background: rgb(38, 255, 38);
+  color: white;
+}
+
+/* 헬프 센터 버튼 */
+.helpCenter {
+  position: absolute;
+  left: 22px;
+  bottom: 55px;
+  text-align: center;
+  border: none;
+  color: #6b3cc9;
+  font-weight: normal;
+  font-size: 14px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease, color 0.3s ease;
+}
+
+.creatorPage_btn {
+  position: absolute;
+  bottom: 25px;
+  left: 22px;
+  border: none;
+  color: #6b3cc9;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.3s ease, color 0.3s ease;
+  background: transparent;
+}
+
+/* QnA 버튼 */
+.qnaButton {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  text-align: center;
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+  background: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 90px auto;
+  border-radius: 15px;
+  display: block;
+  color: #6b3cc9;
+  font-weight: normal;
+  cursor: pointer;
+  transition: all 0.3s ease, color 0.3s ease;
+}
+.helpCenter:hover,
+.qnaButton:hover,
+.creatorPage_btn:hover {
+  transform: scale(1.03);
+}
+
+.helpCenter:active,
+.qnaButton:active {
+  transform: scale(0.99);
+  box-shadow: none;
+}
+
+/* 사이드바 모달 오버레이 */
+.sidebar-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+/* 사이드바 모달 */
+.sidebar-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  min-width: 260px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+.sidebar-modal button {
+  margin: 8px 12px 0 12px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: #6b3cc9;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sidebar-modal button:hover {
+  background: #4b247a;
+}
+
+/* 사이드바 모달 팝업 */
+.sidebar-modal-pop {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  background: rgba(215, 215, 215, 0.7);
+  border-radius: 12px;
+  padding: 24px 18px 18px 18px;
+  min-width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  z-index: 8000;
+  border: 1px solid #e0e0e0;
+  pointer-events: auto;
+}
+.sidebar-modal-pop button {
+  margin: 8px 8px 0 8px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #6b3cc9;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sidebar-modal-pop button:hover {
+  background: #4b247a;
+}
+.sidebar-modal-pop input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+/* 반응형(모바일) 스타일 */
+@media (max-width: 768px) {
+  .new_chat_btn,
   .new_chat_btn2 {
-    display: block;
-    margin: 90px auto;
-    width: 90%;
-    padding: 12px; 
-    border: none;
-    border-radius: 15px; 
-    background-color: #F8F0FB; 
-    color: #6B3CC9; 
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+    margin: 60px auto;
+    width: 80%;
+    padding: 8px;
   }
+  .chat-item {
+    font-size: 13px;
+  }
+}
 
-  .new_chat_btn2:hover {
-    background-color: #6B3CC9;
-    color: #FFFFFF;
-    border-color: #E1BEE7;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-  }
-  .new_chat_btn2active{transform: scale(0.99);}
+.search_icon {
+  position: absolute;
+  border: none;
+  left: 83%;
+  top: 1.7%;
+  background-image: url("../images/orbitmateIcon1.png");
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  background-size: contain;
+  transition: all 0.3s ease;
+  filter: invert(10%) sepia(90%) saturate(300%) hue-rotate(220deg);
+  /*filter: invert(1) grayscale(1); 연한 검은색*/
+  /*filter: invert(1) brightness(0) saturate(100%); 진한 검은색*/
+}
 
-  .sidebar-dropdown-content {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    z-index: 200;
-    overflow: hidden;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-  
-  .sidebar-dropdown-content a {
-    padding: 10px 16px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-  }
-  
-  .sidebar-dropdown-content a:hover {
-    background: rgb(38, 255, 38);
-    color: white;
-  }
-  
+.search_icon:hover {
+  transform: scale(1.03);
+}
+.search_icon:active {
+  transform: none;
+}
+
+.chat_Search {
+  position: absolute;
+  left: 20%;
+  top: 2.2%;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  padding-left: 6px;
+  width: 230px;
+}

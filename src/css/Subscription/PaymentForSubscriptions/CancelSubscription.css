@@ -1,0 +1,129 @@
+#CancelSubscription_Main_f {
+  background-color: #1a1a1a; /* 어두운 POS 느낌 배경 */
+  color: #eaeaea;
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: "Courier New", Courier, monospace; /* 영수증 폰트 느낌 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#receipt_f {
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  width: 360px;
+  min-height: 600px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.05),
+    0 20px 40px rgba(0, 0, 0, 0.6), 0 -10px 20px rgba(255, 255, 255, 0.05),
+    0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+#inner {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 2.6rem;
+  color: #000000;
+  font-family: sans-serif;
+}
+
+#apple-logo {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#apple-logo > img {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 80px;
+  transform: translate(-50%);
+}
+
+.body_receipt {
+  margin: 70px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#details {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed #ccc;
+  padding: 6px 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  color: #111;
+}
+.label {
+  min-width: 110px;
+  text-align: left;
+}
+
+.value {
+  text-align: right;
+  font-weight: bold;
+  color: #111;
+}
+
+#barcode {
+  font-family: monospace;
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+  text-align: center;
+  margin: 25px 0;
+  user-select: none;
+}
+
+#barcode > img {
+  position: absolute;
+  pointer-events: none;
+  width: 300px;
+  height: 250px;
+  top: 360px;
+  left: 30px;
+}
+
+.row-anim {
+  border-bottom: 1px dotted #bbb;
+  padding: 6px 0;
+  font-size: 0.95rem;
+}
+
+#buttons {
+  margin-top: auto;
+  text-align: center;
+}
+
+.replay-btn {
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 10px 20px;
+  border: 1.5px solid #333;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.replay-btn:hover {
+  background-color: #333;
+  color: white;
+}

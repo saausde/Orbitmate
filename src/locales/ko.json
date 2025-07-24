@@ -1,0 +1,256 @@
+{
+  "common": {
+    "language": {
+      "toggle": "English"
+    }
+  },
+  "noticeBoard_main": {
+    "subtitle": "오르빗메이트에 관한 모든 것",
+    "qna_subtitle": "궁금한 점? 바로 물어보세요!",
+    "text_placeholder": "공지사항 검색...",
+    "back_btn": "뒤로가기",
+    "notice": "공지사항",
+    "qna": "질문과 답변",
+    "ask_question_btn": "질문하기",
+    "input_comment_guide": "댓글을 입력하고 Enter를 누르세요"
+  },
+  "notice_detail": {
+    "direction": "공지사항",
+    "directionToQnA": "질문과 답변",
+    "satisfaction_quote": "이 공지에 만족하셨나요?",
+    "satisfaction_quote_QnA": "답변에 만족하셨나요?",
+    "view_comments": "댓글 보기",
+    "delete_post": "삭제",
+    "edit_post": "수정",
+    "edit_comment": "댓글 수정",
+    "input_comment_guide": "댓글 내용을 입력해주세요"
+  },
+
+  "comment_edit": {
+    "form_title": "수정을 위해 아래의 내용들을 채워주세요!",
+    "content_label": "댓글 내용 수정",
+    "content_placeholder": "댓글 내용을 입력해주세요.",
+    "submit_button": "네",
+    "cancel_button": "아니오"
+  },
+
+  "post_edit": {
+    "form_title": "수정을 위해 아래의 내용을 채워주세요!",
+    "subject_label": "제목 수정",
+    "subject_placeholder": "게시글 제목을 입력해주세요.",
+    "content_label": "내용 수정",
+    "content_placeholder": "게시글 내용을 입력해주세요.",
+    "password_label": "비밀번호",
+    "password_placeholder": "비밀번호를 입력해주세요."
+  },
+
+  "general_setting": {
+    "title": "일반",
+    "theme": "테마",
+    "light_theme": "라이트 모드",
+    "dark_theme": "다크 모드",
+    "font_size": "채팅 폰트 크기",
+    "font_size_minimal": "최소",
+    "font_size_small": "작음",
+    "font_size_medium": "보통",
+    "font_size_large": "큼",
+    "font_size_xlarge": "최대",
+    "language": "언어",
+    "ko": "한국어",
+    "en": "영어",
+    "delete_account": "회원 탈퇴"
+  },
+
+  "profileEdit_Setting": {
+    "title": "프로필 설정",
+    "profile_effects_subtitle": "당신의 프로필, 새롭게 바꿔볼 시간이에요!",
+    "profile_effects_description": "최근에 나온 프로필 꾸미기, 프로필 효과 등 확인해 보세요!",
+    "go_to_shop": "상점가기",
+    "level": "레벨",
+    "current_exp": "현재 경험치",
+    "password_and_certification": "비밀번호 및 인증",
+    "UserName": "이름",
+    "UserEmail": "이메일",
+    "UserPhonenumber": "핸드폰 번호",
+    "UserBio": "설명",
+    "UserBioPlaceholder": "내 이야기를 짧게 적어볼까요? (최대 120자)",
+    "placeholderYourIntroduction": "선장의 로그를 시작하세요…...",
+    "empty_introduction": "유저의 메시지를 기다리고 있습니다.",
+    "onlineStatus": "온라인",
+    "subscription": "구독제",
+    "username": "유저네임",
+    "theme": "테마",
+    "save": "저장",
+    "logout": "로그아웃",
+    "delete_account": "계정 삭제",
+    "dark": "블랙홀",
+    "light": "태양빛",
+    "space": "갤럭시",
+    "purple": "성운",
+    "green": "에메랄드 코멧"
+  },
+
+  "profile_setting": {
+    "general": "일반",
+    "profileEdit_setting": "프로필",
+    "setting": "설정",
+    "logOut": "로그아웃",
+    "adminPage": "관리자 페이지"
+  },
+
+  "notification_setting": {
+    "title": "알림"
+  },
+
+  "title_section": {
+    "greeting": "환영합니다, {{name}}님!",
+    "greeting_no_name": "무엇을 도와드릴까요?",
+    "input_placeholder": "무엇이든 물어보세요..."
+  },
+
+  "sidebar_buttons": {
+    "new_chat": "새 채팅",
+    "edit_chat": "채팅 편집",
+    "all_delete_chat": "전체 채팅 내역 삭제",
+    "delete_chat": "채팅 삭제",
+    "edit_title": "제목 편집",
+    "save_changes": "변경 사항 저장",
+    "confirm_question": "정말로 모든 채팅을 삭제하시겠습니까?",
+    "confirm": "확인",
+    "cancel": "취소",
+    "helpCenter": "고객센터",
+    "aboutTheCreators": "우리는 누구인가요?"
+  },
+
+  "subscriptionMain": {
+    "title": "플랜 업그레이드",
+    "personalToggle_btn": "개인",
+    "businessToggle_btn": "비즈니스",
+    "moreFeatures": "비즈니스에 더 많은 기능이 필요하신가요?",
+    "freePlan": "무료 플랜",
+    "currentPlan": "현재 나의 플랜",
+    "here": "보기",
+    "wnattocancel": "구독을 취소하시겠습니까?",
+    "yes": "구독 종료하기",
+    "no": "다시 생각해볼게요",
+    "expiryNotice": "고객님께서 구독하신 서비스는 <span>{{date}}</span>까지 이용하실 수 있으며, 그 전까지는 언제든지 편하게 서비스를 계속 이용하시거나 갱신하실 수 있습니다. 저희 OrbitMate는 항상 고객님의 편리하고 만족스러운 경험을 위해 최선을 다하고 있습니다. 남은 기간 동안 다양한 기능과 풍성한 혜택을 마음껏 누려보세요.",
+    "expiryNotice2": "저희와 함께한 시간이 어떠셨나요? 소중한 의견을 들려주세요.",
+    "reasonCancel": "구독 취소 사유를 알려주세요",
+    "placeholder_reason": "구독 취소 사유를 간단히 적어주세요",
+    "feedback": "소중한 의견을 남겨주세요",
+    "placeholder_feedback": "서비스에 대한 의견을 자유롭게 남겨주세요"
+  },
+
+  "subscriptionMain_free": {
+    "per_month_free": "USD/월",
+    "plan_desc_free": "더 많은 기능으로 스마트하게 활용하세요!",
+    "freePlan_btn": "현재 나의 플랜",
+    "free_features": [
+      "✔ OrbitMate mini 액세스",
+      "✔ 표준 음성 모드",
+      "✔ 검색으로 웹에서 가져온 실시간 데이터 사용",
+      "✔ OrbitMate 제한적 액세스",
+      "✔ 파일 업로드, 고급 데이터 분석, 이미지 생성 등에 제한적 액세스",
+      "✔ 맞춤형 OrbitMate 사용"
+    ]
+  },
+
+  "subscriptionMain_plus": {
+    "per_month_plus": "USD/월",
+    "plan_desc_plus": "활용도 높이는 스마트한 선택!",
+    "plusPlan_btn": "Pro 이용하기",
+    "plus_features": [
+      "✔ Free의 모든 기능 포함",
+      "✔ 메시지, 파일 업로드, 고급 데이터 분석, 이미지 생성 한도 증가",
+      "✔ 심층 리서치 및 다양한 이성 모델 (OrbitMate-mini, OrbitMate-mini-high, o3)과 OrbitMate-4.5 리서치 프리뷰 액세스",
+      "✔ 작업 및 프로젝트 생성, 맞춤형 OrbitMate 설정",
+      "✔ 파일 업로드, 고급 데이터 분석 기능에 제한적 액세스",
+      "✔ 새로운 기능 우선 체험 기회"
+    ]
+  },
+  "subscriptionMain_ultimate": {
+    "per_month_ultimate": "USD/월",
+    "plan_desc_ultimate": "활용도 높이는 스마트한 선택!",
+    "ultimatePlan_btn": " Ultimate 이용하기",
+    "ultimate_features": [
+      "✔ Plus의 모든 기능 포함",
+      "✔ 모든 추론 모델 및 OrbitMate-4o 무제한 액세스",
+      "✔ 고급 음성 기능 무제한 이용",
+      "✔ 복잡한 작업을 위한 다단계 온라인 리서치에 넉넉한 액세스 한도",
+      "✔ Codex 에이전트 리서치 프리뷰 이용 가능",
+      "✔ 더 정밀한 계산과 최적의 응답을 위한 OrbitMate Pro 모드 이용",
+      "✔ 새 기능 및 실험적 도구를 가장 먼저 체험"
+    ]
+  },
+  "subscriptionMain_business": {
+    "per_month_business": "USD/월",
+    "plan_desc_business": "활용도 높이는 스마트한 선택!",
+    "businessPlan_btn": " Enterprise 이용하기",
+    "business_features": [
+      "✔ Plus의 모든 기능 포함",
+      "✔ 모든 추론 모델 및 OrbitMate-4o 무제한 액세스",
+      "✔ 고급 음성 기능 무제한 이용",
+      "✔ 복잡한 작업을 위한 다단계 온라인 리서치에 넉넉한 액세스 한도",
+      "✔ Codex 에이전트 리서치 프리뷰 이용 가능",
+      "✔ 더 정밀한 계산과 최적의 응답을 위한 OrbitMate Pro 모드 이용"
+    ]
+  },
+
+  "subscriptionProcess": {
+    "select_plan": "구독선택",
+    "enter_payment": "결제입력",
+    "payment_complete": "결제완료",
+    "cardholder_name": "카드 소유자 이름",
+    "card_number": "카드 번호",
+    "select_card": "카드 선택",
+    "expiry_month": "만료 월",
+    "expiry_year": "만료 년도",
+    "enter_cardholder_name": "카드 소유자명을 입력하세요",
+    "enter_card_number": "카드 번호를 입력해주세요",
+    "select_month": "월 선택",
+    "select_year": "년도 선택",
+    "monthly": "월",
+    "pay_now": "결제하기"
+  },
+
+  "paymentComplete": {
+    "completed": "구독이 정상 완료되었습니다.",
+    "subscription_info": "구독 정보",
+    "payment_amount": "결제 금액",
+    "payment_method": "결제 방식",
+    "go_to_main": "메인으로",
+    "cancel_info_title": "구독 취소 안내",
+    "cancel_info_body": "구독은 언제든지 OrbitMate 앱 내 ‘내 구독 관리’에서 직접 취소할 수 있습니다. 취소 시 다음 결제일부터 구독이 종료되며, 환불은 제공되지 않습니다. 더 궁금한 점은 고객센터로 문의해주세요.",
+    "credit_card": "신용카드"
+  },
+
+  "about_us": {
+    "title": "OrbitMate를 만든 최고의 팀",
+    "description": "네명의 두뇌, 하나의 목표. OrbitMate는 복잡한 기술을 직관적인 경험으로 재해석한 차세대 AI 플랫폼입니다. 기술의 정교함과 사람 중심의 디자인이 조화를 이루며, 우리는 코드와 창의력으로 누구나 쉽게 다가갈 수 있는 스마트한 세상을 만들어갑니다.",
+    "worktime": "작업시간",
+    "numberOfdevs": "팀원 수",
+    "AI_Model": "사용 AI 모델",
+    "position": "개발자",
+    "days": "일",
+    "ContactUs": "연락 주세요",
+    "ContactUs2": "이 정보를 통해 저희에게 연락하실 수 있어요."
+  },
+
+  "about_each": {
+    "jayname": "나재훈",
+    "jayRole": "전체 UI 제작과 DB 연동에 참여했으며, 서비스 컨셉에 맞는 유니크한 화면을 만드는 데 중점을 두었습니다.  사용자 경험을 고려한 레이아웃과 디테일을 통해, 기능성과 감각적인 디자인을 동시에 담아내고자 했습니다.",
+    "wooname": "신우철",
+    "wooRole": "프론트엔드 코드의 가독성과 유지 보수성을 높이기 위해 리팩토링을 담당했습니다. 백엔드, API 연동 과정에서는 데이터 구조와 요청 방식을 조율해 원활히 서비스 되도록 기능을 구현했습니다.",
+    "simname": "심홍익",
+    "simRole": " AI 모델 연동 및 외부 API 통합을 포함한 백엔드 전반을 담당했습니다. 데이터베이스 설계와 관리, 서버 환경 설정까지 전체적인 시스템 구축을 맡아 안정적인 서비스 운영을 지원했습니다."
+  },
+
+  "ChatLog": {
+    "waiting_message": "AI가 은하계 너머를 스캔 중입니다…!",
+    "noMessages": "오빗메이트가 조용합니다."
+  },
+
+  "adminPage": {
+    "search_btn": "검색"
+  }
+}

@@ -1,0 +1,16 @@
+/* 배경 파티클 전체 컨테이너 스타일 */
+.background-particles {
+  position: fixed; /* 화면 고정 */
+  width: 100vw; /* 전체 너비 */
+  height: 100vh; /* 전체 높이 */
+  z-index: -1; /* 가장 뒤에 배치 */
+  opacity: 0.5; /* 투명도 */
+}
+
+/* 파티클 캔버스 스타일 */
+.background-particles canvas {
+  position: fixed !important; /* 화면 고정 */
+  width: 100vw !important; /* 전체 너비 */
+  height: 100vh !important; /* 전체 높이 */
+  z-index: -1 !important; /* 가장 뒤에 배치 */
+}

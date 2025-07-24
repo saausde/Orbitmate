@@ -1,0 +1,252 @@
+{
+  "common": {
+    "language": {
+      "toggle": "한국어"
+    }
+  },
+  "noticeBoard_main": {
+    "subtitle": "All Things about OrbitMate",
+    "qna_subtitle": "Curious? Just Ask!",
+    "text_placeholder": "Search announcements...",
+    "back_btn": "Previous",
+    "notice": "Notice",
+    "qna": "Q&A",
+    "ask_question_btn": "Ask a Question"
+  },
+  "notice_detail": {
+    "direction": "Notice Board",
+    "directionToQnA": "QnA",
+    "satisfaction_quote": "Did this answer your question?",
+    "satisfaction_quote_QnA": "Was this answer helpful?",
+    "view_comments": "View Comments",
+    "delete_post": "Delete",
+    "edit_post": "Edit",
+    "edit_comment": "Edit ",
+    "input_comment_guide": "Type a comment and press Enter"
+  },
+
+  "comment_edit": {
+    "form_title": "Please fill in the following to make changes!",
+    "content_label": "Edit Your Comment Content",
+    "content_placeholder": "Please enter the comment content.",
+    "submit_button": "Yes",
+    "cancel_button": "No"
+  },
+
+  "post_edit": {
+    "form_title": "Please fill in the fields below to edit the post!",
+    "subject_label": "Edit Title",
+    "subject_placeholder": "Enter the post title.",
+    "content_label": "Edit Content",
+    "content_placeholder": "Enter the post content.",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password."
+  },
+
+  "general_setting": {
+    "title": "General",
+    "theme": "Theme",
+    "light_theme": "Light Mode",
+    "dark_theme": "Dark Mode",
+    "language": "Language",
+    "font_size": "Chat Font Size",
+    "font_size_minimal": "Minimal",
+    "font_size_small": "Small",
+    "font_size_medium": "Medium",
+    "font_size_large": "Large",
+    "font_size_xlarge": "Maximum",
+    "ko": "Korean",
+    "en": "English",
+    "delete_account": "Delete Account"
+  },
+
+  "profileEdit_Setting": {
+    "title": "Profile Setting",
+    "profile_effects_subtitle": "Time to refresh your profile!",
+    "profile_effects_description": "Check out the latest profile customization and effects!",
+    "go_to_shop": "Go to Shop",
+    "level": "Level",
+    "current_exp": "Current Experience",
+    "password_and_certification": "Password and Certification",
+    "UserName": "Name",
+    "UserEmail": "Email",
+    "UserPhonenumber": "Phone Number",
+    "UserBio": "Bio",
+    "UserBioPlaceholder": "Would you like to briefly share your story? (Up to 120 characters)",
+    "placeholderYourIntroduction": "Begin your captain’s log...",
+    "empty_introduction": "Awaiting transmission from the user.",
+    "onlineStatus": "Online",
+    "subscription": "Subscription",
+    "username": "Username",
+    "theme": "Theme",
+    "save": "Save the log",
+    "logout": "Eject from spacecraft",
+    "delete_account": "Terminate identity module",
+    "dark": "Black Hole",
+    "light": "Solar Flare",
+    "space": "Galaxy",
+    "purple": "Nebula",
+    "green": "Emerald Comet"
+  },
+
+  "profile_setting": {
+    "general": "General",
+    "profileEdit_setting": "Profile",
+    "setting": "Setting",
+    "logOut": "Log Out",
+    "adminPage": "Captain’s Deck"
+  },
+
+  "notification_setting": {
+    "title": "Notification"
+  },
+
+  "title_section": {
+    "greeting": "Welcome aboard, Captain {{name}}!",
+    "greeting_no_name": "How can I assist you today?",
+    "input_placeholder": "Type Your Opinion...."
+  },
+
+  "sidebar_buttons": {
+    "new_chat": "New Chat",
+    "edit_chat": "Edit Chat",
+    "all_delete_chat": "Delete All Chats",
+    "delete_chat": "Delete Chat",
+    "edit_title": "Edit Title",
+    "save_changes": "Save Changes",
+    "confirm_question": "Are you sure you want to delete all chats?",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "helpCenter": "Help Center",
+    "aboutTheCreators": "About The Creators"
+  },
+
+  "subscriptionMain": {
+    "title": "Upgrade your plan",
+    "personalToggle_btn": "Personal",
+    "businessToggle_btn": "Business",
+    "moreFeatures": "Need more features for your business?",
+    "freePlan": "Free Plan",
+    "currentPlan": "My Current Plan",
+    "here": "Here",
+    "wnattocancel": "Cancel your subscription?",
+    "yes": "Cancel it",
+    "no": "I’ll Think About It",
+    "expiryNotice": "Please be advised that you may continue to access your subscription service until <span>{{date}}</span>. Until then, feel free to renew or continue enjoying the service at your convenience. Make the most of the remaining period with all the features and benefits we offer.",
+    "expiryNotice2": "How was your experience with us?",
+    "reasonCancel": "Please let us know your reason for cancellation",
+    "placeholder_reason": "Please briefly state your reason for cancellation",
+    "feedback": "Kindly share your valuable feedback",
+    "placeholder_feedback": "Feel free to share your feedback"
+  },
+
+  "subscriptionMain_free": {
+    "per_month_free": "USD/monthly",
+    "plan_desc_free": "Unlock smarter features for free!",
+    "freePlan_btn": "My Current Plan",
+    "free_features": [
+      "✔ Access to OrbitMate mini",
+      "✔ Standard voice mode",
+      "✔ Real-time data from the web via search",
+      "✔ Limited access to OrbitMate",
+      "✔ Limited access to file uploads, advanced data analysis, and image generation",
+      "✔ Personalized use of OrbitMate"
+    ]
+  },
+
+  "subscriptionMain_plus": {
+    "per_month_plus": "USD/monthly",
+    "plan_desc_plus": "Smarter. Faster. Better!",
+    "plusPlan_btn": "Get Pro",
+    "plus_features": [
+      "✔ Includes all features from Free plan",
+      "✔ Increased limits for messages, file uploads, advanced data analysis, and image generation",
+      "✔ Create tasks and projects, and customize your OrbitMate experience",
+      "✔ Limited access to file uploads and advanced data analysis features",
+      "✔ Early access to new features and experiments"
+    ]
+  },
+  "subscriptionMain_ultimate": {
+    "per_month_ultimate": "USD/monthly",
+    "plan_desc_ultimate": "All Access. All Power. OrbitMate!",
+    "ultimatePlan_btn": " Get Ultimate",
+    "ultimate_features": [
+      "✔ Includes all features from Plus plan",
+      "✔ Unlimited access to all inference models and OrbitMate-4o",
+      "✔ Unlimited access to advanced voice capabilities",
+      "✔ Higher limits for multi-step online research in complex tasks",
+      "✔ Access to Codex Agent research preview",
+      "✔ Early access to new features and experimental tools"
+    ]
+  },
+  "subscriptionMain_business": {
+    "per_month_business": "USD/monthly",
+    "plan_desc_business": "Top-tier OrbitMate for businesses!",
+    "businessPlan_btn": " Get Enterprise",
+    "business_features": [
+      "✔ Unlimited user accounts for all employees",
+      "✔ Support for custom AI models and dedicated research capabilities",
+      "✔ Large-scale data analysis and custom report generation",
+      "✔ Dedicated customer support and technical consulting services",
+      "✔ Enhanced security and data privacy management"
+    ]
+  },
+
+  "subscriptionProcess": {
+    "select_plan": "Plan",
+    "enter_payment": "Payment",
+    "payment_complete": "Done",
+    "cardholder_name": "Cardholder Name",
+    "card_number": "Card Number",
+    "select_card": "Select Card",
+    "expiry_month": "Expiry Month",
+    "expiry_year": "Expiry Year",
+    "enter_cardholder_name": "Please enter the cardholder's name",
+    "enter_card_number": "Please enter the card number",
+    "select_month": "Select Month",
+    "select_year": "Select Year",
+    "monthly": "Monthly",
+    "pay_now": "Pay Now"
+  },
+
+  "paymentComplete": {
+    "completed": "Successfully activated.",
+    "subscription_info": "Subscription",
+    "payment_amount": "Amount Paid",
+    "payment_method": "Payment Method",
+    "go_to_main": "Back to Main",
+    "cancel_info_title": "Subscription Cancellation Notice",
+    "cancel_info_body": "You can cancel your subscription anytime via the ‘My Subscriptions’ section in the OrbitMate app. Cancellation will take effect from the next billing cycle, and refunds are not provided. For further assistance, please contact Support.",
+    "credit_card": "Credit Card"
+  },
+
+  "about_us": {
+    "title": "The Dream Team",
+    "description": "5 brains. 1 vision. We’re the minds behind OrbitMate — a next-gen AI platform built to make smart feel simple.\nFrom complex engineering to human-first design, our team of five blends code, creativity, and caffeine to craft an AI experience that’s fast, intuitive, and just a little bit magic.",
+    "worktime": "Work Time",
+    "numberOfdevs": "Team Members",
+    "AI_Model": "AI Model Used",
+    "position": "Developer",
+    "days": "days",
+    "ContactUs": "reach out to us",
+    "ContactUs2": "You may reach out to use with these info"
+  },
+
+  "about_each": {
+    "jayname": "JaeHoon Na",
+    "jayRole": "I worked on the overall UI and database integration, focusing on a unique design that fits the service concept. I aimed to balance functionality with a refined user experience.",
+    "wooname": "Woo Cheol Shin",
+    "wooRole": "Refactored the frontend code to enhance readability and maintainability. During backend and API integration, I coordinated data structures and request methods to ensure smooth service operation.",
+    "simname": "Hongik Sim",
+    "simRole": " Handled the entire backend, including AI model integration and external API consolidation. Managed database design and maintenance, as well as server configuration, ensuring stable and reliable service operation."
+  },
+
+  "ChatLog": {
+    "waiting_message": "AI is scanning beyond the galaxy...!",
+    "noMessages": "The OrbitMate is silent."
+  },
+
+  "adminPage": {
+    "search_btn": "검색"
+  }
+}

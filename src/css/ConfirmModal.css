@@ -1,0 +1,78 @@
+.confirm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* 어두운 반투명 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.confirm-modal {
+  background-color: white;
+  padding: 24px 28px;
+  border-radius: 14px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  max-width: 370px;
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  animation: scaleIn 0.25s ease-out;
+}
+
+.confirm-modal p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.confirm-buttons button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-buttons button:first-of-type {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.confirm-buttons button:last-of-type {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.confirm-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

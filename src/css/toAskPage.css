@@ -1,0 +1,105 @@
+.ask_main {
+  max-width: 1030px;
+  margin-top: 150px;
+  margin-left: 480px;
+  padding: 30px 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+
+  font-family: "Pretendard", sans-serif;
+}
+
+.QnA_form_group,
+.QnA_form_group2 {
+  margin-bottom: 20px;
+}
+
+.QnALableTitle,
+.QnALablePass,
+.QnALableContent {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #000000;
+  position: absolute;
+  top: 45%;
+}
+
+.QnALableTitle,
+.QnALableContent {
+  left: 525px;
+}
+
+.QnALablePass {
+  left: 54.5%;
+}
+
+.QnALableContent {
+  top: 550px;
+}
+
+.QnA_subject_input,
+.QnA_content,
+.QnA_Password_input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  font-family: sans-serif;
+  position: absolute;
+}
+
+.QnA_subject_input,
+.QnA_Password_input {
+  padding: 5px 16px;
+  width: 17%;
+}
+
+.QnA_subject_input {
+  top: 455px;
+  left: 525px;
+}
+
+.QnA_Password_input {
+  margin-left: 660px;
+  top: 455px;
+  left: 20%;
+}
+
+.QnA_content {
+  top: 595px;
+  left: 525px;
+  width: 850px;
+}
+
+.QnA_Ask_btn,
+.backToBefore {
+  display: block;
+  width: 5%;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  background: none;
+  top: 750px;
+}
+
+.QnA_Ask_btn:hover,
+.backToBefore:hover {
+  transform: scale(1.05);
+}
+.QnA_Ask_btn {
+  left: 60.5%;
+}
+.backToBefore {
+  left: 66.5%;
+}

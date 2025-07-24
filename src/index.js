@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./css/Sign.css";
+/*import "./css/Sign.css";*/
+import "./css/dark.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { SignupProvider } from "./contexts/SignupContext";
@@ -10,22 +11,21 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { UserProvider } from "./contexts/UserContext";
 import { SignThemeProvider } from "./contexts/SignTheme";
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
+  <ChatProvider>
     <UserProvider>
       <ThemeProvider>
         <SignupProvider>
-          <ChatProvider>
-            <SignThemeProvider>
-              <App />
-            </SignThemeProvider>
-          </ChatProvider>
+          <SignThemeProvider>
+            <App />
+          </SignThemeProvider>
         </SignupProvider>
       </ThemeProvider>
     </UserProvider>
-  </React.StrictMode>
+  </ChatProvider>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

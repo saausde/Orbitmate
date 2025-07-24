@@ -1,91 +1,77 @@
-import React, { useState } from "react";
+// UserInput 컴포넌트: 메인 입력창, 세션 생성, 엔터 전송 등 사용자 입력 처리
+import React, { useState, useContext } from "react";
 import buttonImage from "../images/up-arrow2.png";
-import "../App.css";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import "../css/UserInput.css";
+import { ChatContext } from "../contexts/ChatContext";
 
 function UserInput({ isClicked, onSessionCreated }) {
+  const { NewChat } = useContext(ChatContext);
+  // [상태] 입력값
   const [inputValue, setInputValue] = useState("");
-  const { user } = useUser();
-  const navigate = useNavigate(); 
+  const { user } = useUser(); // 사용자 정보
+  const navigate = useNavigate(); // 페이지 이동
+  const { t } = useTranslation(); // 다국어 처리
+  const [isSubmitted, setIsSubmitted] = useState(false); //엔터 눌리면 인풋창 내려가게 만들 함수
 
-
+  // [세션 생성 및 입력 전송] 폼 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     // user_id가 없으면 세션 생성 불가
-    if (!user?.storedValue){
-      alert("로그인 후 이용해 주세요.");   
+    if (!user?.storedValue) {
+      alert("로그인 후 이용해 주세요.");
       navigate("/signin");
       return;
     }
 
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/chat/sessions`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            user_id: user.user_id,
-            title: inputValue.trim(),
-            category: "일반"
-          }),
-        }
-      );
-
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error?.message || "세션 생성 실패");
-
-      onSessionCreated(data.session_id);
-      setInputValue("");
+      const newSessionId = await NewChat({ firstMessage: inputValue });
 
       if (typeof onSessionCreated === "function") {
-        onSessionCreated(data.session_id);
-      } else {
-        console.error("onSessionCreated is not a function");
+        setTimeout(() => {
+          onSessionCreated(newSessionId, inputValue);
+        }, 3000); // 필요하다면 이동
       }
+
+      /*setInputValue("");*/
     } catch (error) {
-      alert(error.message);
+      console.error(error);
+      alert("세션 생성에 실패했습니다.");
     }
   };
 
-  //엔터로 전송
+  // [엔터로 전송] 입력창에서 엔터키 입력 시 전송
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
+      setIsSubmitted(true);
       handleSubmit(e);
     }
   };
 
+  // [렌더링] 메인 입력창 UI
   return (
-    <div>
+    <div className="input-wrapper">
       <form onSubmit={handleSubmit}>
-      <input
-          id="userinput"
-          placeholder="Type Your Opinion..."
+        <input
+          id="main_userinput"
+          placeholder={t("title_section.input_placeholder")}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyPress}
           style={{
-          position: "absolute",
-          left: "49%",
-          top: "60vh",
-          borderRadius: "30px",
-          border: "4px solid black",
-          width: "39vw",
-          height: "90px",
-          fontSize: "16px",
-          paddingTop: "1px",
-          paddingLeft: "10px",
-          fontFamily: "sans-serif",           
-            opacity: isClicked ? 1 : 0,
-            transform: isClicked ? "translate(-50%) scale(1)" : "translate(-50%) scale(0.3)",
-            transition: "opacity 0.6s ease, transform 3.5s ease",
-            
+            /*opacity: isSubmitted ? 1 : 0,*/
+            transform: isSubmitted
+              ? "translate(-50%, 33vh) scale(1)"
+              : "translate(-50%, -20%) scale(1)",
+
+            transition:
+              "opacity 1.4s ease, transform 3s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         />
-        
       </form>
     </div>
   );

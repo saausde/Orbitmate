@@ -1,0 +1,97 @@
+/* 전체 섹션 */
+.admin-section {
+  padding: 20px;
+}
+
+/* 상단 제목과 검색 바 */
+.user-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-manager-search-form {
+  display: flex;
+  gap: 8px;
+}
+
+.user-manager-search-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.user-manager-search-button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* 상태 체크박스 */
+.status-toggle {
+  margin-left: 10px;
+}
+
+.status-toggle.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 버튼 스타일 */
+.user-action-button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.user-action-delete {
+  background-color: red;
+}
+
+.user-action-delete.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.user-action-admin {
+  margin-left: 5px;
+  background-color: #007bff;
+}
+
+.user-action-admin.disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* 페이지네이션 */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination-button:disabled {
+  cursor: not-allowed;
+}

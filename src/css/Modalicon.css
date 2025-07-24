@@ -1,44 +1,46 @@
+/* 모달 트리거 아이콘(공통) */
 .modal-trigger-icon {
-    width: 2vw;
-    height: 2vw;
-    min-width: 40px;
-    min-height: 40px;
-    background-size: cover; /* 배경 이미지를 커버 */
-    background-position: center; 
-    background-repeat: no-repeat;
-    border: none; 
-    cursor: pointer; /* 클릭 가능 표시 */
-    z-index: 10; /* 다른 요소들 위에 표시 (모달 오버레이보다는 아래) */
-    background-color: transparent; /* 배경색 투명 */
-    padding: 0; 
-    border-radius: 50%; /* 원형으로 만들 경우 (선택 사항) */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 그림자 */
-    pointer-events: auto; /* 아이콘 클릭 가능하게 */
-    position: absolute;
-    
+  width: 2vw;
+  height: 2vw;
+  min-width: 40px;
+  min-height: 40px;
+  background-size: cover; /* 배경 이미지를 커버 */
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer; /* 클릭 가능 표시 */
+  z-index: 10; /* 다른 요소들 위에 표시 (모달 오버레이보다는 아래) */
+  background-color: transparent; /* 배경색 투명 */
+  padding: 0;
+  border-radius: 50%; /* 원형 아이콘 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
+  pointer-events: auto; /* 아이콘 클릭 가능하게 */
+  position: absolute;
 }
 
+/* 아이콘 호버 효과 */
 .modal-trigger-icon:hover {
-    transform: scale(1.1); /* 호버 시 확대 */
+  transform: scale(1.1); /* 호버 시 확대 */
 }
 
-
-.modal-trigger-icon.icon-1 { /* 좌상단 아이콘 */
-    top: 73vh;
-    left: 96vw; 
+/* 각 위치별 아이콘(1~4) */
+.modal-trigger-icon.icon-1 {
+  /* 좌상단 아이콘 */
+  top: 73vh;
+  left: 95vw;
 }
-
-.modal-trigger-icon.icon-2 { /* 좌하단 아이콘 */
-    top: 79vh; 
-    left: 96vw; 
+.modal-trigger-icon.icon-2 {
+  /* 좌하단 아이콘 */
+  top: 79vh;
+  left: 95vw;
 }
-
-.modal-trigger-icon.icon-3 { /* 우상단 아이콘 */
-     top: 85vh; 
-     left: 96vw;    
+.modal-trigger-icon.icon-3 {
+  /* 우상단 아이콘 */
+  top: 85vh;
+  left: 95vw;
 }
-
-.modal-trigger-icon.icon-4 { /* 우하단 아이콘 */
-     top: 91vh; 
-     left: 96vw;  
+.modal-trigger-icon.icon-4 {
+  /* 우하단 아이콘 */
+  top: 91vh;
+  left: 95vw;
 }

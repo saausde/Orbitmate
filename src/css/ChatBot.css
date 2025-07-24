@@ -1,0 +1,51 @@
+#chatBot_F {
+  position: relative;
+  width: 300px;
+  height: 480px;
+  background-color: rgb(255, 255, 255);
+  margin-left: 80%;
+  margin-top: 8%;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.chatBot_title {
+  position: absolute;
+  font-size: 20px;
+  left: 25%;
+  top: 3%;
+}
+
+.chatBot_icon {
+  position: absolute;
+  left: 10%;
+  top: 5%;
+  width: 35px;
+}
+
+.headHr {
+  position: absolute;
+  top: 16%;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+  box-shadow: 0 15px 20px 0px rgba(5, 0, 0, 0.2);
+}
+
+.chatBot_status {
+  position: absolute;
+  left: 30%;
+  top: 8%;
+}
+
+.green_light {
+  position: absolute;
+  left: 26%;
+  top: 10.3%;
+  width: 7px;
+  height: 7px;
+  border-radius: 15px;
+  background-color: rgb(52, 214, 52);
+  border: 1px solid white;
+}

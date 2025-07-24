@@ -1,0 +1,183 @@
+/* 전체 body 포지션 설정 */
+body {
+  position: relative;
+}
+
+/* 로그인 버튼 스타일 */
+.login-button {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(
+    90deg,
+    #3a07f2,
+    #875cc0,
+    #613699
+  ); /* 그라데이션 배경 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.login-button:hover {
+  transform: translate(-2px, -2px); /* 호버 시 살짝 이동 */
+}
+.login-button:active {
+  transform: translate(0, 0); /* 클릭 시 원 위치 */
+}
+
+/* 일반 설정 프레임 */
+#general_setting_frame {
+  position: relative; /* absolute → relative로 변경하여 내부 요소 겹침 최소화 */
+  width: 513px;
+  top: -1px;
+  height: 600px;
+  left: 26.7%;
+  border-top-right-radius: 26px;
+  border-bottom-right-radius: 26px;
+  background: #fff;
+  overflow: visible;
+  z-index: 100;
+}
+
+/* 일반 설정 타이틀 */
+.general_setting_title,
+.profile_setting_title {
+  position: absolute;
+  width: 150px;
+  height: 30px;
+  left: 4%;
+  top: 23px;
+  font-size: 17px;
+  font-weight: inherit;
+  color: black;
+}
+
+/* 타이틀 구분선 */
+.titleDivider {
+  position: absolute;
+  left: 4%;
+  top: 65px;
+  width: 470px;
+  height: 0.6px;
+  border: none;
+  background-color: rgb(223, 223, 223);
+}
+
+/* 테마 설정 영역 */
+.themePart {
+  position: absolute; /* absolute → relative로 변경하여 겹침 문제 방지 */
+  margin-left: 40px;
+  margin-top: 85px;
+  width: 470px;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 테마 선택 드롭다운 - 클릭 영역 확대, 배치 개선 */
+.themeOption {
+  position: absolute;
+  margin-left: 310px;
+  width: 120px;
+  height: 32px;
+  z-index: 10;
+  background: #fff;
+  border: none;
+}
+
+.themeDivider {
+  position: absolute;
+  left: 4%;
+  top: 125px;
+  width: 470px;
+  height: 0.6px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+}
+
+/* 언어 설정 영역 - 중앙 정렬, 폰트 스타일 */
+.languagePart {
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 145px;
+  width: 470px;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 20; /* 추가: 드롭다운 겹침 방지 */
+}
+
+/* 언어 선택 드롭다운 - 클릭 영역 확대, 배치 개선 */
+.languageOption {
+  position: absolute;
+  margin-left: 310px;
+  width: 120px;
+  height: 32px;
+  z-index: 30; /* 추가: 드롭다운 겹침 방지 */
+  background: #fff;
+  cursor: pointer;
+  border: none;
+  /* outline: 2px solid #4285f4;  포커스 시 시각적 확인용(선택) */
+}
+
+/* 언어 구분선이 드롭다운 위로 올라오지 않게 z-index 낮춤 */
+.languageDivider {
+  position: absolute;
+  left: 4%;
+  top: 182px;
+  width: 470px;
+  height: 1px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+  z-index: 1;
+}
+
+/* 폰트 크기 설정 영역 */
+.fontSizePart {
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 200px;
+  width: 470px;
+  font-size: 15px;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 폰트 크기 선택 드롭다운 - 클릭 영역 확대, 배치 개선 */
+.fontSizeOption {
+  position: absolute;
+  margin-left: 310px;
+  width: 120px;
+  height: 32px;
+  z-index: 40; /* 추가: 드롭다운 겹침 방지 */
+  background: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.fontSizeDivider {
+  position: absolute;
+  left: 4%;
+  top: 240px;
+  width: 470px;
+  height: 1px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+}
+
+.button {
+  background-color: rgb(15, 73, 124);
+  width: 200px;
+  height: 100px;
+  border-radius: 200px;
+  cursor: pointer;
+}

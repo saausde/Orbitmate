@@ -1,0 +1,133 @@
+/* 타이틀 섹션(메인 화면) 스타일 - 반응형 및 한국어 주석 추가 */
+
+/* 전체 화면 크기 및 스크롤 방지 */
+body,
+html {
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.title_section_wrapper {
+  height: 100vh;
+  overflow: visible; /* 로켓 등 이펙트가 잘리지 않도록 */
+  position: relative; /* 필요 시 */
+  background-image: url("../images/titleBackground14.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -15; /* 음수 z-index 제거: fixed 요소가 잘리지 않도록 */
+}
+
+.planetsence {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* 상단 중앙 정렬 헤더(타이틀 등) */
+.centered-header {
+  position: absolute;
+  left: 50%;
+  top: 10vh; /* 화면 상단에서 10vh 위치 */
+  transform: translateX(-50%); /* 수평 중앙 보정 */
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 10;
+}
+
+/* OrbitMate 텍스트(메인 타이틀) - 반응형 */
+#orbitMate {
+  position: fixed;
+  left: 52.5%;
+  top: 85px; /* 전체화면/창모드 모두 astronaut와 비율 유지 */
+  transform: translate(-50%);
+  font-size: 40px; /* astronaut와 비율 맞춤 */
+  min-width: 300px;
+  line-height: 1.1;
+  white-space: nowrap;
+  font-weight: bold;
+  background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 1.5s ease-in-out infinite alternate;
+  transition: all 1.2s ease;
+  z-index: 5;
+}
+
+/* 우주인 이미지 - 반응형 */
+#main-astronaut {
+  position: fixed;
+  left: 50%;
+  top: 30px; /* orbitMate와 비율 유지 */
+  transform: translate(-50%);
+  min-width: 90px;
+  height: 90px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* 시작 버튼(중앙 하단) - 반응형 */
+#start_button {
+  position: absolute;
+  display: flex;
+  left: 50%;
+  top: 60%; /* 반응형 하단 위치 */
+  width: 210px; /* 반응형 버튼 크기 */
+  height: 210px;
+  transform: translateX(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 10; /* orbitMate보다 위에 오도록 */
+}
+#start_button:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* 버튼 클릭 시 애니메이션 효과 */
+.orbit-animate {
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%) scale(0.6);
+  font-size: 3vw;
+}
+
+/* 인사말 텍스트(중앙) */
+#gretting {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  top: 45%;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 300px;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: contain;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(78, 42, 132, 0.8), 0 0 20px rgba(78, 42, 132, 0.5),
+    0 0 30px rgba(0, 198, 255, 0.3);
+  animation: glow 1.5s ease-in-out infinite alternate;
+  transition: opacity 0.5s ease, transform 3.5s ease;
+}
+
+/* 텍스트 글로우 애니메이션 */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(142, 45, 226, 0.2);
+    filter: brightness(1) drop-shadow(0 0 5px rgba(50, 131, 185, 0.2));
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(142, 45, 226, 0.5),
+      0 0 30px rgba(74, 0, 224, 0.6);
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(50, 131, 185, 0.5));
+  }
+}

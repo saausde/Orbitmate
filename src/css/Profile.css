@@ -1,0 +1,329 @@
+/* Profile 컴포넌트 스타일 - 사용자 프로필 및 드롭다운 UI */
+body {
+  position: relative;
+  background-color: white;
+}
+
+.user-icon-container {
+  /* 우측 상단 고정, 클릭 시 드롭다운 표시 */
+  position: fixed;
+  top: 1.5%;
+  right: 1%;
+  cursor: pointer;
+  z-index: 5000;
+  pointer-events: auto;
+}
+
+.user-icon {
+  /* 프로필 아이콘(원형) */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  transition: transform 0.2s;
+}
+.user-icon:hover {
+  /* 마우스 오버 시 확대 효과 */
+  transform: scale(1.05);
+}
+.user-icon:active {
+  /* 클릭 시 약간 축소 */
+  transform: scale(0.999);
+}
+
+.dropdown-content {
+  /* 드롭다운 메뉴 기본 숨김, 위치 고정 */
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 2.5vw;
+  min-width: 210px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-radius: 15px;
+  text-align: center;
+  padding: 5px 0;
+  backdrop-filter: blur(2px);
+}
+.dropdown-content.active {
+  /* 드롭다운 활성화 시 표시 */
+  display: block;
+}
+.dropdown-content a {
+  /* 드롭다운 내 메뉴 항목 */
+  display: block;
+  padding: 8px 16px;
+  margin: 0 6px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 11px;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover {
+  /* 메뉴 항목 호버 효과 */
+  background-color: rgba(241, 241, 241, 0.658);
+
+  cursor: pointer;
+}
+
+.profile_edit_img {
+  /* 프로필 편집 아이콘 위치 및 크기 */
+  position: absolute;
+  width: 1.6vw;
+  left: 23%;
+  top: 1vh;
+}
+
+.back-button {
+  /* 뒤로가기 버튼 스타일 */
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.back-button:hover {
+  background: #e0e0e0;
+}
+.back-button:active {
+  transform: scale(0.95);
+}
+
+#setting_MainFrame,
+#setting_MainFrame.active {
+  position: fixed;
+  z-index: 100000;
+}
+
+#setting_MainFrame {
+  /* 프로필/설정 메인 프레임 */
+  left: 32%;
+  top: 23%;
+  width: 700px;
+  height: 600px;
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: none;
+  transition: box-shadow 0.3s;
+}
+#setting_MainFrame.active {
+  display: block;
+  pointer-events: auto;
+}
+
+.closeFrame {
+  /* 닫기(X) 버튼 - 테두리 제거, 원형 유지 */
+  position: absolute;
+  left: 17px;
+  top: 17px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  color: #000;
+  cursor: pointer;
+  text-align: center;
+  z-index: 1;
+  border-radius: 50%; /* 원형 유지 */
+  border: none; /* 테두리 제거 */
+  background: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.closeFrame:hover {
+  background: #eceaea;
+  border-color: #8e44ad; /* 호버 시 테두리 색상 변경(테두리 없음, 무시됨) */
+}
+
+.CategoriesSetting_f {
+  /* 카테고리(설정/프로필) 영역 */
+  position: absolute;
+  left: -1%;
+  top: -1px;
+  background-color: #fafafa;
+  width: 192px;
+  height: 600px;
+  border-top-left-radius: 31px;
+  border-bottom-left-radius: 31px;
+}
+
+.general_setting,
+.profile_setting,
+.notification_setting {
+  /* 설정/프로필 버튼 공통 */
+  color: #000;
+  position: absolute;
+  font-size: 16px;
+  background: none;
+  border: none;
+  left: 1%;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  width: 168px;
+  min-height: fit-content;
+  text-align: left;
+  padding-left: 40px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.general_setting {
+  /* 일반 설정 버튼 위치 */
+  top: 72px;
+}
+.profile_setting {
+  /* 프로필 설정 버튼 위치 */
+  top: 112px;
+}
+.notification_setting {
+  /* 알림 설정 버튼 위치 */
+  top: 152px;
+}
+.general_setting:hover,
+.profile_setting:hover,
+.notification_setting:hover {
+  background: #ebeaea;
+}
+
+.setting_icon_in_general {
+  /* 일반 설정 아이콘 */
+  position: absolute;
+  left: 2.5%;
+  top: 78px;
+  width: 28px;
+}
+
+.profile_edit_icon {
+  /* 프로필 편집 아이콘 */
+  position: absolute;
+  left: 2.5%;
+  top: 118px;
+  width: 28px;
+}
+
+.notification_icon {
+  /* 알림 설정 아이콘 */
+  position: absolute;
+  left: 3%;
+  top: 162px;
+  width: 18px;
+}
+
+.language_current {
+  /* 현재 언어 표시 및 선택 */
+  position: absolute;
+  color: #000;
+  font-weight: bold;
+  font-size: 17px;
+  left: 30px;
+  top: 30%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.language_current:hover {
+  transform: scale(1.05);
+  color: rgb(163, 83, 159);
+}
+.language_current:active {
+  color: rgb(75, 78, 207);
+}
+
+.dropdown-content a.language-toggle {
+  /* 언어 전환 메뉴 항목 */
+  background: #f8f8f8;
+  margin: 5px 0;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.setting_title {
+  /* 설정 타이틀 텍스트 */
+  width: 150px;
+  position: absolute;
+  color: #000;
+  font-size: 20px;
+  left: 29.5%;
+  top: 18px;
+}
+
+.setting_icon {
+  /* 설정 아이콘(상단) */
+  position: absolute;
+  background: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  left: 20px;
+  top: 82px;
+  filter: brightness(0) invert(1);
+}
+
+.logOut_icon,
+.Account_icon,
+.Dev_icon,
+.OrbitmateUpgrade_icon,
+.admin_icon1 {
+  /* 로그아웃/계정 아이콘 공통 */
+  position: absolute;
+  background: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50px;
+  left: 22px;
+  filter: brightness(0) invert(1);
+}
+.logOut_icon {
+  top: 125px;
+}
+.Account_icon {
+  top: 13px;
+}
+
+.admin_icon1 {
+  top: 160px;
+}
+
+.edit-profile-open {
+  /* 프로필 편집 열림 */
+  display: block;
+}
+.edit-profile-closed {
+  /* 프로필 편집 닫힘 */
+  display: none;
+}
+
+.OrbitmateUpgrade_icon {
+  left: 25px;
+  top: 50px;
+}
+
+.my_profile_hr {
+  /* 프로필 구분선 */
+  width: 470px;
+  left: 29.5%;
+  position: absolute;
+  top: 65px;
+  height: 1px;
+  background: rgb(212, 212, 212);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.user_username {
+  /* 사용자 이름 텍스트 */
+  font-size: 15px;
+}

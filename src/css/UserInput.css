@@ -1,0 +1,24 @@
+#main_userinput {
+  position: fixed;
+  z-index: 100;
+  top: 56%;
+  left: 50%; /* ✔ 중심 정렬을 위해 50% */
+  transform: translate(-50%, -50%); /* ✔ 중심 정렬 */
+  width: 40%;
+  height: clamp(40px, 10vh, 100px);
+  border-radius: 16px;
+  font-size: 1rem;
+  padding: 2vw 2vw;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 8px 12px rgba(0, 0, 0, 0.2);
+  background: transparent;
+  backdrop-filter: blur(11px);
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+  margin: 0 auto 10px auto;
+  padding: 25px 16px;
+}
+
+#main_userinput::placeholder {
+  color: rgb(189, 189, 189);
+}

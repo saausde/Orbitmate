@@ -1,0 +1,147 @@
+/* 전체 영역 */
+.qna-manager {
+  padding: 2rem;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #333;
+}
+
+/* 제목 */
+.qna-manager h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* 테이블 */
+.qna-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qna-table th,
+.qna-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.qna-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.qna-table tr:hover {
+  background-color: #f1f3f5;
+  cursor: pointer;
+}
+
+/* 모달 배경 */
+.qna-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 모달창 */
+.qna-modal {
+  background: white;
+  padding: 2rem;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 질문 내용 */
+.qna-question-content {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  white-space: pre-wrap;
+}
+
+/* 댓글 리스트 */
+.qna-comments {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.qna-comments li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+/* 입력창 */
+.qna-modal textarea {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+/* 버튼 영역 */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.modal-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.modal-buttons button:last-child {
+  background-color: #e0e0e0;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #c0c0c0;
+}

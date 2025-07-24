@@ -1,0 +1,807 @@
+#plus_f {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("../../../images/Payment_background1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.payment_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 80%;
+  background: transparent;
+  backdrop-filter: blur(30px);
+  border: 1px solid white;
+  border-radius: 30px;
+}
+
+.closeFrame2 {
+  position: absolute;
+  left: 95%;
+  top: 4%;
+  /*width: 3vw;
+  height: 6vh;*/
+  transition: all 3s;
+  font-size: 2.3rem;
+  cursor: pointer;
+  z-index: 9999;
+  color: white;
+}
+
+.closeFrame2 {
+  transform: scale(1.03);
+}
+
+.payment_container button {
+  position: absolute;
+  right: 1%;
+  top: 5%;
+  width: 5vw;
+  height: 5vh;
+  font-size: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  border: none;
+  /*border: 2px solid white;*/
+  color: white;
+  background: transparent;
+  transition: all 3s;
+}
+
+.payment_head {
+  position: relative;
+  width: 100%;
+  height: 20%;
+  background: none;
+}
+
+.planName {
+  position: absolute;
+  left: 2%;
+  top: 12%;
+  font-size: clamp(0.7rem, 2.3vw, 2.3rem);
+  font-weight: bold;
+  color: white;
+}
+
+.plusPrice_f {
+  width: 32vw;
+  font-size: clamp(1.8rem, 4vw, 5rem);
+  position: absolute;
+  top: 3%;
+  left: 55%;
+  font-weight: normal;
+  color: white;
+}
+
+.payment_head h2 {
+  position: absolute;
+  color: white;
+  left: 7%;
+  top: 20%;
+  font-size: 1.5rem;
+}
+
+.head_hr {
+  width: 100%;
+  position: absolute;
+  top: 12.5vh;
+}
+
+.astronaut {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+}
+
+/* Body */
+.payment_body {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 60%;
+  background: none;
+}
+
+.body_left {
+  flex: 1;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* 선택된 카드 미리보기 */
+.selected_card_preview {
+  position: absolute;
+  top: -2.5vh;
+  left: 1vw;
+  transform: translateX(-50%);
+  perspective: 1000px;
+}
+
+.card_3d_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+/*
+.card_3d:not([class*="visa"]):not([class*="master"]):not([class*="apple"]):not(
+    [class*="paypal"]
+  ):not([class*="kakao"]):not([class*="union"]) {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}*/
+
+.card_3d {
+  width: clamp(330px, 32vw, 380px);
+  aspect-ratio: 16 / 10;
+  height: auto;
+  position: relative;
+  /* aspect-ratio는 위에서 이미 지정 */
+  background-size: cover; /* 배경 이미지가 카드 전체를 채움 */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-left: 70px;
+  margin-top: 40px;
+}
+
+.card_3d:hover {
+  transform: rotateY(-20deg) rotateX(10deg) translateZ(80px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.card_number {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.card_holder_name {
+  position: absolute;
+  bottom: 12%;
+  left: 8%;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+.card_expiry {
+  position: absolute;
+  bottom: 12%;
+  right: 30%;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 카드 선택 영역 */
+.card_selection_area {
+  position: absolute;
+  top: 23.5vh;
+  right: 5%;
+  width: 90%;
+}
+
+.card_selector_btn {
+  position: relative;
+  width: clamp(120px, 18vw, 220px);
+  min-width: 120px;
+  max-width: 240px;
+  height: 50px;
+  right: 10px;
+  font-size: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.card_selector_btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.arrow {
+  transition: transform 0.3s;
+}
+
+/* .card_selector_btn:hover .arrow {
+  transform: rotate(180deg);
+} */
+
+.card_options {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.card_options.expanded {
+  max-height: 450px;
+}
+
+.card_options:not(.expanded) .card_option {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card_option {
+  width: 100%;
+  height: 5.2vh; /* 45px → vh로 반응형 */
+  min-height: 38px;
+  max-height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.7vw; /* 8px → vw로 반응형 */
+  display: flex;
+  align-items: center;
+  margin-top: 0.5vh;
+  padding: 0 1.2vw;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(15px);
+  opacity: 0;
+  transform-origin: center;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem); /* 반응형 폰트 */
+  box-sizing: border-box;
+}
+
+.card_options.expanded .card_option {
+  opacity: 1;
+}
+
+.card_option:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px) rotateY(-10deg) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card_option:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(0) rotateY(-5deg) scale(1.02);
+}
+
+.card_option img {
+  width: 3vw;
+  min-width: 28px;
+  max-width: 48px;
+  height: 2vw;
+  min-height: 18px;
+  max-height: 32px;
+  object-fit: cover;
+  border-radius: 0.5vw;
+  margin-right: 1vw;
+}
+
+.card_option span {
+  color: white;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right Side */
+.body_right {
+  width: 50%;
+  height: 100%;
+}
+
+.credit_card_img {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 400px;
+  background: none;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 1.2s ease, box-shadow 1s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.credit_card_img:hover {
+  transform: perspective(1000px) rotateX(0deg) rotateY(-180deg)
+    translate(-10px, -30px) scale(1.08);
+  /*box-shadow: 0 30px 45px rgba(0, 0, 0, 0.4);*/
+}
+
+.payment_methods {
+  position: absolute;
+  top: 35vh;
+  left: 45px;
+  width: 45%;
+  height: 50%;
+}
+
+.logo_box {
+  width: 80px;
+  height: 50px;
+  background: transparent;
+  backdrop-filter: blur(30px);
+  border: 1px solid white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.logo_box:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo_box img {
+  max-width: 70%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Right Side */
+.body_right {
+  width: 50%;
+  height: 100%;
+}
+
+.payment_input_f {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  background: transparent;
+  top: 30%;
+}
+
+.cardholderNmae_f,
+.cardNumber_f,
+.cardholderBirth_f {
+  width: 100%;
+  background: transparent;
+  padding: 18px 15px;
+}
+
+.cardholderNmae_f p,
+.cardNumber_f p {
+  margin-left: 10%;
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.cardholderNmae_f input,
+.cardNumber_f input {
+  width: 80%;
+  height: 4vh;
+  margin-left: 10%;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  transition: transform 0.3s ease;
+  color: white;
+  font-size: 16px;
+}
+
+.cardholderNmae_f input::placeholder,
+.cardNumber_f input::placeholder {
+  font-size: 13px;
+}
+
+.cardholderNmae_f input:hover,
+.cardNumber_f input:hover,
+.cardholderBirth_f input:hover,
+.cardholderBirth_f select:hover {
+  transform: scale(1.04);
+}
+
+.cardholderBirth_f {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Align items to the bottom for better label placement */
+  gap: 15px; /* Adjust gap */
+  height: 11.5vh;
+  position: relative;
+  margin-left: 10%; /* Align with other inputs */
+  width: 100%;
+}
+
+.cardholderBirth_f > div {
+  position: relative; /* Each item is a container for label and input */
+  display: flex;
+  flex-direction: column;
+}
+
+.expiry_month,
+.expiry_year,
+.cvv_p {
+  position: absolute;
+  top: 20%;
+  color: white;
+}
+
+.expiry_month {
+  left: 3%;
+}
+
+.expiry_year {
+  left: 32.5%;
+}
+
+.cvv_p {
+  left: 61.8%;
+}
+
+/*
+.cardholderBirth_f p {
+  font-size: 15px;
+  color: white;
+  margin-bottom: 5px; /* Space between label and input 
+  position: static; /* Remove absolute positioning 
+}
+*/
+
+.cardholderBirth_f select,
+.cardholderBirth_f input {
+  height: 4vh; /* Match other inputs height */
+  background: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 0; /* Remove radius for underline style */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 4.5%;
+}
+
+.cardholderBirth_f select {
+  width: 8vw; /* Adjust width */
+}
+
+.cardholderBirth_f input {
+  width: 6vw; /* Adjust width */
+}
+
+.cardholderBirth_f select option {
+  background-color: #1a1a1a !important; /* Darker background for options */
+  color: white;
+}
+
+.cardholderBirth_f input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  padding-left: 5px;
+}
+
+.payment_btn {
+  position: absolute;
+  left: 75%;
+  transform: translateX(-50%);
+  bottom: -18%;
+  width: 35%;
+  height: 50px;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.payment_btn:hover {
+  transform: translateX(-50%) scale(1.02) translateY(-2px);
+}
+
+.loader {
+  position: absolute;
+  right: 3%;
+  bottom: -15%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-image: url("../../../images/loader_icon2.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.progression_f {
+  position: relative;
+  width: 23vw;
+  min-width: 450px;
+  height: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 17%;
+}
+
+.progression_in_completion,
+.progression_in_payment,
+.progression_in_begin {
+  position: fixed;
+  top: 32%;
+  min-width: 30px;
+  min-height: 30px;
+  border: 2px solid white;
+  z-index: 9999;
+  border-radius: 50%;
+}
+
+.progression_in_payment {
+  background-image: url("../../../images/check_icon1.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.progression_in_completion {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.progression_in_begin {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.progressionHr2,
+.progressionHr {
+  background-color: white;
+  border: none;
+  margin: 0;
+  height: 3px;
+  top: 50%;
+  position: absolute;
+}
+
+.progressionHr {
+  left: 5.5%;
+  width: 41.7%;
+}
+
+.progressionHr2 {
+  left: 52.8%;
+  width: 41%;
+}
+
+.progression_titles {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2vh;
+  width: 690px;
+  max-width: 690x;
+  min-width: 320px;
+  position: absolute;
+  top: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.progression_titles > * {
+  flex: 1 1 0;
+  text-align: center;
+  font-weight: bold;
+  width: 10vw;
+}
+
+/* 성공 이펙트 */
+.payment_success_effect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+  z-index: 10000;
+}
+
+.payment_success_effect.show {
+  opacity: 1;
+  animation: successPulse 1s ease-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.success_checkmark {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  position: relative;
+  box-shadow: 0 0 50px rgba(76, 175, 80, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success_checkmark::after {
+  content: "✓";
+  font-size: 80px;
+  color: white;
+  font-weight: bold;
+}
+
+/* 파티클 효과 */
+.payment_particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+}
+
+@keyframes particleExplode {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0);
+  }
+}
+
+/* 결제 버튼 처리 중 상태 */
+.payment_btn.processing {
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  cursor: not-allowed;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* 로더 개선 */
+.loader.payment-processing {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  animation: spin 0.8s linear infinite, pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
+/* 카드 선택 비활성화 상태 */
+.card_selector_btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card_option {
+  pointer-events: auto;
+}
+
+.payment_body.processing .card_option {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 카드 홀로그램 효과 */
+.card_3d::before {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s;
+  opacity: 0;
+}
+
+.card_3d:hover::before {
+  opacity: 1;
+  animation: hologram 2s linear infinite;
+}
+
+@keyframes hologram {
+  0% {
+    transform: rotate(45deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(45deg) translateX(100%);
+  }
+}
+
+.verticalHr {
+  position: fixed;
+  left: 50%;
+  top: 12.6vh;
+  border: 1px solid rgb(168, 168, 168);
+  width: 1px;
+  height: 67.2vh;
+  z-index: -1;
+}

@@ -1,0 +1,259 @@
+.notice_board_main {
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* 헤더 영역 */
+.head_page {
+  position: relative;
+  top: 0;
+  background: linear-gradient(135deg, #1a2a6c, #000000, #b21f1f);
+  padding: 135px 0;
+  color: white;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.title_section_noticeMain {
+  width: 45%;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.title_section_noticeMain > h1 > a {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* 검색창 */
+.search_box {
+  flex-grow: 1;
+  /*max-width: 800px;*/
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+  width: 45%;
+  font-size: 0.9rem;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: background 0.3s ease;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 150px;
+  padding-left: 20px;
+}
+.search_box::placeholder {
+  color: #ccc;
+}
+.search_box:hover,
+.search_box:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 버튼 그룹 */
+.qna_Notice_f {
+  display: flex;
+  gap: 0px;
+  width: auto;
+  /*position: absolute;
+  right: 515px;  원하는 위치로 조절 
+  top: 52px;*/
+  justify-content: space-between;
+}
+
+.qna_Notice_f button {
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: transparent;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+  font-size: 0.9rem;
+}
+.qna_Notice_f button:hover {
+  transform: scale(1.05);
+}
+
+/* 본문 영역 */
+.body_main {
+  max-width: 900px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+
+  backdrop-filter: blur(6px);
+}
+
+.notice_icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* 테이블 */
+.table_main {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table_main td {
+  padding: 0;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.table_main td:hover {
+  background-color: #ebebeb;
+  transition: background-color 0.3s ease;
+}
+
+/* 공지사항 제목 링크 */
+.notice_subject_text {
+  display: flex;
+  justify-content: space-between; /* 텍스트 왼쪽, 화살표 오른쪽 */
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  padding: 40px 20px;
+  cursor: pointer;
+}
+.right_arrow {
+  width: 20px;
+  margin-left: 8px;
+}
+
+/* 버튼 스타일 */
+.back_btn,
+.Ask_btn {
+  padding: 8px 20px;
+  margin: 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  transition: all 0.2s;
+}
+
+.back_btn:hover,
+.Ask_btn:hover {
+  transform: scale(1.03);
+}
+
+.notice_btn {
+  height: 70px;
+}
+
+/* 챗봇 버튼 */
+.chatbot_btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  cursor: pointer;
+  position: fixed;
+  right: 2%;
+  bottom: 3%;
+  background: url("../images/chatBot_icon.png") no-repeat center/cover;
+  border: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.chatbot_btn:hover {
+  transform: scale(1.04);
+}
+
+#footer_f {
+  padding-top: 25px;
+  width: 100%;
+  height: 15vh;
+}
+
+#footer_f > h1 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+#footer_f > ul {
+  display: flex;
+  gap: 20px;
+  margin: 5px auto;
+  width: max-content;
+}
+
+#footer_f > ul > li > a {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.comments_list hr {
+  margin: 15px 50px;
+  width: 88%;
+  border: none;
+  height: 1px;
+  background-color: #cfcfcf;
+}
+
+.notice_icon_toAsk {
+  width: 70px;
+  position: absolute;
+  top: 270px;
+  left: 525px;
+}
+
+.subtitle_toAsk {
+  width: 500px;
+  position: absolute;
+  top: 340px;
+  left: 525px;
+}
+
+.sidebar_notice_page #side_btn,
+.sidebar_notice_page .search_icon,
+.profile_notice_page .dropdown-content > img {
+  filter: brightness(0) invert(1);
+}
+
+.sidebar_notice_page .new_chat_btn,
+.sidebar_notice_page .new_chat_btn2,
+.profile_notice_page .user_username,
+.profile_notice_page a {
+  color: white;
+}
+
+.sidebar_notice_page .new_chat_btn,
+.sidebar_notice_page .new_chat_btn2 {
+  box-shadow: 0 0px 10px rgba(255, 255, 255, 0.1);
+}

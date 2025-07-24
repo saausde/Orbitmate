@@ -1,0 +1,444 @@
+/* 전역 설정 (index.css 혹은 App.css) */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* subscription 페이지 전체 영역 */
+#subscriptionMain {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #fff;
+  background-image: url("../../images/loginPage_background2.jpg");
+  background-size: cover;
+  background-position: center;
+
+  overflow-y: auto;
+}
+
+/* 헤더 영역 */
+.subHead {
+  width: 100%;
+  height: 23vh;
+  position: relative;
+}
+
+/* 제목 */
+.sub_title {
+  font-size: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 25%;
+  position: absolute;
+  font-family: sans-serif;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/* 본문 (카드들) */
+.subBody {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 10px;
+  width: 100%;
+  position: relative;
+  top: 5vh;
+}
+
+/* 카드 스타일 */
+.free_f,
+.plus_f,
+.pro_f,
+.business_f {
+  flex: 1 1 280px;
+  max-width: 340px;
+  height: 570px;
+  border-radius: 20px;
+  background: transparent;
+  backdrop-filter: blur(2px);
+  border: 1px solid white;
+  transition: all 0.4s ease, top 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.free_f:hover,
+.plus_f:hover,
+.pro_f:hover,
+.business_f:hover {
+  transform: translateY(-15px) scale(1.04);
+  z-index: 990;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 카드 내부 글꼴 스타일 */
+.free_f h2,
+.plus_f h2,
+.pro_f h2,
+.business_f h2 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 0px;
+  color: white;
+  word-break: break-word;
+}
+
+.price_f,
+.price_f_Plus,
+.price_f_Pro,
+.price_f_Enterprise {
+  font-size: clamp(1.3rem, 2vw, 2.4rem);
+  text-align: center;
+  color: white;
+  font-weight: normal;
+  word-break: break-word;
+}
+
+.per_month,
+.per_month_Plus,
+.per_month_Pro,
+.per_month_Enterprise {
+  font-size: 14px;
+  color: white;
+}
+
+.plan_desc,
+.plan_desc_Plus,
+.plan_desc_Pro,
+.plan_desc_Enterprise {
+  text-align: center;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  margin: 6px 0;
+  color: white;
+  word-break: break-word;
+}
+
+/* 버튼 */
+.free_btn,
+.Plus_btn,
+.Pro_btn,
+.Enterprise_btn {
+  width: 85%;
+  padding: 10px;
+  font-size: clamp(1rem, 1.2vw, 1.05rem);
+  border-radius: 30px;
+  color: #fff;
+  border: 1px solid white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  margin-top: 15px;
+  background: transparent;
+}
+
+.free_btn:hover,
+.Plus_btn:hover,
+.Pro_btn:hover,
+.Enterprise_btn:hover {
+  transform: scale(1.02);
+  background-color: #7b68ee;
+  color: white;
+}
+
+/* 혜택 설명 */
+.free_benefits,
+.plus_benefits,
+.pro_benefits,
+.Enterprise_benefits {
+  width: 100%;
+  color: white;
+  word-break: keep-all;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+.free_benefits li,
+.plus_benefits li,
+.pro_benefits li,
+.Enterprise_benefits li {
+  margin: 10px 0;
+}
+
+/* 풋터 */
+.subFoot {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.subFoot p,
+.subFoot span,
+.subFoot > a {
+  color: #c9c9c9;
+  font-size: 15px;
+  text-align: center;
+}
+
+.returnHomepage {
+  color: #bb58c4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.returnHomepage:hover {
+  color: #7b68ee;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.returnHomepage:active {
+  color: #3756ad;
+  text-decoration: none;
+}
+
+/* 닫기 버튼 */
+.closeFrame_btn {
+  font-size: 20px;
+  width: 20px;
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  background-color: transparent;
+  border: none;
+  color: #b1b1b1;
+  cursor: pointer;
+}
+
+.closeFrame_btn:hover {
+  transform: scale(1.03);
+}
+
+/* 모바일 레이아웃 */
+@media (max-width: 768px) {
+  .sub_title {
+    font-size: 30px;
+  }
+
+  .free_btn,
+  .Plus_btn,
+  .Pro_btn {
+    font-size: 0.9rem;
+  }
+
+  .free_benefits,
+  .plus_benefits,
+  .pro_benefits {
+    font-size: 14px;
+  }
+
+  .free_f h2,
+  .plus_f h2,
+  .pro_f h2 {
+    font-size: 22px;
+  }
+
+  .price_f,
+  .price_f_Plus,
+  .price_f_Pro {
+    font-size: 1.3rem;
+  }
+
+  .plan_desc,
+  .plan_desc_Plus,
+  .plan_desc_Pro {
+    font-size: 0.9rem;
+  }
+}
+
+/* 토글 스위치 및 모달 관련 스타일 */
+.toggle_f_wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  top: 20vh;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+.toggle_f {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 170px;
+  height: 45px;
+  border: 1px solid white;
+  border-radius: 25px;
+  padding: 5px;
+  z-index: 10;
+  background: transparent;
+}
+
+.animation_f {
+  position: absolute;
+  width: 80px;
+  height: 80%;
+  top: 10%;
+  margin: 0 20px;
+  border-radius: 25px;
+  z-index: 0;
+  transition: left 0.3s ease;
+  background-color: #7b68ee;
+}
+
+.personal_toggle_f,
+.business_toggle_f {
+  width: 70px;
+  margin: 0 auto;
+  z-index: 100;
+}
+
+.personal_toggle_f button,
+.business_toggle_f button {
+  width: 100%;
+  font-size: 15px;
+  border: none;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+}
+
+.toggle_f button.active {
+  color: white;
+}
+
+.disabled_btn {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* 취소 모달 */
+#cancel_f {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translateX(-50%);
+  width: 500px;
+  background: transparent;
+  backdrop-filter: blur(100px);
+  border: 1px solid white;
+  border-radius: 15px;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+.headforCancel_f {
+  width: 100%;
+  height: 150px;
+  background-image: url("../../images/loginPage_background2.jpg");
+  background-size: contain;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.headforCancel_f h1 {
+  text-align: center;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: white;
+}
+
+.bodyforCancel_f {
+  width: 100%;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bodyforCancel_f > p {
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.expiryNotice {
+  margin-top: 5px;
+}
+
+.expiryNotice p {
+  color: white;
+  margin: 0 30px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.expiryNotice p > span {
+  font-weight: bold;
+}
+
+.bodyforCancel_f h1 {
+  font-size: 0.9rem;
+  margin-bottom: 0px;
+  color: white;
+}
+
+.bodyforCancel_f input {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 7px;
+  color: white;
+  border: 2px solid white;
+  outline: none;
+  background: transparent;
+}
+
+.closeForCancel {
+  color: white;
+  font-size: 1.4rem;
+  position: absolute;
+  right: 2%;
+  top: 3%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.closeForCancel:hover {
+  transform: scale(1.03);
+}
+
+.yesOrno_f {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.yesOrno_f button {
+  width: 140px;
+  height: 40px;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: 2px solid white;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.yesOrno_f button:hover {
+  transform: scale(1.06);
+}
