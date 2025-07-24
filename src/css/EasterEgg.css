@@ -15,7 +15,7 @@
   transition: all 0.3s ease;
 }
 
-.flying-rocket:hover img {
+.flying-rocket:hover .quantum-rocket {
   transform: scale(1.2) rotate(20deg);
   filter: drop-shadow(0 0 15px rgba(0, 255, 128, 1));
 }

@@ -83,7 +83,7 @@ const generateCoordinates = (direction) => {
   };
 };
 
-function EasterEgg() {
+function EasterEgg({ onRocketClick, gameStart }) {
   // 캔버스 ref 및 게임 상태
   const canvasRef = useRef(null);
   const [gameStarted, setGameStarted] = useState(false);
@@ -348,7 +348,10 @@ function EasterEgg() {
             ...rocketStyle,
             display: gameStarted ? "none" : "block",
           }}
-          onClick={startGame}
+          onClick={() => {
+            if (onRocketClick) onRocketClick();
+            startGame();
+          }}
           onAnimationEnd={handleAnimationEnd}
         >
           <img
