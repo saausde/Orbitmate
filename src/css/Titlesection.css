@@ -15,7 +15,7 @@ html {
   background-image: url("../images/titleBackground14.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: -15; /* 음수 z-index 제거: fixed 요소가 잘리지 않도록 */
+  z-index: 1;
 }
 
 .planetsence {
@@ -24,7 +24,7 @@ html {
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 1;
 }
 
 /* 상단 중앙 정렬 헤더(타이틀 등) */

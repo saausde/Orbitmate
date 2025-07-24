@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import propTypes from "prop-types";
 // 주요 컴포넌트 import (경로 일치 확인)
-import EasterEgg from "./components/TitleSection/EasterEgg";
 import BackgroundParticles from "./components/TitleSection/BackgroundParticles";
 import Titlesection from "./components/TitleSection/Titlesection";
 import UserInput from "./components/UserInput";
@@ -243,8 +242,7 @@ function AppContent() {
               iconsData={triggerIconsData}
             />
 
-            {/* 이스터에그 */}
-            <EasterEgg />
+            {/* 이스터에그는 Titlesection 내부에서만 렌더링 */}
             {/* 모달들 */}
             {[1, 2, 3, 4].map((modalNum) => (
               <Modal

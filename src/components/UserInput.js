@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import "../css/UserInput.css";
 import { ChatContext } from "../contexts/ChatContext";
 
-function UserInput({ isClicked, onSessionCreated }) {
+function UserInput({ isClicked, onSessionCreated, isGameActive }) {
   const { NewChat } = useContext(ChatContext);
   // [상태] 입력값
   const [inputValue, setInputValue] = useState("");
@@ -52,7 +52,8 @@ function UserInput({ isClicked, onSessionCreated }) {
     }
   };
 
-  // [렌더링] 메인 입력창 UI
+  // [렌더링] 메인 입력창 UI (게임 중이면 렌더링하지 않음)
+  if (isGameActive) return null;
   return (
     <div className="input-wrapper">
       <form onSubmit={handleSubmit}>

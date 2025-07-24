@@ -50,12 +50,8 @@ function Titlesection({
     }
   }, [forceAnimated]);
 
-  // EasterEgg 클릭 시 게임 시작 트리거
-  const [easterEggGameStart, setEasterEggGameStart] = useState(false);
-  const handleRocketClick = () => {
-    setEasterEggGameStart(true);
-    setTimeout(() => setEasterEggGameStart(false), 100); // 상태 초기화
-  };
+  // EasterEgg 클릭 시 게임 시작 트리거 (상태 없이 단순 핸들러)
+  const handleRocketClick = () => {};
 
   return (
     <div className="title_section_wrapper">
@@ -79,10 +75,7 @@ function Titlesection({
         </div>
       </div>
       {/* 이스터에그(로켓) 컴포넌트 클릭 시 게임 시작 트리거 전달 */}
-      <EasterEgg
-        onRocketClick={handleRocketClick}
-        gameStart={easterEggGameStart}
-      />
+      <EasterEgg onRocketClick={handleRocketClick} />
     </div>
   );
 }
