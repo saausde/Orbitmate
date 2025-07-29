@@ -68,6 +68,7 @@ function AppContent() {
   const [currentSessionId, setCurrentSessionId] = useState(null); // 현재 세션 ID
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 프로필 드롭다운
   const [notices, setNotices] = useState([]); // 공지 리스트 상태
+  const [isGameActive, setIsGameActive] = useState(false); // 이스터에그 게임 활성화 상태
   const { showSidebar, setShowSidebar } = useContext(ChatContext); // 사이드바 상태
   const { user } = useUser(); // 사용자 정보
   const { i18n } = useTranslation(); // 언어 정보
@@ -209,6 +210,9 @@ function AppContent() {
               onStartClick={handleStartClick}
               hideStart={hideStart}
               forceAnimated={hideStart} // 뒤로가기 등에서 startbutton 없이 애니메이션 적용
+              onGameStart={() => setIsGameActive(true)}
+              onGameEnd={() => setIsGameActive(false)}
+              isGameActive={isGameActive}
             />
             {/* 채팅 입력창 */}
             <UserInput
@@ -217,6 +221,7 @@ function AppContent() {
                 (location.pathname === "/" && location.state?.hideStart)
               }
               onSessionCreated={handleSessionCreated}
+              isGameActive={isGameActive} // 이스터에그 게임 활성화 상태 전달
             />
             {(location.pathname === "/" || showSidebar) && (
               <Sidebar

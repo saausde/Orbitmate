@@ -83,20 +83,16 @@ const generateCoordinates = (direction) => {
   };
 };
 
-function EasterEgg({ onRocketClick, gameStart }) {
+function EasterEgg({ onRocketClick, isGameActive, onGameStart, onGameEnd }) {
   // 캔버스 ref 및 게임 상태
   const canvasRef = useRef(null);
-  const [gameStarted, setGameStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [rocketStyle, setRocketStyle] = useState({}); // flying-rocket 위치/방향
   const [currentDirection, setCurrentDirection] = useState(null);
-  const [isGameActive, setIsGameActive] = useState(false);
   const scoreRef = useRef(0);
 
   // 게임 종료 핸들러
   const handleCloseGame = useCallback(() => {
-    setGameStarted(false);
-    setIsGameActive(false);
     setScore(0);
     scoreRef.current = 0;
     // 모든 게임 상태 리셋
@@ -104,15 +100,13 @@ function EasterEgg({ onRocketClick, gameStart }) {
     enemyList.current = [];
     explosionList.current = [];
     gameOver.current = false;
-  }, []);
+    if (typeof onGameEnd === "function") onGameEnd();
+  }, [onGameEnd]);
 
   // 게임 시작 핸들러
   const startGame = useCallback(() => {
-    setGameStarted(true);
-    setIsGameActive(true);
-    setScore(0);
-    scoreRef.current = 0;
-  }, []);
+    if (typeof onGameStart === "function") onGameStart();
+  }, [onGameStart]);
 
   // 게임 상태 관련 ref
   const rocketX = useRef(0);
@@ -152,16 +146,16 @@ function EasterEgg({ onRocketClick, gameStart }) {
 
   // flying-rocket이 날아오는 방향과 위치를 무작위로 설정
   useEffect(() => {
-    if (!gameStarted) {
+    if (!isGameActive) {
       const initialDirection = getRandomDirection();
       updateRocketPath(initialDirection);
     }
     // rocketKey가 바뀔 때마다 위치/방향 갱신
-  }, [gameStarted, updateRocketPath, rocketKey]);
+  }, [isGameActive, updateRocketPath, rocketKey]);
 
   // flying-rocket 애니메이션이 끝날 때마다 무작위 방향/위치로 재설정
   const handleAnimationEnd = () => {
-    if (!gameStarted) {
+    if (!isGameActive) {
       // 새로운 무작위 방향/위치로 재설정
       setRocketKey((prev) => prev + 1); // 키 변경 → useEffect 트리거
     }
@@ -169,9 +163,11 @@ function EasterEgg({ onRocketClick, gameStart }) {
 
   // 게임 초기화 및 루프
   useEffect(() => {
-    if (!gameStarted) return;
+    if (!isGameActive) return;
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     let keysDown = {};
     // 게임 상태 초기화
     const initGame = () => {
@@ -202,21 +198,21 @@ function EasterEgg({ onRocketClick, gameStart }) {
       delete keysDown[e.keyCode];
     };
     // 게임 시작
-    const startGame = () => {
+    const startGameLoop = () => {
       initGame();
       window.addEventListener("keydown", handleKeyDown);
       window.addEventListener("keyup", handleKeyUp);
       enemyInterval.current = setInterval(createEnemy, 1000);
       gameLoop();
     };
-    startGame();
+    startGameLoop();
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
       clearInterval(enemyInterval.current);
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [gameStarted]);
+  }, [isGameActive]);
 
   // 총알 생성
   const createBullet = () => {
@@ -316,14 +312,20 @@ function EasterEgg({ onRocketClick, gameStart }) {
       );
       ctx.fillStyle = "#00ff00";
       ctx.font = "24px 'Press Start 2P'";
+      // Center FINAL SCORE horizontally
+      const finalScoreText = `FINAL SCORE: ${scoreRef.current}`;
+      const scoreTextWidth = ctx.measureText(finalScoreText).width;
       ctx.fillText(
-        `FINAL SCORE: ${scoreRef.current}`,
-        canvas.width / 2 - 85,
+        finalScoreText,
+        canvas.width / 2 - scoreTextWidth / 2,
         canvas.height / 2 + 80
       );
+      // Center CLICK TO RESTART horizontally
+      const restartText = "CLICK TO RESTART";
+      const restartTextWidth = ctx.measureText(restartText).width;
       ctx.fillText(
-        "CLICK TO RESTART",
-        canvas.width / 2 - 105,
+        restartText,
+        canvas.width / 2 - restartTextWidth / 2,
         canvas.height / 2 + 100
       );
     }
@@ -331,9 +333,11 @@ function EasterEgg({ onRocketClick, gameStart }) {
 
   // 게임 오버 시 캔버스 클릭으로 재시작
   const handleCanvasClick = () => {
-    if (gameOver.current) {
-      setGameStarted(false);
-      setTimeout(() => setGameStarted(true), 100);
+    if (gameOver.current && typeof onGameEnd === "function") {
+      onGameEnd(); // 게임 종료 후 부모에서 isGameActive를 false로 바꿔줌
+      setTimeout(() => {
+        if (typeof onGameStart === "function") onGameStart();
+      }, 100);
     }
   };
 
@@ -344,14 +348,8 @@ function EasterEgg({ onRocketClick, gameStart }) {
         <div
           key={rocketKey} // 매번 새로운 key로 리렌더
           className="flying-rocket"
-          style={{
-            ...rocketStyle,
-            display: gameStarted ? "none" : "block",
-          }}
-          onClick={() => {
-            if (onRocketClick) onRocketClick();
-            startGame();
-          }}
+          style={rocketStyle}
+          onClick={startGame}
           onAnimationEnd={handleAnimationEnd}
         >
           <img

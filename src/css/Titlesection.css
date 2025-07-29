@@ -12,7 +12,7 @@ html {
   height: 100vh;
   overflow: visible; /* 로켓 등 이펙트가 잘리지 않도록 */
   position: relative; /* 필요 시 */
-  background-image: url("../images/titleBackground14.jpg");
+  background-image: url("../images/8k_stars_milky_way.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
@@ -102,7 +102,7 @@ html {
   position: fixed;
   left: 50%;
   transform: translate(-50%);
-  top: 45%;
+  top: 50%;
   font-size: 45px;
   font-weight: bold;
   text-align: center;

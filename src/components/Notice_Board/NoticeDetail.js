@@ -597,7 +597,7 @@ function NoticeDetail() {
                                   user.profile.profile_image_path.startsWith(
                                     "http"
                                   )
-                                    ? user.profile.profile_image_path
+                                    ? user.profile.profile_image_path //문제지점 프로필 이미지 어떻게 가져올지 고민
                                     : `${process.env.REACT_APP_API_BASE_URL}${user.profile.profile_image_path}`
                                 }
                                 alt="avatar"
@@ -606,9 +606,9 @@ function NoticeDetail() {
                             )}
                             <div className="user_info">
                               <span className="username">
-                                {user?.login?.is_admin === 1
-                                  ? ` 👨‍🚀${user?.profile?.username}`
-                                  : user?.profile?.username}
+                                {comment.user_name === "관리자"
+                                  ? ` 👨‍🚀${comment.user_name}`
+                                  : comment.user_name}
                               </span>
                               <span className="timestamp">
                                 {new Date(

@@ -1,7 +1,7 @@
 #main_userinput {
   position: fixed;
   z-index: 100;
-  top: 56%;
+  top: 61%;
   left: 50%; /* ✔ 중심 정렬을 위해 50% */
   transform: translate(-50%, -50%); /* ✔ 중심 정렬 */
   width: 40%;

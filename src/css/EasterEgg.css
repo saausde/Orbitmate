@@ -1,14 +1,16 @@
 /* ===== 로켓 이스터에그(비행 애니메이션) ===== */
 .flying-rocket {
   position: fixed;
+  left: 0;
+  top: 0;
   z-index: 1001;
   cursor: pointer;
+  pointer-events: auto;
   animation: cosmicFlight 8s linear infinite;
   transform-origin: center center;
 }
 
-.flying-rocket img,
-.quantum-rocket {
+.flying-rocket img {
   width: 60px;
   height: 60px;
   filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.7));
@@ -53,6 +55,7 @@
 }
 
 #gameCanvas {
+  z-index: 1000;
   background: radial-gradient(circle at center, #001, #000);
   border-radius: 10px;
   border: 1px solid #0ff3;

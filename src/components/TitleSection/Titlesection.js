@@ -10,13 +10,15 @@ import startButton from "../../images/start_button-removebg-preview.png";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-/*import PlanetScene from "./PlanetScene";*/
-
+import SolarSystem from "../SolarSystem";
 function Titlesection({
   onStartClick,
   hideStart,
   forceAnimated,
   submittedText,
+  onGameStart,
+  onGameEnd,
+  isGameActive,
 }) {
   // [상태] 시작 버튼 표시, 애니메이션 트리거 등
   const [showButton, setShowButton] = useState(true); // 시작 버튼 표시 여부
@@ -56,7 +58,9 @@ function Titlesection({
   return (
     <div className="title_section_wrapper">
       <div id="main_title">
-        <div className="planetsence"></div>
+        <div className="SolarSystem">
+          <SolarSystem />
+        </div>
         {/* OrbitMate 타이틀 (애니메이션 적용) */}
         <div id="orbitMate">OrbitMate</div>
 
@@ -75,7 +79,12 @@ function Titlesection({
         </div>
       </div>
       {/* 이스터에그(로켓) 컴포넌트 클릭 시 게임 시작 트리거 전달 */}
-      <EasterEgg onRocketClick={handleRocketClick} />
+      <EasterEgg
+        onRocketClick={handleRocketClick}
+        onGameStart={onGameStart}
+        onGameEnd={onGameEnd}
+        isGameActive={isGameActive}
+      />
     </div>
   );
 }
