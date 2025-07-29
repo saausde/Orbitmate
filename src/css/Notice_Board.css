@@ -246,11 +246,21 @@
   filter: brightness(0) invert(1);
 }
 
-.sidebar_notice_page .new_chat_btn,
-.sidebar_notice_page .new_chat_btn2,
-.profile_notice_page .user_username,
-.profile_notice_page a {
-  color: white;
+.sidebar_notice_page #side_main_f button {
+  color: #ffffff;
+  background: transparent;
+}
+
+.sidebar_notice_page #side_main_f ul,
+.sidebar_notice_page #side_main_f li,
+.sidebar_notice_page #side_main_f .creatorPage_btn,
+.sidebar_notice_page #side_main_f .helpCenter {
+  color: #000000;
+}
+
+.sidebar_notice_page #side_main_f ul:hover,
+.sidebar_notice_page #side_main_f li:hover {
+  background: transparent;
 }
 
 .sidebar_notice_page .new_chat_btn,

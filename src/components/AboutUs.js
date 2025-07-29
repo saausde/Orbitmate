@@ -121,11 +121,8 @@ function AboutUs() {
               <img className="barcode" src={barcode} />
             </div>
             <div className="card_back">
-              <div className="namebox">EunSeok Lee</div>
-              <div className="My_role">
-                {/*프로젝트 역할내용*/}
-                전반적인 기능구현{/*나중에 자세히쓸게요*/}
-              </div>
+              <div className="namebox">{t("about_each.eunname")}</div>
+              <div className="My_role">{t("about_each.eunRole")}</div>
               <button
                 className="contact_btn"
                 onClick={() => {

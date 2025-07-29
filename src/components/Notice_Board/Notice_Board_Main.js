@@ -140,6 +140,7 @@ function Notice_Board_Main() {
             userMessage={sidebarUserMessage}
             showSidebar={showSidebar}
             toggleSidebar={toggleSidebar}
+            location={location}
           />
         </div>
         <input

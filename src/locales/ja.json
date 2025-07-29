@@ -1,0 +1,243 @@
+{
+  "common": {
+    "language": {
+      "toggle": "日本語"
+    }
+  },
+  "noticeBoard_main": {
+    "subtitle": "お知らせとQ&Aをご確認ください！",
+    "qna_subtitle": "気になることはすぐにご質問ください！",
+    "text_placeholder": "お知らせを検索...",
+    "back_btn": "戻る",
+    "notice": "お知らせ",
+    "qna": "質問と回答",
+    "ask_question_btn": "質問する",
+    "input_comment_guide": "コメントを入力してEnterキーを押してください"
+  },
+  "notice_detail": {
+    "direction": "お知らせ",
+    "directionToQnA": "質問と回答",
+    "satisfaction_quote": "このお知らせに満足しましたか？",
+    "satisfaction_quote_QnA": "この回答に満足しましたか？",
+    "view_comments": "コメントを見る",
+    "delete_post": "削除",
+    "edit_post": "編集",
+    "edit_comment": "コメント編集",
+    "input_comment_guide": "コメント内容を入力してください"
+  },
+  "comment_edit": {
+    "form_title": "修正のために下記の内容をご記入ください！",
+    "content_label": "コメント内容の修正",
+    "content_placeholder": "コメント内容を入力してください。",
+    "submit_button": "はい",
+    "cancel_button": "いいえ"
+  },
+  "post_edit": {
+    "form_title": "修正のために下記の内容をご記入ください！",
+    "subject_label": "タイトル修正",
+    "subject_placeholder": "投稿タイトルを入力してください。",
+    "content_label": "内容修正",
+    "content_placeholder": "投稿内容を入力してください。",
+    "password_label": "パスワード",
+    "password_placeholder": "パスワードを入力してください。"
+  },
+  "general_setting": {
+    "title": "一般",
+    "theme": "テーマ",
+    "light_theme": "ライトモード",
+    "dark_theme": "ダークモード",
+    "font_size": "チャットフォントサイズ",
+    "font_size_minimal": "最小",
+    "font_size_small": "小",
+    "font_size_medium": "中",
+    "font_size_large": "大",
+    "font_size_xlarge": "最大",
+    "language": "言語",
+    "ko": "韓国語",
+    "en": "英語",
+    "ja": "日本語",
+    "delete_account": "アカウント削除"
+  },
+  "profileEdit_Setting": {
+    "title": "プロフィール設定",
+    "profile_effects_subtitle": "あなたのプロフィールを新しく変えてみましょう！",
+    "profile_effects_description": "最近追加されたプロフィール装飾や効果をチェックしてください！",
+    "go_to_shop": "ショップへ",
+    "level": "レベル",
+    "current_exp": "現在の経験値",
+    "password_and_certification": "パスワードと認証",
+    "UserName": "名前",
+    "UserEmail": "メールアドレス",
+    "UserPhonenumber": "電話番号",
+    "UserBio": "説明",
+    "UserBioPlaceholder": "自己紹介を簡単に書いてみましょう（最大120文字）",
+    "placeholderYourIntroduction": "キャプテンのログを始めましょう…",
+    "empty_introduction": "ユーザーからのメッセージをお待ちしています。",
+    "onlineStatus": "オンライン",
+    "subscription": "サブスクリプション",
+    "username": "ユーザー名",
+    "theme": "テーマ",
+    "save": "保存",
+    "logout": "ログアウト",
+    "delete_account": "アカウント削除",
+    "dark": "ブラックホール",
+    "light": "太陽光",
+    "space": "ギャラクシー",
+    "purple": "星雲",
+    "green": "エメラルドコメット"
+  },
+  "profile_setting": {
+    "general": "一般",
+    "profileEdit_setting": "プロフィール",
+    "setting": "設定",
+    "logOut": "ログアウト",
+    "adminPage": "管理者ページ"
+  },
+  "notification_setting": {
+    "title": "通知"
+  },
+  "title_section": {
+    "greeting": "ようこそ、{{name}}さん！",
+    "greeting_no_name": "ご用件をお聞かせください。",
+    "input_placeholder": "何でもご質問ください..."
+  },
+  "sidebar_buttons": {
+    "new_chat": "新しいチャット",
+    "edit_chat": "チャット編集",
+    "all_delete_chat": "全チャット履歴削除",
+    "delete_chat": "チャット削除",
+    "edit_title": "タイトル編集",
+    "save_changes": "変更を保存",
+    "confirm_question": "本当にすべてのチャットを削除しますか？",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "helpCenter": "カスタマーセンター",
+    "aboutTheCreators": "私たちは誰？"
+  },
+  "subscriptionMain": {
+    "title": "プランアップグレード",
+    "personalToggle_btn": "個人",
+    "businessToggle_btn": "ビジネス",
+    "moreFeatures": "ビジネス向けにさらに多くの機能が必要ですか？",
+    "freePlan": "無料プラン",
+    "currentPlan": "現在のプラン",
+    "here": "見る",
+    "wnattocancel": "サブスクリプションを解約しますか？",
+    "yes": "解約する",
+    "no": "もう一度考えます",
+    "expiryNotice": "ご契約中のサービスは<span>{{date}}</span>までご利用いただけます。それまでいつでもサービスの継続や更新が可能です。OrbitMateは常にお客様の快適な体験のために最善を尽くしています。残りの期間も多彩な機能と特典をお楽しみください。",
+    "expiryNotice2": "ご利用いただいた感想をお聞かせください。",
+    "reasonCancel": "解約理由を教えてください",
+    "placeholder_reason": "解約理由を簡単にご記入ください",
+    "feedback": "ご意見をお聞かせください",
+    "placeholder_feedback": "サービスに関するご意見を自由にご記入ください"
+  },
+  "subscriptionMain_free": {
+    "per_month_free": "USD/月",
+    "plan_desc_free": "より多くの機能をスマートに活用しましょう！",
+    "freePlan_btn": "現在のプラン",
+    "free_features": [
+      "✔ OrbitMate mini アクセス",
+      "✔ 標準音声モード",
+      "✔ 検索でウェブからのリアルタイムデータ利用",
+      "✔ OrbitMate限定アクセス",
+      "✔ ファイルアップロード、高度なデータ分析、画像生成など限定的アクセス",
+      "✔ カスタムOrbitMate利用"
+    ]
+  },
+  "subscriptionMain_plus": {
+    "per_month_plus": "USD/月",
+    "plan_desc_plus": "より賢い選択！",
+    "plusPlan_btn": "Proを利用する",
+    "plus_features": [
+      "✔ Freeの全機能を含む",
+      "✔ メッセージ、ファイルアップロード、高度なデータ分析、画像生成の上限増加",
+      "✔ 深層リサーチや多様なAIモデル(OrbitMate-mini, OrbitMate-mini-high, o3)とOrbitMate-4.5リサーチプレビューアクセス",
+      "✔ タスク・プロジェクト作成、カスタムOrbitMate設定",
+      "✔ ファイルアップロード・高度なデータ分析機能の限定的アクセス",
+      "✔ 新機能の優先体験"
+    ]
+  },
+  "subscriptionMain_ultimate": {
+    "per_month_ultimate": "USD/月",
+    "plan_desc_ultimate": "最も賢い選択！",
+    "ultimatePlan_btn": "Ultimateを利用する",
+    "ultimate_features": [
+      "✔ Plusの全機能を含む",
+      "✔ すべての推論モデルとOrbitMate-4o無制限アクセス",
+      "✔ 高度な音声機能無制限利用",
+      "✔ 複雑な作業のための多段階オンラインリサーチに十分なアクセス上限",
+      "✔ Codexエージェントリサーチプレビュー利用可能",
+      "✔ より精密な計算と最適な応答のためのOrbitMate Proモード利用",
+      "✔ 新機能・実験的ツールを最速体験"
+    ]
+  },
+  "subscriptionMain_business": {
+    "per_month_business": "USD/月",
+    "plan_desc_business": "ビジネスに最適な選択！",
+    "businessPlan_btn": "Enterpriseを利用する",
+    "business_features": [
+      "✔ Plusの全機能を含む",
+      "✔ すべての推論モデルとOrbitMate-4o無制限アクセス",
+      "✔ 高度な音声機能無制限利用",
+      "✔ 複雑な作業のための多段階オンラインリサーチに十分なアクセス上限",
+      "✔ Codexエージェントリサーチプレビュー利用可能",
+      "✔ より精密な計算と最適な応答のためのOrbitMate Proモード利用"
+    ]
+  },
+  "subscriptionProcess": {
+    "select_plan": "プラン選択",
+    "enter_payment": "支払い情報入力",
+    "payment_complete": "支払い完了",
+    "cardholder_name": "カード名義人",
+    "card_number": "カード番号",
+    "select_card": "カード選択",
+    "expiry_month": "有効期限(月)",
+    "expiry_year": "有効期限(年)",
+    "enter_cardholder_name": "カード名義人を入力してください",
+    "enter_card_number": "カード番号を入力してください",
+    "select_month": "月を選択",
+    "select_year": "年を選択",
+    "monthly": "月",
+    "pay_now": "支払う"
+  },
+  "paymentComplete": {
+    "completed": "サブスクリプションが正常に完了しました。",
+    "subscription_info": "サブスクリプション情報",
+    "payment_amount": "支払金額",
+    "payment_method": "支払方法",
+    "go_to_main": "メインへ",
+    "cancel_info_title": "解約案内",
+    "cancel_info_body": "サブスクリプションはいつでもOrbitMateアプリ内「マイサブスクリプション管理」から解約できます。解約後は次回請求日からサービスが終了し、返金はありません。ご不明な点はカスタマーセンターまでお問い合わせください。",
+    "credit_card": "クレジットカード"
+  },
+  "about_us": {
+    "title": "OrbitMateを作った最高のチーム",
+    "description": "4人の頭脳、1つの目標。OrbitMateは複雑な技術を直感的な体験に再解釈した次世代AIプラットフォームです。技術の精巧さと人間中心のデザインが調和し、私たちはコードと創造力で誰もが簡単に使えるスマートな世界を作ります。",
+    "worktime": "作業時間",
+    "numberOfdevs": "チーム人数",
+    "AI_Model": "使用AIモデル",
+    "position": "開発者",
+    "days": "日",
+    "ContactUs": "お問い合わせ",
+    "ContactUs2": "この情報からご連絡いただけます。"
+  },
+  "about_each": {
+    "jayname": "ナ・ジェフン",
+    "jayRole": "全UI制作とDB連携に参加し、サービスコンセプトに合ったユニークな画面作りに注力しました。ユーザー体験を考慮したレイアウトとディテールで、機能性と感覚的デザインの両立を目指しました。",
+    "wooname": "シン・ウチョル",
+    "wooRole": "フロントエンドコードの可読性と保守性向上のためリファクタリングを担当。バックエンドやAPI連携ではデータ構造とリクエスト方式を調整し、円滑なサービス提供を実現しました。",
+    "simname": "シム・ホンイク",
+    "simRole": "AIモデル連携と外部API統合を含むバックエンド全般を担当。データベース設計・管理、サーバー環境構築まで全体システムを構築し、安定したサービス運用を支援しました。",
+    "eunname": "イ・ウンソク",
+    "eunRole": "プロジェクト全般にわたり機能実装を担当。フロントエンドとバックエンドの両方に焦点を当て、統一感のある機能的なユーザー体験を確保しました。"
+  },
+  "ChatLog": {
+    "waiting_message": "AIが銀河の彼方をスキャン中です…！",
+    "code_copy": "コピー",
+    "noMessages": "OrbitMateは静かです。"
+  },
+  "adminPage": {
+    "search_btn": "検索"
+  }
+}

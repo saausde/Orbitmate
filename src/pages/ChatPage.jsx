@@ -42,20 +42,24 @@ const ChatPage = ({
   return (
     <div className="chat-main" ref={mainRef}>
       {/* Sidebar를 최상위에 렌더링하여 브라우저 기준 고정 */}
-      <Sidebar
-        userMessage={sidebarUserMessage}
-        showSidebar={showSidebar}
-        toggleSidebar={toggleSidebar}
-      />
+      <div className="chat-log-sidebar">
+        <Sidebar
+          userMessage={sidebarUserMessage}
+          showSidebar={showSidebar}
+          toggleSidebar={toggleSidebar}
+        />
+      </div>
       {/* 채팅 본문 영역: 중첩 chat-main 제거, Wrapper에서 이미 감싸므로 바로 ChatLog만 사용 */}
       <ChatLog session_id={session_id} />
-      {/* 프로필/설정 영역 */}
-      <Profile
-        isDropdownOpen={isDropdownOpen}
-        onToggleDropdown={toggleDropdown}
-        onEditProfile={handleEditProfile}
-        onLogout={handleLogout}
-      />
+      <div className="chat-log-profile">
+        {/* 프로필/설정 영역 */}
+        <Profile
+          isDropdownOpen={isDropdownOpen}
+          onToggleDropdown={toggleDropdown}
+          onEditProfile={handleEditProfile}
+          onLogout={handleLogout}
+        />
+      </div>
     </div>
   );
 };

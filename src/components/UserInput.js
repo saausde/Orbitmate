@@ -29,11 +29,25 @@ function UserInput({ isClicked, onSessionCreated, isGameActive }) {
     }
 
     try {
-      const newSessionId = await NewChat({ firstMessage: inputValue });
+      // 세션 생성
+      const newSessionId = await NewChat({});
+
+      // 세션 생성 후 사용자 메시지 전송
+      await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/chat/sessions/${newSessionId}/messages`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: user.storedValue,
+            message: inputValue,
+          }),
+        }
+      );
 
       if (typeof onSessionCreated === "function") {
         setTimeout(() => {
-          onSessionCreated(newSessionId, inputValue);
+          onSessionCreated(newSessionId);
         }, 3000); // 필요하다면 이동
       }
 
@@ -66,7 +80,7 @@ function UserInput({ isClicked, onSessionCreated, isGameActive }) {
           style={{
             /*opacity: isSubmitted ? 1 : 0,*/
             transform: isSubmitted
-              ? "translate(-50%, 33vh) scale(1)"
+              ? "translate(-50%, 27vh) scale(1)"
               : "translate(-50%, -20%) scale(1)",
 
             transition:

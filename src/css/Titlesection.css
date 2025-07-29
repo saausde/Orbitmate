@@ -12,7 +12,8 @@ html {
   height: 100vh;
   overflow: visible; /* 로켓 등 이펙트가 잘리지 않도록 */
   position: relative; /* 필요 시 */
-  background-image: url("../images/8k_stars_milky_way.jpg");
+  background-image: url("../images/TitleSection/mainBackground2.jpg");
+  /*background-image: url("../images/titleBackground16.jpg");*/
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
@@ -50,7 +51,7 @@ html {
   line-height: 1.1;
   white-space: nowrap;
   font-weight: bold;
-  background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  background: linear-gradient(90deg, #00ffaa, #ffcc00, #ff9966);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -108,13 +109,16 @@ html {
   text-align: center;
   min-width: 300px;
   white-space: nowrap;
-  background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  /*background: linear-gradient(90deg, #8e2de2, #4a00e0, #00c6ff);
+  text-shadow: 0 0 10px rgba(78, 42, 132, 0.8), 0 0 20px rgba(78, 42, 132, 0.5),
+    0 0 30px rgba(0, 198, 255, 0.3);*/
+  background: linear-gradient(90deg, #00ffaa, #ffcc00, #ff9966);
+  text-shadow: 0px 0px 10px rgba(0, 255, 170, 0.7),
+    0px 0px 20px rgba(255, 204, 0, 0.6), 0px 0px 30px rgba(255, 153, 102, 0.5);
   -webkit-background-clip: text;
   background-clip: text;
   background-size: contain;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 10px rgba(78, 42, 132, 0.8), 0 0 20px rgba(78, 42, 132, 0.5),
-    0 0 30px rgba(0, 198, 255, 0.3);
   animation: glow 1.5s ease-in-out infinite alternate;
   transition: opacity 0.5s ease, transform 3.5s ease;
 }

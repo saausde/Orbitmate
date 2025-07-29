@@ -1,5 +1,25 @@
 /* 사이드바 전체 레이아웃 및 UI 요소별 한국어 주석 추가, 코드 최적화 */
 
+#side_main_f button,
+#side_main_f ul,
+#side_main_f li {
+  color: white;
+}
+
+/*채팅 세션 사이드바*/
+.chat-log-sidebar #side_main_f button,
+.chat-log-sidebar #side_main_f ul,
+.chat-log-sidebar #side_main_f li {
+  color: #6b3cc9;
+  font-family: sans-serif;
+  font-weight: normal;
+  background-color: white;
+}
+
+.chat-log-sidebar #side_main_f .search_icon {
+  filter: brightness(1) invert(0);
+}
+
 /* 사이드바 토글 버튼 (브라우저 기준 고정) */
 #side_btn {
   position: fixed;
@@ -7,8 +27,8 @@
   left: 15px;
   margin: 0;
   z-index: 20000;
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
@@ -23,6 +43,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: brightness(0) invert(1);
 }
 #side_btn:hover {
   transform: scale(1.05);
@@ -32,13 +53,8 @@
   transform: scale(0.97);
 }
 
-@media (max-width: 800px) {
-  #side_btn {
-    top: 12px;
-    left: 8px;
-    width: 40px;
-    height: 40px;
-  }
+.chat-log-sidebar #side_btn {
+  filter: none;
 }
 
 /* 사이드바 프레임 (슬라이드 메뉴) */
@@ -46,9 +62,9 @@
   width: 16vw;
   min-width: 210px;
   height: 100vh;
-  /*background: transparent;
-  backdrop-filter: blur(15px);*/
-  background-color: white;
+  backdrop-filter: blur(15px);
+  /*background-color: white;*/
+  background: transparent;
   position: fixed;
   top: 0;
   left: 0;
@@ -157,11 +173,9 @@
   padding: 10px;
   border: none;
   border-radius: 10px;
-  /*background-color: #f8f0fb;*/
   font-weight: normal;
   background: transparent;
-  color: #6b3cc9;
-
+  color: #ffffff;
   text-align: left;
   cursor: pointer;
   box-shadow: 0 0px 10px rgba(117, 69, 129, 0.2);
@@ -172,7 +186,7 @@
   background-color: #6b3cc9;
   color: #ffffff;
   border-color: #e1bee7;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
   transform: translate(-2px, -2px);
 }
 .new_chat_btn:active {
@@ -187,10 +201,8 @@
   padding: 10px;
   border: none;
   border-radius: 10px;
-  /*background-color: #f8f0fb;*/
-  background: transparent;
-  color: #6b3cc9;
   font-weight: normal;
+  background: transparent;
   text-align: left;
   cursor: pointer;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
@@ -391,7 +403,8 @@
   background-color: transparent;
   background-size: contain;
   transition: all 0.3s ease;
-  filter: invert(10%) sepia(90%) saturate(300%) hue-rotate(220deg);
+  /*filter: invert(10%) sepia(90%) saturate(300%) hue-rotate(220deg);*/
+  filter: brightness(0) invert(1);
   /*filter: invert(1) grayscale(1); 연한 검은색*/
   /*filter: invert(1) brightness(0) saturate(100%); 진한 검은색*/
 }

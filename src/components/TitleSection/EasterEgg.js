@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import rocketImageSrc from "../../game/images/spaceship_pixel3.png";
+import cometImageSrc from "../../images/comet2.gif";
 import spaceImageSrc from "../../game/images/gameBackground1.avif";
 import bulletImageSrc from "../../game/images/bullet_pixel2.png";
 import enemyImageSrc from "../../game/images/alien_ship3.png";
@@ -83,11 +84,11 @@ const generateCoordinates = (direction) => {
   };
 };
 
-function EasterEgg({ onRocketClick, isGameActive, onGameStart, onGameEnd }) {
+function EasterEgg({ oncometClick, isGameActive, onGameStart, onGameEnd }) {
   // 캔버스 ref 및 게임 상태
   const canvasRef = useRef(null);
   const [score, setScore] = useState(0);
-  const [rocketStyle, setRocketStyle] = useState({}); // flying-rocket 위치/방향
+  const [cometStyle, setcometStyle] = useState({}); // flying-comet 위치/방향
   const [currentDirection, setCurrentDirection] = useState(null);
   const scoreRef = useRef(0);
 
@@ -120,18 +121,18 @@ function EasterEgg({ onRocketClick, isGameActive, onGameStart, onGameEnd }) {
   const lastShotTime = useRef(Date.now());
   const BULLET_COOLDOWN = 300;
 
-  // 로켓 이동 각도 계산
+  // 행성 이동 각도 계산
   const calculateRotation = (start, end) => {
     const deltaX = end.x - start.x;
     const deltaY = end.y - start.y;
     return Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 90;
   };
 
-  // flying-rocket의 무작위 경로/회전 적용
-  const updateRocketPath = useCallback((direction) => {
+  // flying-comet의 무작위 경로/회전 적용
+  const updatecometPath = useCallback((direction) => {
     const coords = generateCoordinates(direction);
     const rotation = calculateRotation(coords.start, coords.end); // 각도 계산
-    setRocketStyle({
+    setcometStyle({
       "--start-x": `${coords.start.x}px`,
       "--start-y": `${coords.start.y}px`,
       "--end-x": `${coords.end.x}px`,
@@ -141,23 +142,23 @@ function EasterEgg({ onRocketClick, isGameActive, onGameStart, onGameEnd }) {
     setCurrentDirection(direction);
   }, []);
 
-  // flying-rocket이 사라지고 다시 등장할 때마다 무작위 위치/방향 갱신
-  const [rocketKey, setRocketKey] = useState(0); // 리렌더 트리거용 키
+  // flying-comet이 사라지고 다시 등장할 때마다 무작위 위치/방향 갱신
+  const [cometKey, setcometKey] = useState(0); // 리렌더 트리거용 키
 
-  // flying-rocket이 날아오는 방향과 위치를 무작위로 설정
+  // flying-comet이 날아오는 방향과 위치를 무작위로 설정
   useEffect(() => {
     if (!isGameActive) {
       const initialDirection = getRandomDirection();
-      updateRocketPath(initialDirection);
+      updatecometPath(initialDirection);
     }
-    // rocketKey가 바뀔 때마다 위치/방향 갱신
-  }, [isGameActive, updateRocketPath, rocketKey]);
+    // cometKey가 바뀔 때마다 위치/방향 갱신
+  }, [isGameActive, updatecometPath, cometKey]);
 
-  // flying-rocket 애니메이션이 끝날 때마다 무작위 방향/위치로 재설정
+  // flying-comet 애니메이션이 끝날 때마다 무작위 방향/위치로 재설정
   const handleAnimationEnd = () => {
     if (!isGameActive) {
       // 새로운 무작위 방향/위치로 재설정
-      setRocketKey((prev) => prev + 1); // 키 변경 → useEffect 트리거
+      setcometKey((prev) => prev + 1); // 키 변경 → useEffect 트리거
     }
   };
 
@@ -343,20 +344,16 @@ function EasterEgg({ onRocketClick, isGameActive, onGameStart, onGameEnd }) {
 
   return (
     <div id="cosmic-arena">
-      {/* flying-rocket: 무작위 방향/위치로 화면 끝까지 날아가고, 사라지면 다시 무작위로 등장 */}
+      {/* flying-comet: 무작위 방향/위치로 화면 끝까지 날아가고, 사라지면 다시 무작위로 등장 */}
       {!isGameActive && (
         <div
-          key={rocketKey} // 매번 새로운 key로 리렌더
-          className="flying-rocket"
-          style={rocketStyle}
+          key={cometKey} // 매번 새로운 key로 리렌더
+          className="flying-comet"
+          style={cometStyle}
           onClick={startGame}
           onAnimationEnd={handleAnimationEnd}
         >
-          <img
-            src={rocketImageSrc}
-            alt="Start Game"
-            className="quantum-rocket"
-          />
+          <img src={cometImageSrc} alt="Start Game" className="quantum-comet" />
         </div>
       )}
       {/* 게임 모달 및 캔버스 */}

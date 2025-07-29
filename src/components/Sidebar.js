@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useContext, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 import { ChatContext } from "../contexts/ChatContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import "../css/Sidebar.css";
 import "../css/dark.css";
@@ -15,6 +15,7 @@ import SearchChatList from "./SearchChatList";
 
 // 주요 기능별로 상세 주석 추가
 function Sidebar({ userMessage = "" }) {
+  const location = useLocation();
   // [상태] 모달 대상, 편집 제목, 모달 위치 등
 
   const { t, i18n } = useTranslation();
@@ -168,180 +169,187 @@ function Sidebar({ userMessage = "" }) {
 
   // [렌더링] 사이드바, 채팅 목록, 옵션 모달 등 UI
   return (
-    <div
-      id="side_bar_main"
-      className={showSidebar ? "sidebar-open" : "sidebar-closed"}
-    >
-      {/* 사이드바 토글 버튼 - 항상 보이게 */}
-      <div>
-        <img
-          id="side_btn"
-          src={sideBarImg}
-          alt="사이드바 열기"
-          style={{
-            width: 32,
-            height: 32,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onClick={toggleSidebar}
-        />
-      </div>
-
-      {/* 사이드바 프레임 */}
-      <div className={`side_bar_frame${showSidebar ? " open" : " closed"}`}>
-        {/* 새 채팅 생성 버튼 및 이미지*/}
-
-        <button className="search_icon" onClick={goToMain} />
-        <button className="new_chat_btn" onClick={handleNewChat}>
-          {t("sidebar_buttons.new_chat")}
-        </button>
-        {/* 전체 채팅 삭제 버튼 */}
-        <button className="new_chat_btn2" onClick={() => setShowConfirm(true)}>
-          {t("sidebar_buttons.all_delete_chat")}
-        </button>
-        {showConfirm && (
-          <ConfirmModal
-            onConfirm={handleDeleteAll}
-            onCancel={() => setShowConfirm(false)}
+    <div id="side_main_f">
+      <div
+        id="side_bar_main"
+        className={showSidebar ? "sidebar-open" : "sidebar-closed"}
+      >
+        {/* 사이드바 토글 버튼 - 항상 보이게 */}
+        <div>
+          <img
+            id="side_btn"
+            src={sideBarImg}
+            alt="사이드바 열기"
+            /*style={{
+            filter:
+              location.pathname === "/" &&
+              !showSidebar &&
+              !document.body.classList.contains("dark")
+                ? "brightness(0) invert(1)"
+                : "none",
+          }}*/
+            onClick={toggleSidebar}
           />
-        )}
-        {/* 채팅 목록 */}
-        <div className="sidebar_chat_list_wrapper">
-          <ul className="sidebar-chat-list">
-            {!Array.isArray(chats) || chats.length === 0 ? (
-              <li className="chat-noMessage">{t("ChatLog.noMessages")}</li>
-            ) : (
-              chats.map((chat) => {
-                const safeTitle = chat?.title || "새 채팅";
-
-                return (
-                  <li
-                    key={chat.session_id}
-                    onClick={() => {
-                      change_session_id(chat.session_id);
-                      switchChat(chat.session_id);
-                    }}
-                    title={safeTitle}
-                    className={`chat-item ${
-                      chat.session_id === currentChatId ? "active" : "inactive"
-                    }`}
-                    style={{ position: "relative" }}
-                  >
-                    {/* 채팅 미리보기(최대 20자) */}
-                    {safeTitle.length > 20
-                      ? `${safeTitle.slice(0, 17)}...`
-                      : safeTitle}
-
-                    {/* 채팅 옵션 버튼 (이름 변경/삭제) */}
-                    <button
-                      className="options-btn"
-                      ref={
-                        modalTarget && modalTarget.id === chat.id
-                          ? modalBtnRef
-                          : null
-                      }
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        setShowModalPos({
-                          top: rect.top + window.scrollY + rect.height + 4,
-                          left: rect.left + window.scrollX,
-                        });
-                        setModalTarget({
-                          id: chat.session_id,
-                          title: safeTitle,
-                        });
-                        setEditTitle(safeTitle);
-                      }}
-                      aria-label="채팅 옵션"
-                    >
-                      ···
-                    </button>
-                  </li>
-                );
-              })
-            )}
-          </ul>
         </div>
-        {/* QnA/Help Center 버튼 */}
-        <div className="sidebar-bottom-buttons">
-          {/*<input
+
+        {/* 사이드바 프레임 */}
+        <div className={`side_bar_frame${showSidebar ? " open" : " closed"}`}>
+          {/* 새 채팅 생성 버튼 및 이미지*/}
+
+          <button className="search_icon" onClick={goToMain} />
+          <button className="new_chat_btn" onClick={handleNewChat}>
+            {t("sidebar_buttons.new_chat")}
+          </button>
+          {/* 전체 채팅 삭제 버튼 */}
+          <button
+            className="new_chat_btn2"
+            onClick={() => setShowConfirm(true)}
+          >
+            {t("sidebar_buttons.all_delete_chat")}
+          </button>
+          {showConfirm && (
+            <ConfirmModal
+              onConfirm={handleDeleteAll}
+              onCancel={() => setShowConfirm(false)}
+            />
+          )}
+          {/* 채팅 목록 */}
+          <div className="sidebar_chat_list_wrapper">
+            <ul className="sidebar-chat-list">
+              {!Array.isArray(chats) || chats.length === 0 ? (
+                <li className="chat-noMessage">{t("ChatLog.noMessages")}</li>
+              ) : (
+                chats.map((chat) => {
+                  const safeTitle = chat?.title || "새 채팅";
+
+                  return (
+                    <li
+                      key={chat.session_id}
+                      onClick={() => {
+                        change_session_id(chat.session_id);
+                        switchChat(chat.session_id);
+                      }}
+                      title={safeTitle}
+                      className={`chat-item ${
+                        chat.session_id === currentChatId
+                          ? "active"
+                          : "inactive"
+                      }`}
+                      style={{ position: "relative" }}
+                    >
+                      {/* 채팅 미리보기(최대 20자) */}
+                      {safeTitle.length > 20
+                        ? `${safeTitle.slice(0, 17)}...`
+                        : safeTitle}
+
+                      {/* 채팅 옵션 버튼 (이름 변경/삭제) */}
+                      <button
+                        className="options-btn"
+                        ref={
+                          modalTarget && modalTarget.id === chat.id
+                            ? modalBtnRef
+                            : null
+                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          setShowModalPos({
+                            top: rect.top + window.scrollY + rect.height + 4,
+                            left: rect.left + window.scrollX,
+                          });
+                          setModalTarget({
+                            id: chat.session_id,
+                            title: safeTitle,
+                          });
+                          setEditTitle(safeTitle);
+                        }}
+                        aria-label="채팅 옵션"
+                      >
+                        ···
+                      </button>
+                    </li>
+                  );
+                })
+              )}
+            </ul>
+          </div>
+          {/* QnA/Help Center 버튼 */}
+          <div className="sidebar-bottom-buttons">
+            {/*<input
             value="QnA"
             type="button"
             className="qnaButton"
             onClick={goToQnA}
           />*/}
 
-          <button onClick={goTonotice_Board} className="helpCenter">
-            {t("sidebar_buttons.helpCenter")}
-          </button>
-          <button className="creatorPage_btn" onClick={creatorPage}>
-            {t("sidebar_buttons.aboutTheCreators")}
-          </button>
+            <button onClick={goTonotice_Board} className="helpCenter">
+              {t("sidebar_buttons.helpCenter")}
+            </button>
+            <button className="creatorPage_btn" onClick={creatorPage}>
+              {t("sidebar_buttons.aboutTheCreators")}
+            </button>
+          </div>
         </div>
+
+        {/* 채팅 옵션 모달 (이름 변경/삭제) */}
+        {modalTarget &&
+          ReactDOM.createPortal(
+            <div
+              id="sidebar-modal-pop"
+              className="sidebar-modal sidebar-modal-pop"
+              style={{
+                position: "fixed",
+                top: showModalPos.top,
+                left: showModalPos.left,
+                zIndex: 4000,
+                minWidth: "220px",
+              }}
+            >
+              <h4 style={{ marginTop: 0 }}>{t("sidebar_buttons.edit_chat")}</h4>
+              <input
+                type="text"
+                value={editTitle}
+                onChange={(e) => setEditTitle(e.target.value)}
+                placeholder="새 제목을 입력하세요"
+                style={{ width: "80%", marginBottom: "12px" }}
+              />
+              <div>
+                {/* 이름 변경 버튼 */}
+                <button
+                  onClick={() => {
+                    updateChat(modalTarget.id, editTitle);
+                    setModalTarget(null);
+                  }}
+                >
+                  {t("sidebar_buttons.edit_title")}
+                </button>
+
+                {/* 삭제 버튼 */}
+                <button
+                  onClick={async () => {
+                    const deletedId = modalTarget.id;
+                    setModalTarget(null); // 모달 먼저 닫기
+                    await deleteChat(deletedId); // context 내에서 currentChatId도 관리됨
+
+                    // 삭제 후 남은 세션이 있으면 첫 번째 세션으로 이동, 없으면 메인으로 이동
+                    const remaining = chats.filter(
+                      (chat) => chat.session_id !== deletedId
+                    );
+                    if (remaining.length > 0) {
+                      navigate(`/chat/${remaining[0].session_id}`);
+                    } else {
+                      navigate("/");
+                    }
+                  }}
+                  style={{ background: "#e57373" }}
+                >
+                  {t("sidebar_buttons.delete_chat")}
+                </button>
+              </div>
+            </div>,
+            document.body
+          )}
       </div>
-
-      {/* 채팅 옵션 모달 (이름 변경/삭제) */}
-      {modalTarget &&
-        ReactDOM.createPortal(
-          <div
-            id="sidebar-modal-pop"
-            className="sidebar-modal sidebar-modal-pop"
-            style={{
-              position: "fixed",
-              top: showModalPos.top,
-              left: showModalPos.left,
-              zIndex: 4000,
-              minWidth: "220px",
-            }}
-          >
-            <h4 style={{ marginTop: 0 }}>{t("sidebar_buttons.edit_chat")}</h4>
-            <input
-              type="text"
-              value={editTitle}
-              onChange={(e) => setEditTitle(e.target.value)}
-              placeholder="새 제목을 입력하세요"
-              style={{ width: "80%", marginBottom: "12px" }}
-            />
-            <div>
-              {/* 이름 변경 버튼 */}
-              <button
-                onClick={() => {
-                  updateChat(modalTarget.id, editTitle);
-                  setModalTarget(null);
-                }}
-              >
-                {t("sidebar_buttons.edit_title")}
-              </button>
-
-              {/* 삭제 버튼 */}
-              <button
-                onClick={async () => {
-                  const deletedId = modalTarget.id;
-                  setModalTarget(null); // 모달 먼저 닫기
-                  await deleteChat(deletedId); // context 내에서 currentChatId도 관리됨
-
-                  // 삭제 후 남은 세션이 있으면 첫 번째 세션으로 이동, 없으면 메인으로 이동
-                  const remaining = chats.filter(
-                    (chat) => chat.session_id !== deletedId
-                  );
-                  if (remaining.length > 0) {
-                    navigate(`/chat/${remaining[0].session_id}`);
-                  } else {
-                    navigate("/");
-                  }
-                }}
-                style={{ background: "#e57373" }}
-              >
-                {t("sidebar_buttons.delete_chat")}
-              </button>
-            </div>
-          </div>,
-          document.body
-        )}
     </div>
   );
 }

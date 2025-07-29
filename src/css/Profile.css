@@ -68,6 +68,10 @@ body {
   cursor: pointer;
 }
 
+.chat-log-profile .dropdown-content a {
+  color: #000;
+}
+
 .profile_edit_img {
   /* 프로필 편집 아이콘 위치 및 크기 */
   position: absolute;
@@ -285,6 +289,11 @@ body {
   left: 22px;
   filter: brightness(0) invert(1);
 }
+
+.chat-log-profile img {
+  filter: none;
+}
+
 .logOut_icon {
   top: 125px;
 }

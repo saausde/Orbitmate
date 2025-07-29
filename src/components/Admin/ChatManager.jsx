@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ChatContext } from "../../contexts/ChatContext";
 import { useUser } from "../../contexts/UserContext";
+import "../../css/AdminCSS/ChatManager.css";
 
 export default function ChatManage({ userList }) {
   const [userSessions, setUserSessions] = useState([]); // ✅ 유저별 세션 목록
@@ -177,14 +178,7 @@ export default function ChatManage({ userList }) {
                 <td>{sessions.length}개</td>
                 <td>
                   <button
-                    style={{
-                      padding: "4px 8px",
-                      backgroundColor: "#e74c3c",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                    }}
+                    className="admin-delete-all-btn"
                     onClick={() => handleDeleteAll(user_id, sessions)}
                   >
                     전체 삭제
@@ -234,14 +228,7 @@ export default function ChatManage({ userList }) {
                               </td>
                               <td>
                                 <button
-                                  style={{
-                                    padding: "4px 8px",
-                                    backgroundColor: "#e67e22",
-                                    color: "white",
-                                    border: "none",
-                                    borderRadius: "4px",
-                                    cursor: "pointer",
-                                  }}
+                                  className="admin-session-delete-btn"
                                   onClick={() =>
                                     handleDeleteSession(session.session_id)
                                   }
@@ -249,15 +236,7 @@ export default function ChatManage({ userList }) {
                                   삭제
                                 </button>
                                 <button
-                                  style={{
-                                    marginRight: "6px",
-                                    padding: "4px 8px",
-                                    backgroundColor: "#3498db",
-                                    color: "white",
-                                    border: "none",
-                                    borderRadius: "4px",
-                                    cursor: "pointer",
-                                  }}
+                                  className="admin-session-view-btn"
                                   onClick={() => {
                                     setSelectedSession(session.session_id);
                                     fetchSessionMessages(session.session_id);
@@ -281,52 +260,31 @@ export default function ChatManage({ userList }) {
 
       {isModalOpen && (
         <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
+          className="admin-modal-overlay"
           onClick={() => setIsModalOpen(false)} // 배경 클릭 시 닫힘
         >
           <div
             className="chatView-modal"
             onClick={(e) => e.stopPropagation()} // 모달 내부 클릭은 닫힘 방지
           >
-            <h3 style={{ marginTop: 0 }}>채팅 내역</h3>
+            <h3 className="admin-modal-title">채팅 내역</h3>
             <button
+              className="admin-modal-close-btn"
               onClick={() => setIsModalOpen(false)}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                background: "transparent",
-                border: "none",
-                fontSize: "18px",
-                cursor: "pointer",
-              }}
             >
               ❌
             </button>
 
             {sessionMessages.length > 0 ? (
-              <ul style={{ padding: 0, listStyle: "none" }}>
+              <ul className="admin-message-list">
                 {sessionMessages.map((msg) => (
                   <li
                     key={msg.message_id}
-                    style={{
-                      marginBottom: "12px",
-                      padding: "10px",
-                      backgroundColor:
-                        msg.message_type === "user" ? "#f0f0f0" : "#e8f5ff",
-                      borderRadius: "6px",
-                    }}
+                    className={
+                      msg.message_type === "user"
+                        ? "admin-message-item user"
+                        : "admin-message-item ai"
+                    }
                   >
                     <strong>
                       {msg.message_type === "user" ? "유저" : "AI"}:

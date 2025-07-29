@@ -20,6 +20,18 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css"; // 또는 atom-one-dark.css 등
 import { useTranslation } from "react-i18next";
 
+function fixBoldWithKorean(text) {
+  // 한글과 **볼드**가 붙어있으면 사이에 zero-width-space 삽입
+  return text
+    .replace(/([\uac00-\ud7af])(\*{2}.*?\*{2})/g, "$1\u200B$2")
+    .replace(/(\*{2}.*?\*{2})([\uac00-\ud7af])/g, "$1\u200B$2");
+}
+
+function preserveLeadingSpaces(text) {
+  // 각 줄의 맨 앞 연속 공백만 &nbsp;로 치환
+  return text.replace(/^ +/gm, (spaces) => "\u00A0".repeat(spaces.length));
+}
+
 // ChatLog: 채팅 메시지 목록, 입력, 수정, 삭제, 로딩 등 UI/UX 관리 (채팅방에서만 사용)
 function ChatLog({ session_id, showSidebar, toggleSidebar }) {
   const { getUserId, chats, setChats } = useContext(ChatContext);
@@ -65,6 +77,144 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
 
       return updated;
     });
+  }, []);
+
+  // 도구 호출 상태 메시지 생성 함수 (확장 가능한 컴포넌트 문법 사용)
+  const getToolStatusMessage = useCallback((toolData) => {
+    const { type, tool_name, result_summary } = toolData;
+
+    switch (type) {
+      case "tool_start":
+        return `\n\n:::ai-component type="tool-loading" name="${tool_name}" action="호출":::`;
+
+      case "tool_progress":
+        return `\n\n:::ai-component type="tool-loading" name="${tool_name}" action="실행":::`;
+
+      case "tool_complete":
+        if (result_summary) {
+          return `\n\n:::ai-component type="tool-result" name="${tool_name}" result="${result_summary}":::`;
+        } else {
+          return `\n\n:::ai-component type="tool-complete" name="${tool_name}":::`;
+        }
+
+      case "tool_error":
+        return `\n\n:::ai-component type="tool-error" name="${tool_name}" error="${toolData.error}":::`;
+
+      case "tools_batch_start":
+        return `\n\n:::ai-component type="batch-loading" action="시작":::`;
+
+      case "tools_batch_complete":
+        return ""; // 배치 완료는 표시하지 않음
+
+      default:
+        return "";
+    }
+  }, []);
+
+  // AI 인라인 컴포넌트 렌더링 함수
+  const renderAiComponent = useCallback((type, props) => {
+    const componentProps = {
+      key: `ai-comp-${Date.now()}-${Math.random()}`,
+      ...props,
+    };
+
+    switch (type) {
+      case "tool-loading":
+        return (
+          <div className="ai-tool-loading" {...componentProps}>
+            <div className="tool-spinner-small"></div>
+            <span>
+              {props.name} {props.action} 중...
+            </span>
+          </div>
+        );
+
+      case "tool-result":
+        return (
+          <div className="ai-tool-result" {...componentProps}>
+            <div className="tool-result-icon">📊</div>
+            <div className="tool-result-content">
+              <div className="tool-result-header">{props.name} 결과</div>
+              <div className="tool-result-data">{props.result}</div>
+            </div>
+          </div>
+        );
+
+      case "tool-complete":
+        return (
+          <div className="ai-tool-complete" {...componentProps}>
+            <div className="tool-complete-icon">✅</div>
+            <span>{props.name} 완료</span>
+          </div>
+        );
+
+      case "tool-error":
+        return (
+          <div className="ai-tool-error" {...componentProps}>
+            <div className="tool-error-icon">❌</div>
+            <span>
+              {props.name} 실패: {props.error}
+            </span>
+          </div>
+        );
+
+      case "batch-loading":
+        return (
+          <div className="ai-batch-loading" {...componentProps}>
+            <div className="batch-spinner"></div>
+            <span>여러 도구 {props.action}...</span>
+          </div>
+        );
+
+      default:
+        return <span>알 수 없는 컴포넌트: {type}</span>;
+    }
+  }, []);
+
+  // 메시지 내용에서 AI 컴포넌트 파싱 및 렌더링
+  const parseMessageContent = useCallback((content) => {
+    const componentRegex = /:::ai-component\s+(.+?):::/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = componentRegex.exec(content)) !== null) {
+      // 컴포넌트 앞의 일반 텍스트 추가
+      if (match.index > lastIndex) {
+        parts.push({
+          type: "text",
+          content: content.slice(lastIndex, match.index),
+        });
+      }
+
+      // 컴포넌트 속성 파싱
+      const attributeStr = match[1];
+      const attributes = {};
+      const attrRegex = /(\w+)="([^"]+)"/g;
+      let attrMatch;
+
+      while ((attrMatch = attrRegex.exec(attributeStr)) !== null) {
+        attributes[attrMatch[1]] = attrMatch[2];
+      }
+
+      parts.push({
+        type: "component",
+        componentType: attributes.type,
+        props: attributes,
+      });
+
+      lastIndex = componentRegex.lastIndex;
+    }
+
+    // 마지막 일반 텍스트 추가
+    if (lastIndex < content.length) {
+      parts.push({
+        type: "text",
+        content: content.slice(lastIndex),
+      });
+    }
+
+    return parts;
   }, []);
 
   // 메시지 찾기 헬퍼 함수 (더 강력한 검색)
@@ -269,6 +419,45 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
             break;
           }
 
+          // 도구 실행 이벤트 처리
+          if (
+            dataStr.includes('"type":"tool_') ||
+            dataStr.includes('"type":"tools_batch_')
+          ) {
+            try {
+              const toolEvent = JSON.parse(dataStr);
+              if (
+                toolEvent.type &&
+                (toolEvent.type.startsWith("tool_") ||
+                  toolEvent.type.startsWith("tools_batch_"))
+              ) {
+                const toolStatusMessage = getToolStatusMessage(toolEvent);
+
+                // 현재 스트리밍 중인 AI 메시지에 도구 상태 추가
+                const currentAiId = aiMessageId || tempAiMessageId;
+                if (currentAiId && aiMessageCreated && toolStatusMessage) {
+                  // 기존 메시지에 도구 상태 추가 (이전 도구 상태는 제거)
+                  let updatedMessage = aiMessage;
+
+                  // 이전 도구 상태 메시지 제거 (대괄호 + AI 컴포넌트 문법)
+                  updatedMessage = updatedMessage.replace(/\n\n\[.*?\]/g, "");
+                  updatedMessage = updatedMessage.replace(
+                    /\n\n:::ai-component[^:]*:::/g,
+                    ""
+                  );
+
+                  // 새 도구 상태 추가
+                  updateMessageById(currentAiId, {
+                    message_content: updatedMessage + toolStatusMessage,
+                  });
+                }
+                continue;
+              }
+            } catch (e) {
+              console.error("도구 이벤트 JSON 파싱 오류", dataStr, e);
+            }
+          }
+
           // 최종 성공 응답 처리
           if (dataStr.startsWith('{"status":"success"')) {
             try {
@@ -288,9 +477,25 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
                 const currentAiId = aiMessageId || tempAiMessageId;
 
                 if (currentAiId && aiMessageCreated) {
+                  // 최종 메시지에서 도구 상태 정리 (로딩 상태 제거, 결과만 남김)
+                  let finalMessage = aiMessage;
+                  finalMessage = finalMessage.replace(
+                    /\n\n:::ai-component\s+type="tool-loading"[^:]*:::/g,
+                    ""
+                  );
+                  finalMessage = finalMessage.replace(
+                    /\n\n:::ai-component\s+type="batch-loading"[^:]*:::/g,
+                    ""
+                  );
+                  finalMessage = finalMessage.replace(
+                    /\n\n:::ai-component\s+type="tool-complete"[^:]*:::/g,
+                    ""
+                  );
+
                   const updates = {
                     isStreaming: false,
                     message_id: finalAiMessageId,
+                    message_content: finalMessage,
                   };
                   if (parsed.data.created_at) {
                     updates.created_at = parsed.data.created_at;
@@ -348,7 +553,7 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
       }
 
       const currentChat = chats.find((chat) => chat.session_id === session_id);
-      const defaultTitles = ["새 세션", "New Session"];
+      const defaultTitles = ["새 세션", "New Session", "新しいセッション"];
 
       if (currentChat && defaultTitles.includes(currentChat.title.trim())) {
         console.log(
@@ -370,7 +575,7 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
     }
   };
 
-  // 메인 메시지 전송 핸들러 (날씨 or 일반 분기)
+  // 메인 메시지 전송 핸들러
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (isSending || !inputMessage.trim()) return;
@@ -623,9 +828,12 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
         )}
         {error && (
           <div className="error">
-            {error === "세션 ID가 제공되지 않았습니다." &&
-            i18n.language === "en"
-              ? "Session ID was not provided."
+            {error === "세션 ID가 제공되지 않았습니다."
+              ? i18n.language === "en"
+                ? "Session ID was not provided."
+                : i18n.language === "ja"
+                ? "セッションIDが提供されていません。"
+                : error
               : error}
           </div>
         )}
@@ -693,161 +901,186 @@ function ChatLog({ session_id, showSidebar, toggleSidebar }) {
                     )}
                   </div>
                 )}
-                <ReactMarkdown
-                  key={msg._renderKey || msg.message_id}
-                  remarkPlugins={[remarkGfm]}
-                  components={
-                    msg.message_type === "ai"
-                      ? {
-                          ul: (props) => (
-                            <ul {...props} className="ai-markdown-ul" />
-                          ),
-                          ol: (props) => (
-                            <ol {...props} className="ai-markdown-ol" />
-                          ),
-                          li: (props) => (
-                            <li {...props} className="ai-markdown-li" />
-                          ),
-                          p: (props) => (
-                            <p {...props} className="ai-markdown-p" />
-                          ),
-                          strong: (props) => <strong {...props} />,
-                          em: (props) => <em {...props} />,
-                          mark: (props) => <mark {...props} />,
-                          kbd: (props) => <kbd {...props} />,
-                          sub: (props) => <sub {...props} />,
-                          sup: (props) => <sup {...props} />,
-                          // 표 지원 추가
-                          table: (props) => (
-                            <div className="table-container">
-                              <table {...props} className="ai-markdown-table" />
-                            </div>
-                          ),
-                          thead: (props) => (
-                            <thead {...props} className="ai-markdown-thead" />
-                          ),
-                          tbody: (props) => (
-                            <tbody {...props} className="ai-markdown-tbody" />
-                          ),
-                          tr: (props) => (
-                            <tr {...props} className="ai-markdown-tr" />
-                          ),
-                          th: (props) => (
-                            <th {...props} className="ai-markdown-th" />
-                          ),
-                          td: (props) => (
-                            <td {...props} className="ai-markdown-td" />
-                          ),
-                          code: ({
-                            node,
-                            inline,
-                            className,
-                            children,
-                            ...props
-                          }) => {
-                            if (inline) {
-                              return (
-                                <code
-                                  {...props}
-                                  className={
-                                    "ai-markdown-code" +
-                                    (className ? ` ${className}` : "")
-                                  }
-                                >
-                                  {children}
-                                </code>
-                              );
-                            }
-                            // 언어명 누락 시 language-plaintext로 지정
-                            let langClass = className;
-                            if (!langClass || !/^language-/.test(langClass)) {
-                              langClass = "language-plaintext";
-                            }
-                            return (
-                              <div style={{ position: "relative" }}>
-                                <pre>
-                                  <code
-                                    ref={(el) => {
-                                      if (el) hljs.highlightElement(el);
-                                    }}
+                {msg.message_type === "ai" ? (
+                  // AI 메시지: 커스텀 컴포넌트 파싱 후 렌더링
+                  (() => {
+                    const parsedParts = parseMessageContent(
+                      msg.message_content || ""
+                    );
+                    return parsedParts.map((part, index) => {
+                      if (part.type === "component") {
+                        return renderAiComponent(
+                          part.componentType,
+                          part.props
+                        );
+                      } else {
+                        return (
+                          <ReactMarkdown
+                            key={`text-${index}`}
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              ul: (props) => (
+                                <ul {...props} className="ai-markdown-ul" />
+                              ),
+                              ol: (props) => (
+                                <ol {...props} className="ai-markdown-ol" />
+                              ),
+                              li: (props) => (
+                                <li {...props} className="ai-markdown-li" />
+                              ),
+                              p: (props) => (
+                                <p {...props} className="ai-markdown-p" />
+                              ),
+                              strong: (props) => <strong {...props} />,
+                              em: (props) => <em {...props} />,
+                              mark: (props) => <mark {...props} />,
+                              kbd: (props) => <kbd {...props} />,
+                              sub: (props) => <sub {...props} />,
+                              sup: (props) => <sup {...props} />,
+                              table: (props) => (
+                                <div className="table-container">
+                                  <table
                                     {...props}
-                                    className={langClass}
-                                  >
-                                    {children}
-                                  </code>
-                                </pre>
-                                <button
-                                  className="code-copy-btn"
-                                  type="button"
-                                  title="코드 복사"
-                                  onClick={() => handleCopy(String(children))}
-                                  tabIndex={0}
-                                  aria-label="코드 복사"
-                                >
-                                  <img
-                                    src={require("../images/copy_icon.png")}
-                                    alt="복사"
-                                    style={{
-                                      width: 16,
-                                      height: 16,
-                                      marginRight: 4,
-                                    }}
+                                    className="ai-markdown-table"
                                   />
-                                  복사
-                                </button>
-                              </div>
-                            );
-                          },
-                        }
-                      : {
-                          ul: (props) => (
-                            <ul {...props} className="markdown-ul" />
-                          ),
-                          ol: (props) => (
-                            <ol {...props} className="markdown-ol" />
-                          ),
-                          li: (props) => (
-                            <li {...props} className="markdown-li" />
-                          ),
-                          p: (props) => <p {...props} className="markdown-p" />,
-                          strong: (props) => <strong {...props} />,
-                          em: (props) => <em {...props} />,
-                          mark: (props) => <mark {...props} />,
-                          kbd: (props) => <kbd {...props} />,
-                          sub: (props) => <sub {...props} />,
-                          sup: (props) => <sup {...props} />,
-                          // 표 지원 추가
-                          table: (props) => (
-                            <div className="table-container">
-                              <table {...props} className="markdown-table" />
-                            </div>
-                          ),
-                          thead: (props) => (
-                            <thead {...props} className="markdown-thead" />
-                          ),
-                          tbody: (props) => (
-                            <tbody {...props} className="markdown-tbody" />
-                          ),
-                          tr: (props) => (
-                            <tr {...props} className="markdown-tr" />
-                          ),
-                          th: (props) => (
-                            <th {...props} className="markdown-th" />
-                          ),
-                          td: (props) => (
-                            <td {...props} className="markdown-td" />
-                          ),
-                          code: (props) => (
-                            <code {...props} className="markdown-code" />
-                          ),
-                          span: (props) => (
-                            <span {...props} className="markdown-span" />
-                          ),
-                        }
-                  }
-                >
-                  {(msg.message_content || "").replace(/\\n/g, "\n")}
-                </ReactMarkdown>
+                                </div>
+                              ),
+                              thead: (props) => (
+                                <thead
+                                  {...props}
+                                  className="ai-markdown-thead"
+                                />
+                              ),
+                              tbody: (props) => (
+                                <tbody
+                                  {...props}
+                                  className="ai-markdown-tbody"
+                                />
+                              ),
+                              tr: (props) => (
+                                <tr {...props} className="ai-markdown-tr" />
+                              ),
+                              th: (props) => (
+                                <th {...props} className="ai-markdown-th" />
+                              ),
+                              td: (props) => (
+                                <td {...props} className="ai-markdown-td" />
+                              ),
+                              code: ({
+                                node,
+                                inline,
+                                className,
+                                children,
+                                ...props
+                              }) => {
+                                if (inline) {
+                                  return (
+                                    <code
+                                      {...props}
+                                      className={
+                                        "ai-markdown-code" +
+                                        (className ? ` ${className}` : "")
+                                      }
+                                    >
+                                      {children}
+                                    </code>
+                                  );
+                                }
+                                let langClass = className;
+                                if (
+                                  !langClass ||
+                                  !/^language-/.test(langClass)
+                                ) {
+                                  langClass = "language-plaintext";
+                                }
+                                return (
+                                  <div style={{ position: "relative" }}>
+                                    <pre>
+                                      <code
+                                        ref={(el) => {
+                                          if (el) hljs.highlightElement(el);
+                                        }}
+                                        {...props}
+                                        className={langClass}
+                                      >
+                                        {children}
+                                      </code>
+                                    </pre>
+                                    <button
+                                      className="code-copy-btn"
+                                      type="button"
+                                      title="코드 복사"
+                                      onClick={() =>
+                                        handleCopy(String(children))
+                                      }
+                                      tabIndex={0}
+                                      aria-label="코드 복사"
+                                    >
+                                      <img
+                                        src={require("../images/copy_icon.png")}
+                                        alt="복사"
+                                        style={{
+                                          width: 16,
+                                          height: 16,
+                                          marginRight: 4,
+                                        }}
+                                      />
+                                      {t("ChatLog.code_copy")}
+                                    </button>
+                                  </div>
+                                );
+                              },
+                            }}
+                          >
+                            {fixBoldWithKorean(
+                              part.content.replace(/\\n/g, "\n")
+                            )}
+                          </ReactMarkdown>
+                        );
+                      }
+                    });
+                  })()
+                ) : (
+                  // 사용자 메시지: 기존 방식
+                  <ReactMarkdown
+                    key={msg._renderKey || msg.message_id}
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      ul: (props) => <ul {...props} className="markdown-ul" />,
+                      ol: (props) => <ol {...props} className="markdown-ol" />,
+                      li: (props) => <li {...props} className="markdown-li" />,
+                      p: (props) => <p {...props} className="markdown-p" />,
+                      strong: (props) => <strong {...props} />,
+                      em: (props) => <em {...props} />,
+                      mark: (props) => <mark {...props} />,
+                      kbd: (props) => <kbd {...props} />,
+                      sub: (props) => <sub {...props} />,
+                      sup: (props) => <sup {...props} />,
+                      table: (props) => (
+                        <div className="table-container">
+                          <table {...props} className="markdown-table" />
+                        </div>
+                      ),
+                      thead: (props) => (
+                        <thead {...props} className="markdown-thead" />
+                      ),
+                      tbody: (props) => (
+                        <tbody {...props} className="markdown-tbody" />
+                      ),
+                      tr: (props) => <tr {...props} className="markdown-tr" />,
+                      th: (props) => <th {...props} className="markdown-th" />,
+                      td: (props) => <td {...props} className="markdown-td" />,
+                      code: (props) => (
+                        <code {...props} className="markdown-code" />
+                      ),
+                      span: (props) => (
+                        <span {...props} className="markdown-span" />
+                      ),
+                    }}
+                  >
+                    {(msg.message_content || "").replace(/\\n/g, "\n")}
+                  </ReactMarkdown>
+                )}
                 <div
                   className={`message-meta${
                     msg.message_type === "user" ? " user-meta" : " ai-meta"

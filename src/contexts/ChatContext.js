@@ -67,9 +67,17 @@ export function ChatProvider({ children }) {
   // [새 세션 생성] 서버에 새 세션 생성 후 상태 반영
   const NewChat = useCallback(
     async ({ title, category = "일반", firstMessage } = {}) => {
-      // 언어에 따라 기본 타이틀 다국어 처리
-      let finalTitle =
-        title || (i18n.language === "ko" ? "새 세션" : "New Session");
+      // 언어에 따라 기본 타이틀 다국어 처리 (한국어/영어/일본어)
+      let finalTitle;
+      if (title) {
+        finalTitle = title;
+      } else if (i18n.language === "ko") {
+        finalTitle = "새 세션";
+      } else if (i18n.language === "ja") {
+        finalTitle = "新しいセッション";
+      } else {
+        finalTitle = "New Session";
+      }
       // 만약 firstMessage가 있으면 제목으로 사용
       if (
         firstMessage &&

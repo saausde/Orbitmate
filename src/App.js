@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import propTypes from "prop-types";
 // 주요 컴포넌트 import (경로 일치 확인)
-import BackgroundParticles from "./components/TitleSection/BackgroundParticles";
+/*import BackgroundParticles from "./components/TitleSection/BackgroundParticles";*/
 import Titlesection from "./components/TitleSection/Titlesection";
 import UserInput from "./components/UserInput";
 import Sidebar from "./components/Sidebar";
@@ -204,7 +204,7 @@ function AppContent() {
         element={
           <div id="Main">
             {/* 파티클 배경 (cobweb 타입, 색상 prop은 라이브러리 한계로 미적용) */}
-            <BackgroundParticles type="cobweb" />
+            {/*<BackgroundParticles type="cobweb" />*/}
             {/* 타이틀 섹션: 항상 렌더링, hideStart은 prop으로 전달 */}
             <Titlesection
               onStartClick={handleStartClick}

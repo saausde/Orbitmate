@@ -24,19 +24,35 @@ function ProfileEditSetting({
   const [lang, setLang] = useState("ko");
 
   // 구독 티어 이름 매핑 객체 (API 응답에 따른 매핑 선언)
+
+  // 구독 티어 이름 매핑 객체 (영어/일본어)
   const tierNameMap = {
-    "오빗메이트 코멧": "OrbitMate Comet",
-    "오빗메이트 플래닛": "OrbitMate Planet",
-    "오빗메이트 스타": "OrbitMate Star",
-    "오빗메이트 갤럭시": "OrbitMate Galaxy",
+    ko: {
+      "오빗메이트 코멧": "오빗메이트 코멧",
+      "오빗메이트 플래닛": "오빗메이트 플래닛",
+      "오빗메이트 스타": "오빗메이트 스타",
+      "오빗메이트 갤럭시": "오빗메이트 갤럭시",
+    },
+    en: {
+      "오빗메이트 코멧": "OrbitMate Comet",
+      "오빗메이트 플래닛": "OrbitMate Planet",
+      "오빗메이트 스타": "OrbitMate Star",
+      "오빗메이트 갤럭시": "OrbitMate Galaxy",
+    },
+    ja: {
+      "오빗메이트 코멧": "オービットメイト コメット",
+      "오빗메이트 플래닛": "オービットメイト プラネット",
+      "오빗메이트 스타": "オービットメイト スター",
+      "오빗메이트 갤럭시": "オービットメイト ギャラクシー",
+    },
   };
 
-  // 티어 이름을 언어에 맞게 변환하는 함수 (영어는 매핑된 이름 사용)
+  // 티어 이름을 언어에 맞게 변환하는 함수 (한국어/영어/일본어)
   const getTierDisplayName = (tierDisplayName) => {
-    if (i18n.language === "en") {
-      return tierNameMap[tierDisplayName] || tierDisplayName;
-    }
-    return tierDisplayName;
+    const lang = ["ko", "en", "ja"].includes(i18n.language)
+      ? i18n.language
+      : "ko";
+    return tierNameMap[lang][tierDisplayName] || tierDisplayName;
   };
 
   // 프로필 이미지, 입력값 상태

@@ -50,7 +50,12 @@ body.dark label {
 .dark .chatView-modal li,
 .chat-page.dark {
   background: #23272f;
+
   color: #fff;
+}
+
+.dark .chatView-modal li {
+  background-color: #2d313a;
 }
 
 .dark .qna-manager h2 {
@@ -61,24 +66,28 @@ body.dark label {
   background-color: #3a414e;
 }
 
-/* 다크 모드 채팅 사이드바 */
+.dark .chat-log-sidebar #side_main_f button,
+.dark .chat-log-sidebar #side_main_f ul,
+.dark .chat-log-sidebar #side_main_f li {
+  background-color: transparent;
+  color: #fff;
+}
+
+/* 다크 모드 채팅 사이드바 --------------------------------------*/
 .chat-page.dark .chat-sidebar {
-  background: #1e2128;
+  background: rgb(107, 60, 201);
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
-
-.dark .new_chat_btn,
-.dark .new_chat_btn2 {
-  font-weight: normal;
-  color: white;
-  background-color: rgba(116, 116, 116, 0.2);
+.dark #side_main_f ul,
+.dark #side_main_f li {
+  background: transparent;
 }
 
-.dark .chat-item {
-  background-color: rgba(116, 116, 116, 0.2);
-  color: white;
-  font-weight: normal;
+.dark #side_main_f li:hover {
+  background-color: #6b3cc9;
 }
+
+/*-------------------------------------------------------------*/
 
 /* 다크 모드 로그인 버튼 */
 .dark .login-button {
@@ -268,6 +277,10 @@ body.dark .chat-main {
   background-color: #888282;
 }
 
+.dark .chat-log-profile .dropdown-content a {
+  color: #fff;
+}
+
 /* 다크 모드 프로필 편집 프레임 */
 body.dark #edit_profile_main,
 .dark #edit_profile_main {
@@ -320,6 +333,17 @@ body.dark #edit_profile_main .profile-display-name,
   color: #bdbdbd;
 }
 
+.dark .title_section_wrapper {
+  background-image: url("../images/8k_stars_milky_way.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dark #side_btn,
+.dark .chat-log-sidebar #side_btn {
+  filter: brightness(0) invert(1);
+}
+
 body.dark #edit_profile_main .profile-bio,
 .dark #edit_profile_main .profile-bio {
   color: #e0e0e0;
@@ -338,13 +362,11 @@ body.dark #edit_profile_main .profile-bio-placeholder,
 .dark .Account_icon,
 .dark .logOut_icon,
 .dark .setting_icon,
-.dark .search_icon,
 .dark .OrbitmateUpgrade_icon,
 .dark .admin_icon1 {
   filter: brightness(0) invert(0.9);
 }
 
-.dark #side_btn,
 .dark .delete_comment_btn_icon {
   filter: brightness(0) invert(1);
 }
@@ -402,8 +424,6 @@ body.dark #edit_profile_main .profile-bio-placeholder,
   background-color: #474747;
 }
 
-.dark .qnaButton,
-.dark .helpCenter,
 .confirm_edit_body input::placeholder,
 .confirm_edit_body textarea::placeholder {
   color: white;
@@ -418,7 +438,9 @@ body.dark #edit_profile_main .profile-bio-placeholder,
 }
 
 .dark .side_bar_frame {
-  background-color: #303030;
+  /*background-color: #303030;*/
+  background: transparent;
+  box-shadow: 1px 0px 10px rgba(255, 255, 255, 0.1);
 }
 
 .dark .message-actions {
@@ -594,4 +616,12 @@ body.dark .confirm-buttons button:last-of-type {
 
 .dark .confirm_edit_body {
   background-color: #474747;
+}
+
+/* 다크 모드 사이드바 공지사항 페이지 */
+.dark .sidebar_notice_page #side_main_f ul,
+.dark .sidebar_notice_page #side_main_f li,
+.dark .sidebar_notice_page #side_main_f .creatorPage_btn,
+.dark .sidebar_notice_page #side_main_f .helpCenter {
+  color: #ffffff;
 }

@@ -67,7 +67,15 @@ const Profile = ({ onToggleDropdown, onEditProfile, isDropdownOpen }) => {
 
   // [언어 전환] 언어 변경 및 서버 저장
   const handleLanguageToggle = () => {
-    const newLang = i18n.language === "ko" ? "en" : "ko"; // 현재 언어에 따라 변경
+    // 언어 순환: 한국어 -> 영어 -> 일본어 -> 한국어
+    let newLang;
+    if (i18n.language === "ko") {
+      newLang = "en";
+    } else if (i18n.language === "en") {
+      newLang = "ja";
+    } else {
+      newLang = "ko";
+    }
     i18n.changeLanguage(newLang); // 언어 변경
     saveUserSettings({ language: newLang });
   };

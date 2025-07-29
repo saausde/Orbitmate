@@ -97,6 +97,34 @@ export default function QnaManager() {
     }
   };
 
+  const handleDeleteComment = async (commentId, userName) => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/api/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_name: userName }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.status === "success" && data.data.success) {
+        alert("댓글이 삭제되었습니다.");
+        // 삭제된 댓글을 UI에서 제거
+        setComments((prev) => prev.filter((c) => c.comment_id !== commentId));
+      } else {
+        alert("삭제 권한이 없거나 실패했습니다.");
+      }
+    } catch (err) {
+      console.error("댓글 삭제 실패:", err);
+      alert("댓글 삭제 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <div className="qna-manager">
       <h2>QnA 관리</h2>
@@ -107,7 +135,6 @@ export default function QnaManager() {
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>비고</th>
           </tr>
         </thead>
         <tbody>
@@ -120,7 +147,6 @@ export default function QnaManager() {
               <td>{qna.subject}</td>
               <td>{qna.user_name}</td>
               <td>{new Date(qna.created_date).toLocaleString("ko-KR")}</td>
-              <td>미답변</td> {/* 이후 답변 여부 판단 로직 추가 */}
             </tr>
           ))}
         </tbody>
@@ -142,15 +168,26 @@ export default function QnaManager() {
               {postDetail?.translation?.content || "(내용 없음)"}
             </div>
 
-            <hr />
-            <h4>댓글 목록</h4>
-            <ul className="qna-comments">
-              {comments.map((c) => (
-                <li key={c.comment_id}>
-                  <b>{c.user_name}</b>: {c.content}
-                </li>
-              ))}
-            </ul>
+            {comments.length > 0 && (
+              <>
+                <h4>댓글 목록</h4>
+                <ul className="qna-comments">
+                  {comments.map((c) => (
+                    <li key={c.comment_id}>
+                      <b>{c.user_name}</b>: {c.content}
+                      <button
+                        onClick={() =>
+                          handleDeleteComment(c.comment_id, c.user_name)
+                        }
+                        className="comment-delete-btn"
+                      >
+                        삭제
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
             <textarea
               placeholder="답변을 입력하세요"

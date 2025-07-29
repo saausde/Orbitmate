@@ -6,7 +6,7 @@
 // useTranslation: 다국어 지원을 위한 i18n 라이브러리의 훅으로, 현재 언어 설정과 번역 기능을 제공
 import { useEffect, useState, useRef, useContext } from "react";
 import { ChatContext } from "../../contexts/ChatContext";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../css/NoticeDetail.css";
 import "../../css/dark.css";
@@ -21,6 +21,8 @@ import Profile from "../Settings/Profile";
 import Sidebar from "../Sidebar";
 
 function NoticeDetail() {
+  // 현재 위치 정보 가져오기
+  const location = useLocation();
   //현재 사용자 정보 보내기
   const { user } = useUser();
   // URL 파라미터에서 공지 ID 추출
@@ -388,6 +390,7 @@ function NoticeDetail() {
           userMessage={sidebarUserMessage}
           showSidebar={showSidebar}
           toggleSidebar={toggleSidebar}
+          location={location} // 추가
         />
       </div>
       {/* 상단 헤더 영역 */}
@@ -456,7 +459,7 @@ function NoticeDetail() {
         <div className="subject_line_QnA">
           <h2>{notice.translation?.subject}</h2>
           <h3 className="postWriter">
-            {user?.login?.is_admin === 1
+            {notice?.user_name === "관리자"
               ? `👨‍🚀${notice?.user_name}`
               : notice?.user_name}
           </h3>
@@ -546,7 +549,7 @@ function NoticeDetail() {
           {/*<p dangerouslySetInnerHTML={{ __html: yourValue }} />*/}
         </div>
         {/*댓글 영역*/}
-        {!notice?.is_notice && (
+        {!notice?.is_notice && notice?.user_name === user_name && (
           <>
             <div className="comment_input_f">
               <button
@@ -591,7 +594,7 @@ function NoticeDetail() {
                           className="comment_card_f"
                         >
                           <div className="comment_header">
-                            {user?.profile?.profile_image_path && (
+                            {/*user?.profile?.profile_image_path && ( 현재 본인이 아닌 다른 유저의 이미지를 가져오는데 문제가 있어 잠시 주석처리하였음
                               <img
                                 src={
                                   user.profile.profile_image_path.startsWith(
@@ -603,7 +606,7 @@ function NoticeDetail() {
                                 alt="avatar"
                                 className="avatar"
                               />
-                            )}
+                            )*/}
                             <div className="user_info">
                               <span className="username">
                                 {comment.user_name === "관리자"
@@ -627,34 +630,41 @@ function NoticeDetail() {
                               <span className="reply_btn">Reply</span>*/}
                             </div>
                             <div className="right_actions">
-                              <button
-                                className="delete_comment_btn"
-                                onClick={() =>
-                                  deleteComment(comment.comment_id, user_name)
-                                }
-                              >
-                                <img
-                                  className="delete_comment_btn_icon"
-                                  src={remove_icon}
-                                />
-                                {t("notice_detail.delete_post")}
-                              </button>
-                              {/*댓글 수정*/}
-                              <button
-                                className="edit_comment_btn"
-                                onClick={() => {
-                                  setshowCommentEdit(true);
-                                  setSelectedCommentId(comment.comment_id);
+                              {comment.user_name === user_name && (
+                                <>
+                                  <button
+                                    className="delete_comment_btn"
+                                    onClick={() =>
+                                      deleteComment(
+                                        comment.comment_id,
+                                        user_name
+                                      )
+                                    }
+                                  >
+                                    <img
+                                      className="delete_comment_btn_icon"
+                                      src={remove_icon}
+                                    />
+                                    {t("notice_detail.delete_post")}
+                                  </button>
+                                  {/*댓글 수정*/}
+                                  <button
+                                    className="edit_comment_btn"
+                                    onClick={() => {
+                                      setshowCommentEdit(true);
+                                      setSelectedCommentId(comment.comment_id);
 
-                                  setContent(comment.content);
-                                }}
-                              >
-                                <img
-                                  className="delete_comment_btn_icon"
-                                  src={edit_icon}
-                                />
-                                {t("notice_detail.edit_post")}
-                              </button>
+                                      setContent(comment.content);
+                                    }}
+                                  >
+                                    <img
+                                      className="delete_comment_btn_icon"
+                                      src={edit_icon}
+                                    />
+                                    {t("notice_detail.edit_post")}
+                                  </button>
+                                </>
+                              )}
                             </div>
                           </div>
                           <hr />

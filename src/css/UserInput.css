@@ -9,11 +9,12 @@
   border-radius: 16px;
   font-size: 1rem;
   padding: 2vw 2vw;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 24px rgba(48, 48, 48, 0.3),
+    0 8px 12px rgba(53, 53, 53, 0.2);
   background: transparent;
   backdrop-filter: blur(11px);
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(100, 100, 100, 0.2);
   color: rgb(255, 255, 255);
   margin: 0 auto 10px auto;
   padding: 25px 16px;

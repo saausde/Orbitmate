@@ -49,9 +49,22 @@ export default function NoticeManager() {
   };
 
   const fetchNoticeDetail = async (post_id) => {
+    const notice = noticeList.find((n) => n.post_id === post_id);
+
+    if (notice.origin_language !== language && !notice.has_translation) {
+      const shouldTranslate = window.confirm(
+        "해당 언어로 번역되지 않은 공지입니다.\n번역 후 내용을 확인하시겠습니까?"
+      );
+      if (!shouldTranslate) return;
+
+      await handleTranslate(post_id);
+      await fetchNotices();
+      return; // 상세 열람은 다시 클릭해서 시도하도록 유도
+    }
+
     try {
       const res = await fetch(
-        `${API_BASE}/api/posts/${post_id}?language=ko&include_all_translations=true`
+        `${API_BASE}/api/posts/${post_id}?language=${language}&include_all_translations=true`
       );
       const json = await res.json();
 
@@ -77,7 +90,7 @@ export default function NoticeManager() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             user_id: userId, // 관리자 ID
-            user_name: userName,
+            user_name: "관리자",
             subject: editSubject,
             content: editContent,
           }),
@@ -127,7 +140,7 @@ export default function NoticeManager() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: userId, // 로그인한 유저 ID 사용
-          user_name: userName,
+          user_name: "관리자",
           subject: newSubject,
           content: newContent,
           origin_language: "ko",
@@ -149,6 +162,63 @@ export default function NoticeManager() {
     }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm("정말로 이 공지를 삭제하시겠습니까?")) return;
+
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/posts/${selectedNotice.post_id}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_name: "관리자", // 혹은 userName 변수 사용
+          }),
+        }
+      );
+
+      const json = await res.json();
+
+      if (!res.ok || json.status !== "success") {
+        throw new Error("삭제 실패");
+      }
+
+      alert("공지 삭제 완료");
+
+      // 삭제된 항목 목록에서 제거
+      setNoticeList((prev) =>
+        prev.filter((notice) => notice.post_id !== selectedNotice.post_id)
+      );
+      setIsModalOpen(false); // 모달 닫기
+    } catch (err) {
+      alert("공지 삭제 실패: " + err.message);
+    }
+  };
+
+  const handleTranslate = async (postId) => {
+    try {
+      const res = await fetch(`${API_BASE}/api/posts/${postId}/translations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target_language: language,
+          force_retranslate: false,
+        }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok || json.status !== "success") {
+        throw new Error("번역 실패");
+      }
+
+      alert("번역이 완료되었습니다.");
+      fetchNotices(); // 번역 완료 후 목록 갱신
+    } catch (err) {
+      alert("번역 요청 실패: " + err.message);
+    }
+  };
+
   return (
     <div className="notice-manager">
       <div className="notice-header">
@@ -165,6 +235,7 @@ export default function NoticeManager() {
         >
           <option value="ko">한국어</option>
           <option value="en">English</option>
+          <option value="ja">日本語</option>
         </select>
       </div>
 
@@ -175,6 +246,7 @@ export default function NoticeManager() {
             <th>작성자</th>
             <th>작성일</th>
             <th>수정일</th>
+            <th>번역여부</th>
           </tr>
         </thead>
         <tbody>
@@ -188,6 +260,26 @@ export default function NoticeManager() {
               <td>{notice.user_name}</td>
               <td>{new Date(notice.created_date).toLocaleString("ko-KR")}</td>
               <td>{new Date(notice.updated_date).toLocaleString("ko-KR")}</td>
+              <td>
+                {notice.origin_language === language ? (
+                  "원문"
+                ) : notice.has_translation ? (
+                  "번역완료"
+                ) : (
+                  <>
+                    번역필요{" "}
+                    <button
+                      className="translate-btn"
+                      onClick={(e) => {
+                        e.stopPropagation(); // tr 클릭 방지
+                        handleTranslate(notice.post_id);
+                      }}
+                    >
+                      번역하기
+                    </button>
+                  </>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -226,7 +318,7 @@ export default function NoticeManager() {
 
             <div className="notice-modal-buttons">
               <button onClick={handleUpdate}>수정</button>
-              <button>삭제</button>
+              <button onClick={handleDelete}>삭제</button>
               <button onClick={() => setIsModalOpen(false)}>닫기</button>
             </div>
           </div>

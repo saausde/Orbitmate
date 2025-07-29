@@ -199,6 +199,7 @@ function GeneralSetting() {
         >
           <option value="ko">{t("general_setting.ko")}</option>
           <option value="en">{t("general_setting.en")}</option>
+          <option value="ja">{t("general_setting.ja")}</option>
         </select>
       </div>
       <hr className="languageDivider" />

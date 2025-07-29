@@ -57,6 +57,7 @@
     "font_size_xlarge": "Maximum",
     "ko": "Korean",
     "en": "English",
+    "ja": "Japanese",
     "delete_account": "Delete Account"
   },
 
@@ -238,11 +239,14 @@
     "wooname": "Woo Cheol Shin",
     "wooRole": "Refactored the frontend code to enhance readability and maintainability. During backend and API integration, I coordinated data structures and request methods to ensure smooth service operation.",
     "simname": "Hongik Sim",
-    "simRole": " Handled the entire backend, including AI model integration and external API consolidation. Managed database design and maintenance, as well as server configuration, ensuring stable and reliable service operation."
+    "simRole": " Handled the entire backend, including AI model integration and external API consolidation. Managed database design and maintenance, as well as server configuration, ensuring stable and reliable service operation.",
+    "eunname": "EunSeok Lee",
+    "eunRole": "Responsible for implementing features across the project, focusing on both frontend and backend development to ensure a cohesive and functional user experience."
   },
 
   "ChatLog": {
     "waiting_message": "AI is scanning beyond the galaxy...!",
+    "code_copy": "Copy",
     "noMessages": "The OrbitMate is silent."
   },
 

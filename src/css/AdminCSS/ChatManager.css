@@ -1,0 +1,108 @@
+/* =========================
+   관리자 채팅 관리 CSS
+   (ChatManager.jsx 전용)
+   ========================= */
+
+/* 메시지 리스트(ul) - 불릿 제거, 여백 제거 */
+.admin-message-list {
+  padding: 0;
+  list-style: none;
+}
+
+/* 메시지 항목(li) - 공통 */
+.admin-message-item {
+  margin-bottom: 12px; /* 항목 간 간격 */
+  padding: 10px; /* 내부 여백 */
+  border-radius: 6px; /* 둥근 테두리 */
+}
+/* 사용자 메시지 배경 */
+.admin-message-item.user {
+  background-color: #f0f0f0;
+}
+/* AI 메시지 배경 */
+.admin-message-item.ai {
+  background-color: #e8f5ff;
+}
+
+/* 사용자 메시지 배경 */
+.dark .admin-message-item.user {
+  background-color: #f83aff;
+}
+/* AI 메시지 배경 */
+.dark .admin-message-item.ai {
+  background-color: #640958;
+}
+
+/* 전체 삭제 버튼 (빨간색) */
+.admin-delete-all-btn {
+  padding: 4px 8px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 세션 삭제 버튼 (주황색) */
+.admin-session-delete-btn {
+  padding: 4px 8px;
+  background-color: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 채팅 보기 버튼 (파란색) */
+.admin-session-view-btn {
+  margin-right: 6px;
+  padding: 4px 8px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 모달 오버레이(배경) - 화면 전체 어둡게 */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* 모달 본문(채팅 내역) */
+.chatView-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  padding: 32px 24px 24px 24px;
+  min-width: 340px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* 모달 제목 */
+.admin-modal-title {
+  margin-top: 0;
+}
+
+/* 모달 닫기 버튼 (우측 상단 X) */
+.admin-modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}

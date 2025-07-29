@@ -4,9 +4,7 @@ import EasterEgg from "./EasterEgg";
 import "../../css/Titlesection.css";
 import "../../css/dark.css";
 import { useTheme } from "../../contexts/ThemeContext";
-import astronaut from "../../images/astronaut-cartoon.png";
 import astronautWhite from "../../images/astronaut-cartoon-white.png";
-import startButton from "../../images/start_button-removebg-preview.png";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
@@ -53,7 +51,7 @@ function Titlesection({
   }, [forceAnimated]);
 
   // EasterEgg 클릭 시 게임 시작 트리거 (상태 없이 단순 핸들러)
-  const handleRocketClick = () => {};
+  const handlecometClick = () => {};
 
   return (
     <div className="title_section_wrapper">
@@ -80,7 +78,7 @@ function Titlesection({
       </div>
       {/* 이스터에그(로켓) 컴포넌트 클릭 시 게임 시작 트리거 전달 */}
       <EasterEgg
-        onRocketClick={handleRocketClick}
+        oncometClick={handlecometClick}
         onGameStart={onGameStart}
         onGameEnd={onGameEnd}
         isGameActive={isGameActive}

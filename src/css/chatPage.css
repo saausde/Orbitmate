@@ -652,7 +652,7 @@ pre code {
   border: none;
   border-radius: 6px;
   padding: 4px 10px;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   cursor: pointer;
   z-index: 20;
@@ -792,4 +792,177 @@ pre code {
 .ai-markdown-thead {
   background-color: #444;
   font-weight: bold;
+}
+
+/* AI 인라인 컴포넌트 스타일 */
+/*.ai-tool-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  color: #3b82f6;
+  font-size: 14px;
+  animation: toolLoadingPulse 2s ease-in-out infinite;
+}
+
+/*.ai-tool-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  margin: 8px 0;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  color: #22c55e;
+  font-size: 14px;
+}*/
+
+.ai-tool-complete {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 6px;
+  color: #22c55e;
+  font-size: 13px;
+  animation: toolCompleteFade 0.5s ease-in-out;
+}
+
+.ai-tool-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 14px;
+}
+
+.ai-batch-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+  color: #f59e0b;
+  font-size: 14px;
+}
+
+.tool-result-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tool-result-header {
+  font-weight: bold;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.tool-result-data {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tool-result-icon,
+.tool-complete-icon,
+.tool-error-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* 스피너 애니메이션 */
+.tool-spinner-small {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+.batch-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  border-top: 2px solid #f59e0b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+/* 애니메이션 */
+@keyframes toolLoadingPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.01);
+  }
+}
+
+@keyframes toolCompleteFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 다크 모드에서 더 잘 보이도록 조정 */
+.chat-log.dark .ai-tool-loading {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.chat-log.dark .ai-tool-result {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.chat-log.dark .ai-tool-complete {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+  max-width: 100px;
+}
+
+.chat-log.dark .ai-tool-error {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.chat-log.dark .ai-batch-loading {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
 }
