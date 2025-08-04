@@ -625,3 +625,7 @@ body.dark .confirm-buttons button:last-of-type {
 .dark .sidebar_notice_page #side_main_f .helpCenter {
   color: #ffffff;
 }
+
+.dark .search_icon {
+  filter: brightness(0) invert(1);
+}

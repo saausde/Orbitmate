@@ -12,11 +12,12 @@ html {
   height: 100vh;
   overflow: visible; /* 로켓 등 이펙트가 잘리지 않도록 */
   position: relative; /* 필요 시 */
-  background-image: url("../images/TitleSection/mainBackground2.jpg");
-  /*background-image: url("../images/titleBackground16.jpg");*/
+  background-image: url("../images/TitleSection/lowPoly_wallpaper3.png");
+  /*background-image: url("../images/notice_head_photo3.jpg");*/
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
+  background-position: center center;
 }
 
 .planetsence {

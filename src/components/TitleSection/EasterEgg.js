@@ -203,7 +203,7 @@ function EasterEgg({ oncometClick, isGameActive, onGameStart, onGameEnd }) {
       initGame();
       window.addEventListener("keydown", handleKeyDown);
       window.addEventListener("keyup", handleKeyUp);
-      enemyInterval.current = setInterval(createEnemy, 1000);
+      enemyInterval.current = setInterval(createEnemy, 1700);
       gameLoop();
     };
     startGameLoop();

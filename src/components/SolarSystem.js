@@ -1,121 +1,129 @@
 import React, { useEffect, useRef } from "react";
-import * as THREE from "three"; //Three.js전체를 불러옴
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"; //마우스로 3D 카메라를 회전/이동하게 해줌
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"; //glb 파일 로드할수있게 해주는것
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const SolarSystem = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
-    //사용자 화면에 맞추는 용도 즉 client.width, height를 읽어서 저장
     const mount = mountRef.current;
     const width = mount.clientWidth;
     const height = mount.clientHeight;
 
-    // 씬, 카메라, 렌더러 설정
-    const scene = new THREE.Scene(); //이곳이 공간
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000); //화면에서 보이는 시점
-    camera.position.set(5, 3, 23); //카메라 위치
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.set(5, 3, 23);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); //실제로 브라우저에서 구현하는 곳
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
-    renderer.setClearColor(0x000000, 0); // 투명
+    renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
     // 조명
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2); //전체적으로 밝게
+    const ambientLight = new THREE.AmbientLight(0xffffff, 3);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1.2, 300);
+    const pointLight = new THREE.PointLight(0xffffff, 1, 300);
     pointLight.position.set(0, 10, 0);
     scene.add(pointLight);
 
-    const loader = new GLTFLoader(); //glb를 로더할수있는 loader 생성
+    const loader = new GLTFLoader();
     let sunModel = null;
-    const sunRotationSpeed = -0.002; //태양 도는 속도
-    // 태양
+    const sunRotationSpeed = -0.002;
+
+    // 🌞 태양
     loader.load(
-      "/models/sun2.glb",
+      "/models_LowPloy/Sun_lowPoly.glb",
       (gltf) => {
         const sun = gltf.scene;
-        sun.scale.set(0.1, 0.1, 0.1);
+        sun.scale.set(2.4, 2.4, 2.4);
         sun.position.set(0, 0, 0);
         scene.add(sun);
-        sunModel = sun; // 태양 모델 저장
+        sunModel = sun;
       },
       undefined,
       (error) => console.error("Failed to load Sun model:", error)
     );
 
-    // 행성 정보 정의
+    // 🪐 행성 정의 (각각 Y 위치도 추가)
     const planetConfigs = [
       {
         name: "Mercury",
         distance: 5,
-        path: "/models/mercury2.glb",
-        scale: 0.03,
+        path: "/models_LowPloy/Planet_lowPloy2.glb",
+        scale: 0.2,
         speed: 0.02,
+        y: -0.3,
       },
       {
         name: "Venus",
-        distance: 7,
-        path: "/models/venus.glb",
-        scale: 0.5,
+        distance: 6.3,
+        path: "/models_LowPloy/venus_lowPoly.glb",
+        scale: 0.3,
         speed: 0.015,
+        y: -0.3,
       },
       {
         name: "Earth",
         distance: 8,
-        path: "/models/earth4.glb",
-        scale: 0.6,
+        path: "/models_LowPloy/Satellite orbiting Earth_lowPloy.glb",
+        scale: 0.003,
         speed: 0.03,
+        y: 0.4,
       },
       {
         name: "Mars",
-        distance: 10,
-        path: "/models/mars3.glb",
-        scale: 0.004,
+        distance: 10.5,
+        path: "/models_LowPloy/mars_lowPoly.glb",
+        scale: 0.2,
         speed: 0.01,
+        y: 0.4,
       },
       {
         name: "Jupiter",
-        distance: 11.5,
-        path: "/models/jupiter1.glb",
-        scale: 1,
+        distance: 12.4,
+        path: "/models_LowPloy/Jupiter_lowPloy.glb",
+        scale: 0.02,
         speed: 0.05,
+        y: -2,
       },
       {
         name: "Saturn",
-        distance: 15,
-        path: "/models/saturn.glb",
-        scale: 0.001,
+        distance: 16,
+        path: "/models_LowPloy/Saturn_lowPloy.glb",
+        scale: 1.5,
         speed: 0.0000000000003,
+        y: 0.6,
       },
       {
         name: "Uranus",
         distance: 18,
-        path: "/models/uranus2.glb",
-        scale: 0.0008,
+        path: "/models_LowPloy/Uranus_lowPloy2.glb",
+        scale: 1.5,
         speed: 0.006,
+        y: 1.3,
       },
       {
         name: "Neptune",
-        distance: 19,
-        path: "/models/neptune2.glb",
-        scale: 0.3,
+        distance: 15,
+        path: "/models_LowPloy/Neptune_lowPoly.glb",
+        scale: 1,
         speed: 0.005,
+        y: 0.5,
       },
     ];
 
     const planetModels = [];
 
-    planetConfigs.forEach(({ name, distance, path, scale }, index) => {
+    planetConfigs.forEach(({ name, distance, path, scale, y }) => {
       loader.load(
         path,
         (gltf) => {
           const model = gltf.scene;
           model.scale.set(scale, scale, scale);
-          scene.add(model); //각각 지정한 행성들의 값을 여기서 로드해서 공간으로 보낸다
+          model.position.y = y; // Y축 위치 반영
+          scene.add(model);
           planetModels.push({
             model,
             distance,
@@ -127,27 +135,21 @@ const SolarSystem = () => {
       );
     });
 
-    // 카메라 컨트롤
-    const controls = new OrbitControls(camera, renderer.domElement); //마우스로 카메라를 회전할수있게해줌
+    const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    // 애니메이션 루프
     const animate = () => {
-      requestAnimationFrame(animate); // 매 프레임마다 animate()를 다시 호출해서 끊임없이 움직이게함
+      requestAnimationFrame(animate);
 
-      //이제 여기서 모든 행성의 값을 계산함
       planetModels.forEach(({ model, distance, speed }, i) => {
-        const angle = Date.now() * 0.0001 * (i + 1); //실제 현재 시간을 가져와서 값이 점점 커지며 계속 돌게됨
+        const angle = Date.now() * 0.0001 * (i + 1);
         model.position.x = Math.cos(angle * speed * 100) * distance;
         model.position.z = Math.sin(angle * speed * 100) * distance;
-
-        //행성 자전
         model.rotation.y += -0.005;
       });
 
-      // 태양 자전 애니메이션
       if (sunModel) {
-        sunModel.rotation.y += sunRotationSpeed; // y축 기준으로 천천히 돌기
+        sunModel.rotation.y += sunRotationSpeed;
       }
 
       controls.update();
@@ -156,7 +158,6 @@ const SolarSystem = () => {
 
     animate();
 
-    //여기서 반응형 설정
     const handleResize = () => {
       const newWidth = mount.clientWidth;
       const newHeight = mount.clientHeight;

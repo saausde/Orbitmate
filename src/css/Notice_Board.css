@@ -241,14 +241,8 @@
 }
 
 .sidebar_notice_page #side_btn,
-.sidebar_notice_page .search_icon,
 .profile_notice_page .dropdown-content > img {
   filter: brightness(0) invert(1);
-}
-
-.sidebar_notice_page #side_main_f button {
-  color: #ffffff;
-  background: transparent;
 }
 
 .sidebar_notice_page #side_main_f ul,

@@ -165,6 +165,13 @@
   min-width: 130px;
 }
 
+.new_chat_btn,
+.new_chat_btn2,
+#side_main_f ul,
+#side_main_f li {
+  box-shadow: 0 0px 10px rgba(117, 69, 129, 0.2);
+}
+
 /* 새 채팅 버튼 */
 .new_chat_btn {
   display: block;
@@ -178,7 +185,7 @@
   color: #ffffff;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 0px 10px rgba(117, 69, 129, 0.2);
+
   transition: all 0.3s ease, color 0.3s ease;
   backdrop-filter: blur(20px);
 }
@@ -205,7 +212,6 @@
   background: transparent;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease, color 0.3s ease;
 }
 .new_chat_btn2:hover {
