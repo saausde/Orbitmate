@@ -2,6 +2,7 @@
   "name": "orbitmate",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/NoahJenoko/OrbitMate.git",
   "dependencies": {
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
@@ -34,7 +35,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",                     
+    "deploy": "gh-pages -d build"  
   },
   "eslintConfig": {
     "extends": [
