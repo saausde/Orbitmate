@@ -10,6 +10,7 @@ if (!emailPattern.test(em)) { setErrorMsg1("유효한 이메일 주소를 입력
 if (password.trim().length < 8) { setErrorMsg2("비밀번호는 최소 8자 이상이어야 합니다."); return; }
 
 회원가입 1단계 → 서버 중복 체크 → 단계 전환
+
 설명: 로컬 상태에 1단계 정보를 저장한 뒤, 서버에 이메일 중복 여부를 확인하고 닉네임 단계로 전환.
 핵심 코드:
 setData(prev => ({ ...prev, email: em, password: pwd }));
@@ -19,6 +20,7 @@ if (json.data.email_exists) { alert("이미 가입된 이메일입니다."); ret
 navigate("/signup/un");
 
 회원가입 2단계(닉네임) → 최종 등록
+
 설명: 닉네임 필수 입력 검증 후 서버로 username, email, password를 전송하여 가입 완료.
 핵심 코드:
 if (!nickname.trim()) { setError("닉네임을 입력해주세요."); inputRef.current?.focus(); return; }
@@ -28,6 +30,7 @@ alert("회원가입 성공! 다시 로그인 해주세요.");
 navigate("/signin");
 
 로그인 제출 → 사용자/설정 로딩 → 세션 캐싱 → 라우팅
+
 설명: 로그인 성공 후 추가 API로 프로필·설정 정보를 불러오고, 채팅 세션을 전역 상태와 localStorage에 캐싱해 새로고침에도 상태를 유지.
 핵심 코드:
 const loginRes = await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/login, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em, password: pwd }) });
