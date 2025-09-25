@@ -1,190 +1,50 @@
-회원가입 / 로그인
+회원가입 / 로그인 – 프론트 핵심 코드
 
-설명
-
-
-
-사용자가 이메일과 비밀번호로 계정을 생성하고, 닉네임을 설정한 뒤 로그인할 수 있는 기능입니다.
-
-로그인 이후에는 사용자 정보를 불러오고, 세션 목록을 캐싱하여 원활한 이용이 가능하도록 구현했습니다.
-
-
-
-구현 상세
-
-1\. 회원가입 (2단계 구조)
-
-
-
-1단계 (이메일/비밀번호 입력)
-
-
-
-이메일 정규식 검사, 비밀번호 길이(최소 8자) 조건 검증
-
-
-
-붙여넣기/스페이스 입력 차단으로 불필요한 공백 방지
-
-
-
-서버에 이메일 중복 여부 확인 → 중복 시 알림, 통과 시 닉네임 단계 이동
-
-
-
-2단계 (닉네임 입력)
-
-
-
-닉네임 공백/미입력 방지
-
-
-
-최종적으로 username, email, password를 묶어 서버에 전달하여 가입 완료
-
-
-
-2\. 로그인
-
-
-
-이메일/비밀번호 입력값 검증
-
-
-
-서버에 로그인 요청 → 토큰/유저ID 획득
-
-
-
-추가 요청으로 프로필/설정 정보 로딩
-
-
-
-채팅 세션 목록 조회 → localStorage와 전역 상태(ChatContext)에 저장
-
-
-
-최종적으로 토큰과 유저ID를 로컬 저장소에 보관 후 메인 페이지로 라우팅
-
-
-
-핵심 코드
-
-1\) 입력값 정제 및 검증
-
-
-
+입력값 정제(공백 차단) + 즉시 검증
+설명: 타이핑·붙여넣기 단계에서 불필요한 공백을 제거하고, 이메일/비밀번호 형식을 즉시 점검해 UX와 데이터 무결성을 높임.
+핵심 코드:
 const preventSpace = (e) => { if (e.key === " ") e.preventDefault(); };
+const handlePaste = (e) => { e.preventDefault(); const pasted = e.clipboardData.getData("text").replace(/\s+/g, ""); document.execCommand("insertText", false, pasted); };
+const emailPattern = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+if (!emailPattern.test(em)) { setErrorMsg1("유효한 이메일 주소를 입력해주세요."); inputRef.current?.focus(); return; }
+if (password.trim().length < 8) { setErrorMsg2("비밀번호는 최소 8자 이상이어야 합니다."); return; }
 
-
-
-const handlePaste = (e) => {
-
-  e.preventDefault();
-
-  const pasted = e.clipboardData.getData("text").replace(/\\s+/g, "");
-
-  document.execCommand("insertText", false, pasted);
-
-};
-
-
-
-const emailPattern = /^\[^\\s@]+@\[^\\s@]+.\[^\\s@]+$/;
-
-
-
-2\) 회원가입 1단계 제출 → 중복 검사 → 단계 전이
-
-
-
+회원가입 1단계 → 서버 중복 체크 → 단계 전환
+설명: 로컬 상태에 1단계 정보를 저장한 뒤, 서버에 이메일 중복 여부를 확인하고 닉네임 단계로 전환.
+핵심 코드:
 setData(prev => ({ ...prev, email: em, password: pwd }));
-
-
-
-const res = await fetch(${process.env.REACT\_APP\_API\_BASE\_URL}/api/users/check-email, {
-
-  method: "POST",
-
-  headers: { "Content-Type": "application/json" },
-
-  body: JSON.stringify({ email: em }),
-
-});
-
+const res = await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/check-email, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em }) });
 const json = await res.json();
+if (json.data.email_exists) { alert("이미 가입된 이메일입니다."); return; }
+navigate("/signup/un");
 
+회원가입 2단계(닉네임) → 최종 등록
+설명: 닉네임 필수 입력 검증 후 서버로 username, email, password를 전송하여 가입 완료.
+핵심 코드:
+if (!nickname.trim()) { setError("닉네임을 입력해주세요."); inputRef.current?.focus(); return; }
+const res = await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/register, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: nickname, email: data.email, password: data.password }) });
+if (!res.ok) throw new Error(json?.error?.message || "오류가 발생했습니다.");
+alert("회원가입 성공! 다시 로그인 해주세요.");
+navigate("/signin");
 
-
-if (json.data.email\_exists) {
-
-  alert("이미 가입된 이메일입니다.");
-
-  return;
-
-}
-
-navigate("/signup/un"); // 닉네임 입력 단계로 이동
-
-
-
-3\) 로그인 후 초기화 (프로필/설정/세션)
-
-
-
-setUser({
-
-  login: json.data,
-
-  profile: profileJson.data,
-
-  settings: settingsJson.data,
-
-  storedValue: true,
-
-});
-
-
-
-const sessionRes = await fetch(
-
-  ${process.env.REACT\_APP\_API\_BASE\_URL}/api/sessions/${json.data.user\_id}/chat/sessions,
-
-  {
-
-    method: "GET",
-
-    headers: {
-
-      "Content-Type": "application/json",
-
-      Authorization: Bearer ${json.data.token},
-
-    },
-
-  }
-
-);
-
-
-
-if (sessionRes.ok) {
-
-  const sessionJson = await sessionRes.json();
-
-  setChats(sessionJson.data);
-
-  localStorage.setItem("chats", JSON.stringify(sessionJson.data));
-
-}
-
-
-
-localStorage.setItem("token", json.data.token);
-
-localStorage.setItem("user\_id", json.data.user\_id);
-
-
-
+로그인 제출 → 사용자/설정 로딩 → 세션 캐싱 → 라우팅
+설명: 로그인 성공 후 추가 API로 프로필·설정 정보를 불러오고, 채팅 세션을 전역 상태와 localStorage에 캐싱해 새로고침에도 상태를 유지.
+핵심 코드:
+const loginRes = await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/login, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em, password: pwd }) });
+const loginJson = await loginRes.json();
+const profileJson = await (await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/${loginJson.data.user_id}/profile)).json();
+const settingsJson = await (await fetch(${process.env.REACT_APP_API_BASE_URL}/api/users/${loginJson.data.user_id}/settings)).json();
+setUser({ login: loginJson.data, profile: profileJson.data, settings: settingsJson.data, storedValue: true });
+const sessionRes = await fetch(${process.env.REACT_APP_API_BASE_URL}/api/sessions/${loginJson.data.user_id}/chat/sessions, { method: "GET", headers: { "Content-Type": "application/json", Authorization: Bearer ${loginJson.data.token} } });
+if (sessionRes.ok) { const sessionJson = await sessionRes.json(); setChats(sessionJson.data); localStorage.setItem("chats", JSON.stringify(sessionJson.data)); }
+localStorage.setItem("token", loginJson.data.token);
+localStorage.setItem("user_id", loginJson.data.user_id);
 navigate("/");
 
+폼 UX 가드(포커스/에러 메세지/중복 제출 방지)
+설명: 잘못된 입력 시 해당 입력으로 포커스를 이동하고, 에러 메세지를 인라인으로 표시. onSubmit에서 기본동작(e.preventDefault)으로 중복 제출을 방지.
+핵심 코드:
+if (!em) { setErrorMsg1("이메일 주소를 입력해주세요."); inputRef.current?.focus(); return; }
+if (!pwd) { setErrorMsg2("비밀번호를 입력해주세요."); pwdRef.current?.focus(); return; }
+
+<form noValidate onSubmit={handleSubmit}> … </form>
